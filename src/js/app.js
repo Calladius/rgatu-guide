@@ -1426,18 +1426,30 @@ if ('serviceWorker' in navigator) {
   // Определяем iOS Safari — там нет beforeinstallprompt
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
+  // Проверяем, устанавливал ли недавно (в течение 30 дней)
+  // Некоторые браузеры (Edge) вызывают beforeinstallprompt даже после установки
+  function wasRecentlyInstalled() {
+    try {
+      const ts = parseInt(localStorage.getItem('pwa_installed') || '0');
+      if (!ts) return false;
+      // 30 дней — если за это время установили, не показываем баннер
+      // Если приложение удалили — через 30 дней beforeinstallprompt снова сработает
+      return (Date.now() - ts) < 30 * 24 * 60 * 60 * 1000;
+    } catch(e) { return false; }
+  }
+
   // Перехватываем системный промпт (Chrome, Edge, Samsung Internet)
-  // Это событие вызывается ТОЛЬКО если приложение НЕ установлено
-  // Если пользователь удалит приложение — событие снова сработает
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
+    // Если недавно установили — подавляем баннер
+    if (wasRecentlyInstalled()) return;
     deferredPrompt = e;
     if (banner) banner.classList.add('visible');
   });
 
   // Fallback для iOS — там нет beforeinstallprompt
   setTimeout(() => {
-    if (isIOS && banner && !banner.classList.contains('visible')) {
+    if (isIOS && banner && !banner.classList.contains('visible') && !wasRecentlyInstalled()) {
       installBtn.textContent = 'Как установить';
       const spanEl = banner.querySelector('span');
       if (spanEl) spanEl.textContent = 'Нажмите  → «На экран Домой»';
@@ -1461,17 +1473,18 @@ if ('serviceWorker' in navigator) {
     });
   }
 
-  // Кнопка закрыть — скрываем до следующего захода
+  // Кнопка закрыть
   if (closeBtn) {
     closeBtn.addEventListener('click', () => {
       if (banner) banner.classList.remove('visible');
     });
   }
 
-  // При установке — скрываем баннер
+  // При установке — скрываем баннер и запоминаем время
   window.addEventListener('appinstalled', () => {
     deferredPrompt = null;
     if (banner) banner.classList.remove('visible');
+    try { localStorage.setItem('pwa_installed', Date.now().toString()); } catch(e) {}
   });
 })();
 
