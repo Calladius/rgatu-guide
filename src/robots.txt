@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://rgatu-guide.is-a.dev/sitemap.xml
+Sitemap: https://calladius.github.io/rgatu-guide/sitemap.xml
