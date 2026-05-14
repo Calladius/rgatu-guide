@@ -1420,26 +1420,18 @@ if ('serviceWorker' in navigator) {
 
   // Проверяем, запущено ли как установленное приложение
   function isRunningAsApp() {
-    // Способ 1: display-mode standalone (Chrome, Edge, Firefox)
     if (window.matchMedia('(display-mode: standalone)').matches) return true;
-    // Способ 2: iOS Safari standalone
     if (window.navigator.standalone === true) return true;
-    // Способ 3: iOS Safari PWA (нет навигации, fullscreen)
-    if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream && !window.navigator.standalone && !window.chrome) {
-      // В iOS PWA standalone=true, в браузере — undefined
-    }
     return false;
   }
 
   // Если запущено как приложение — баннер не нужен
   if (isRunningAsApp()) return;
 
-  // Проверяем, установлено ли приложение через getInstalledRelatedApps (Chrome 85+)
-  if ('getInstalledRelatedApps' in navigator) {
-    navigator.getInstalledRelatedApps().then(apps => {
-      if (apps && apps.length > 0) return; // Уже установлено — не показываем
-    }).catch(() => {});
-  }
+  // Проверяем, устанавливал ли пользователь ранее
+  let wasInstalled = false;
+  try { wasInstalled = localStorage.getItem('pwa_installed') === '1'; } catch(e) {}
+  if (wasInstalled) return; // Уже установлено — не показываем баннер вообще
 
   // Определяем iOS Safari — там нет beforeinstallprompt
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
@@ -1448,6 +1440,8 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
+    // Проверяем ещё раз — вдруг установили в другой вкладке
+    try { if (localStorage.getItem('pwa_installed') === '1') return; } catch(e2) {}
     if (banner) banner.classList.add('visible');
   });
 
@@ -1488,22 +1482,12 @@ if ('serviceWorker' in navigator) {
     });
   }
 
-  // При установке — скрываем баннер и запоминаем
+  // При установке — скрываем баннер и запоминаем навсегда
   window.addEventListener('appinstalled', () => {
     deferredPrompt = null;
     if (banner) banner.classList.remove('visible');
-    // Запоминаем что установлено — чтобы не показывать в браузере тоже
     try { localStorage.setItem('pwa_installed', '1'); } catch(e) {}
   });
-
-  // Если ранее установили — не показываем баннер в браузере
-  try {
-    if (localStorage.getItem('pwa_installed') === '1') {
-      // Но если beforeinstallprompt всё ещё срабатывает — значит удалили, покажем снова
-      // Поэтому просто скрываем баннер при загрузке
-      if (banner) banner.classList.remove('visible');
-    }
-  } catch(e) {}
 })();
 
 // ============================================
