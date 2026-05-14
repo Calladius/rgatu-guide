@@ -4,7 +4,7 @@
   "description": "Цифровой путеводитель для студентов РГАТУ им. П.А. Соловьёва",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#f5f7fa",
+  "background_color": "#C62828",
   "theme_color": "#C62828",
   "orientation": "any",
   "lang": "ru",

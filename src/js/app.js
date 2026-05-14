@@ -1418,9 +1418,27 @@ if ('serviceWorker' in navigator) {
   const installBtn = document.getElementById('installBtn');
   const closeBtn = document.getElementById('installClose');
 
-  // Не показываем если уже в режиме standalone (приложение установлено)
-  if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
-    return;
+  // Проверяем, запущено ли как установленное приложение
+  function isRunningAsApp() {
+    // Способ 1: display-mode standalone (Chrome, Edge, Firefox)
+    if (window.matchMedia('(display-mode: standalone)').matches) return true;
+    // Способ 2: iOS Safari standalone
+    if (window.navigator.standalone === true) return true;
+    // Способ 3: iOS Safari PWA (нет навигации, fullscreen)
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream && !window.navigator.standalone && !window.chrome) {
+      // В iOS PWA standalone=true, в браузере — undefined
+    }
+    return false;
+  }
+
+  // Если запущено как приложение — баннер не нужен
+  if (isRunningAsApp()) return;
+
+  // Проверяем, установлено ли приложение через getInstalledRelatedApps (Chrome 85+)
+  if ('getInstalledRelatedApps' in navigator) {
+    navigator.getInstalledRelatedApps().then(apps => {
+      if (apps && apps.length > 0) return; // Уже установлено — не показываем
+    }).catch(() => {});
   }
 
   // Определяем iOS Safari — там нет beforeinstallprompt
@@ -1437,12 +1455,9 @@ if ('serviceWorker' in navigator) {
   // показываем баннер с инструкцией для iOS
   setTimeout(() => {
     if (!deferredPrompt && !isIOS && banner && !banner.classList.contains('visible')) {
-      // На Android/десктопе beforeinstallprompt должен был сработать
-      // Если нет — возможно приложение уже устанавливалось или браузер не поддерживает
       return;
     }
     if (isIOS && banner && !banner.classList.contains('visible')) {
-      // iOS — меняем текст на инструкцию
       installBtn.textContent = 'Как установить';
       const spanEl = banner.querySelector('span');
       if (spanEl) spanEl.textContent = 'Нажмите  → «На экран Домой»';
@@ -1454,7 +1469,6 @@ if ('serviceWorker' in navigator) {
   if (installBtn) {
     installBtn.addEventListener('click', () => {
       if (deferredPrompt) {
-        // Chrome/Edge — системный промпт
         deferredPrompt.prompt();
         deferredPrompt.userChoice.then((result) => {
           console.log('PWA install:', result.outcome);
@@ -1462,24 +1476,34 @@ if ('serviceWorker' in navigator) {
           if (banner) banner.classList.remove('visible');
         });
       } else if (isIOS) {
-        // iOS — показываем подсказку как добавить на главный экран
         alert('Чтобы установить приложение:\n\n1. Нажмите кнопку «Поделиться» (квадрат со стрелкой внизу экрана)\n2. Выберите «На экран "Домой"»\n3. Нажмите «Добавить»');
       }
     });
   }
 
-  // Кнопка закрыть — просто скрываем, но при следующем заходе покажем снова
+  // Кнопка закрыть — скрываем до следующего захода
   if (closeBtn) {
     closeBtn.addEventListener('click', () => {
       if (banner) banner.classList.remove('visible');
     });
   }
 
-  // Если уже установлено — не показываем
+  // При установке — скрываем баннер и запоминаем
   window.addEventListener('appinstalled', () => {
     deferredPrompt = null;
     if (banner) banner.classList.remove('visible');
+    // Запоминаем что установлено — чтобы не показывать в браузере тоже
+    try { localStorage.setItem('pwa_installed', '1'); } catch(e) {}
   });
+
+  // Если ранее установили — не показываем баннер в браузере
+  try {
+    if (localStorage.getItem('pwa_installed') === '1') {
+      // Но если beforeinstallprompt всё ещё срабатывает — значит удалили, покажем снова
+      // Поэтому просто скрываем баннер при загрузке
+      if (banner) banner.classList.remove('visible');
+    }
+  } catch(e) {}
 })();
 
 // ============================================
