@@ -1396,9 +1396,9 @@ if ('serviceWorker' in navigator) {
           const newWorker = reg.installing;
           newWorker.addEventListener('statechange', () => {
             if (newWorker.state === 'activated') {
-              // Новый SW активирован — перезагружаем страницу для применения
-              console.log('SW обновлён, перезагружаем...');
-              window.location.reload();
+              // Новый SW активирован через clients.claim()
+              // Обновление применится при следующем заходе — не перезагружаем страницу
+              console.log('SW обновлён, применится при следующем заходе');
             }
           });
         });
