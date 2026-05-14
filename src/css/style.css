@@ -593,12 +593,11 @@ ul { list-style: none; }
 
 /* --- Баннер установки PWA --- */
 .install-banner {
-  position: fixed; bottom: 0; left: 0; right: 0;
-  background: #1a237e; color: white; padding: 12px 16px;
+  position: fixed; top: var(--header-h); left: 0; right: 0;
+  background: #1a237e; color: white; padding: 10px 16px;
   display: none; align-items: center; gap: 10px;
   font-size: 13px; z-index: 500;
-  box-shadow: 0 -2px 12px rgba(0,0,0,0.3);
-  padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 .install-banner.visible { display: flex; }
 .install-banner svg { flex-shrink: 0; }
@@ -614,22 +613,6 @@ ul { list-style: none; }
   font-size: 22px; cursor: pointer; padding: 0 4px; line-height: 1;
 }
 .install-banner__close:hover { color: white; }
-
-/* На мобильных — баннер по центру экрана, чтобы не прятался за браузерной панелью */
-@media (max-width: 599px) {
-  .install-banner {
-    bottom: auto; top: 50%; left: 16px; right: 16px;
-    transform: translateY(-50%);
-    border-radius: 16px;
-    padding: 20px 16px;
-    flex-direction: column; text-align: center;
-    gap: 12px;
-  }
-  .install-banner span { flex: none; font-size: 15px; }
-  .install-banner svg { display: none; }
-  .install-banner__btn { font-size: 15px; padding: 10px 28px; }
-  .install-banner__close { position: absolute; top: 6px; right: 10px; font-size: 24px; }
-}
 
 /* --- Адаптив --- */
 @media (min-width: 600px) {

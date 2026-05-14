@@ -1423,10 +1423,6 @@ if ('serviceWorker' in navigator) {
     return;
   }
 
-  // Проверяем, не закрывал ли пользователь баннер ранее
-  const dismissed = localStorage.getItem('pwa_install_dismissed');
-  if (dismissed) return;
-
   // Определяем iOS Safari — там нет beforeinstallprompt
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
@@ -1438,7 +1434,7 @@ if ('serviceWorker' in navigator) {
   });
 
   // Fallback: если через 3 секунды beforeinstallprompt не сработал —
-  // показываем баннер с инструкцией для iOS или для повторной установки
+  // показываем баннер с инструкцией для iOS
   setTimeout(() => {
     if (!deferredPrompt && !isIOS && banner && !banner.classList.contains('visible')) {
       // На Android/десктопе beforeinstallprompt должен был сработать
@@ -1472,11 +1468,10 @@ if ('serviceWorker' in navigator) {
     });
   }
 
-  // Кнопка закрыть — запоминаем что пользователь отклонил
+  // Кнопка закрыть — просто скрываем, но при следующем заходе покажем снова
   if (closeBtn) {
     closeBtn.addEventListener('click', () => {
       if (banner) banner.classList.remove('visible');
-      localStorage.setItem('pwa_install_dismissed', '1');
     });
   }
 
