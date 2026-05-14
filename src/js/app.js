@@ -1418,39 +1418,25 @@ if ('serviceWorker' in navigator) {
   const installBtn = document.getElementById('installBtn');
   const closeBtn = document.getElementById('installClose');
 
-  // Проверяем, запущено ли как установленное приложение
-  function isRunningAsApp() {
-    if (window.matchMedia('(display-mode: standalone)').matches) return true;
-    if (window.navigator.standalone === true) return true;
-    return false;
+  // Если запущено как установленное приложение — баннер не нужен
+  if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+    return;
   }
-
-  // Если запущено как приложение — баннер не нужен
-  if (isRunningAsApp()) return;
-
-  // Проверяем, устанавливал ли пользователь ранее
-  let wasInstalled = false;
-  try { wasInstalled = localStorage.getItem('pwa_installed') === '1'; } catch(e) {}
-  if (wasInstalled) return; // Уже установлено — не показываем баннер вообще
 
   // Определяем iOS Safari — там нет beforeinstallprompt
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
   // Перехватываем системный промпт (Chrome, Edge, Samsung Internet)
+  // Это событие вызывается ТОЛЬКО если приложение НЕ установлено
+  // Если пользователь удалит приложение — событие снова сработает
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    // Проверяем ещё раз — вдруг установили в другой вкладке
-    try { if (localStorage.getItem('pwa_installed') === '1') return; } catch(e2) {}
     if (banner) banner.classList.add('visible');
   });
 
-  // Fallback: если через 3 секунды beforeinstallprompt не сработал —
-  // показываем баннер с инструкцией для iOS
+  // Fallback для iOS — там нет beforeinstallprompt
   setTimeout(() => {
-    if (!deferredPrompt && !isIOS && banner && !banner.classList.contains('visible')) {
-      return;
-    }
     if (isIOS && banner && !banner.classList.contains('visible')) {
       installBtn.textContent = 'Как установить';
       const spanEl = banner.querySelector('span');
@@ -1482,11 +1468,10 @@ if ('serviceWorker' in navigator) {
     });
   }
 
-  // При установке — скрываем баннер и запоминаем навсегда
+  // При установке — скрываем баннер
   window.addEventListener('appinstalled', () => {
     deferredPrompt = null;
     if (banner) banner.classList.remove('visible');
-    try { localStorage.setItem('pwa_installed', '1'); } catch(e) {}
   });
 })();
 
