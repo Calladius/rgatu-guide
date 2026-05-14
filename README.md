@@ -43,25 +43,7 @@ rgatu-guide/
     └── icons/                 # Иконки PWA
 ```
 
-## Запуск
-
-### Локальный сервер
-
-```bash
-cd src
-python -m http.server 8080
-```
-
-Откройте http://localhost:8080 в браузере.
-
-### Обновление данных
-
-```bash
-cd parser
-python rsatu_parser.py
-```
-
-Данные будут обновлены из официального сайта https://www.rsatu.ru
+Данные будут обновляться с официального сайта https://www.rsatu.ru автоматически
 
 ## Функционал
 
