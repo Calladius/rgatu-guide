@@ -1,37 +1,44 @@
 /**
  * Service Worker для Путеводителя РГАТУ
  * Обеспечивает офлайн-доступ и кэширование ресурсов
- * v6: SVG-карты кэшируются при установке для полного офлайна
+ * v7: относительные пути — работает на любом домене/подкаталоге
  */
 
-const CACHE_NAME = 'rgatu-guide-v6';
+const CACHE_NAME = 'rgatu-guide-v7';
+
+// Относительные пути — совпадают с окончанием URL независимо от базового пути
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/css/style.css',
-  '/js/app.js',
-  '/manifest.json',
-  '/icons/favicon.svg',
-  '/data/data_departments.json',
-  '/data/data_documents.json',
-  '/data/data_contacts.json',
-  '/data/data_leadership.json',
-  '/data/data_subdivisions.json',
-  '/data/data_meta.json',
+  'index.html',
+  'css/style.css',
+  'js/app.js',
+  'manifest.json',
+  'icons/favicon.svg',
+  'data/data_departments.json',
+  'data/data_documents.json',
+  'data/data_contacts.json',
+  'data/data_leadership.json',
+  'data/data_subdivisions.json',
+  'data/data_meta.json',
   // SVG-карты — кэшируем для полного офлайна
-  '/maps/floor_1.svg',
-  '/maps/floor_2.svg',
-  '/maps/floor_3.svg',
-  '/maps/floor_4.svg',
-  '/maps/floor_5.svg',
+  'maps/floor_1.svg',
+  'maps/floor_2.svg',
+  'maps/floor_3.svg',
+  'maps/floor_4.svg',
+  'maps/floor_5.svg',
 ];
 
-// Установка — кэшируем статику (без SVG — они загружаются по требованию)
+// Проверяет, соответствует ли путь запроса одному из кэшируемых ресурсов
+function isStaticAsset(pathname) {
+  return STATIC_ASSETS.some(asset => pathname.endsWith(asset));
+}
+
+// Установка — кэшируем статику
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('SW: кэширование статики v5');
-      return cache.addAll(STATIC_ASSETS);
+      console.log('SW: кэширование статики v7');
+      // Кэшируем относительно текущей области (scope)
+      return cache.addAll(STATIC_ASSETS.map(a => './' + a));
     })
   );
   self.skipWaiting();
@@ -54,17 +61,19 @@ self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Только GET-запросы
-  if (request.method !== 'GET') return;
+  // Только GET-запросы и только с того же источника
+  if (request.method !== 'GET' || url.origin !== self.location.origin) return;
 
-  // Статические ресурсы (HTML, CSS, JS) — Cache First, обновляем в фоне
-  if (STATIC_ASSETS.some(asset => url.pathname.endsWith(asset) || url.pathname === asset)) {
+  // Статические ресурсы (HTML, CSS, JS, JSON, SVG) — Cache First, обновляем в фоне
+  if (isStaticAsset(url.pathname)) {
     event.respondWith(
       caches.match(request).then((cached) => {
         // Фоновое обновление
         const fetchPromise = fetch(request).then((response) => {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+          if (response.ok) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+          }
           return response;
         }).catch(() => cached);
         return cached || fetchPromise;
@@ -73,38 +82,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // SVG-карты — Cache First с фоновым обновлением (офлайн приоритет)
-  if (url.pathname.endsWith('.svg')) {
-    event.respondWith(
-      caches.match(request).then((cached) => {
-        // Фоновое обновление — скачиваем свежую версию если онлайн
-        const fetchPromise = fetch(request).then((response) => {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
-          return response;
-        }).catch(() => cached);
-        // Отдаём кэш мгновенно, обновляем в фоне
-        return cached || fetchPromise;
-      })
-    );
-    return;
-  }
-
-  // JSON-данные — Network First с fallback на кэш
-  if (url.pathname.endsWith('.json')) {
-    event.respondWith(
-      fetch(request)
-        .then((response) => {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
-          return response;
-        })
-        .catch(() => caches.match(request))
-    );
-    return;
-  }
-
-  // Всё остальное — Network First
+  // Всё остальное — Network First с fallback на кэш
   event.respondWith(
     fetch(request)
       .then((response) => {

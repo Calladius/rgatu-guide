@@ -2,7 +2,7 @@
   "name": "Путеводитель РГАТУ",
   "short_name": "РГАТУ",
   "description": "Цифровой путеводитель для студентов РГАТУ им. П.А. Соловьёва",
-  "start_url": "/index.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f5f7fa",
   "theme_color": "#1565C0",
@@ -67,12 +67,12 @@
   "shortcuts": [
     {
       "name": "Карта этажей",
-      "url": "/index.html#map",
+      "url": "./index.html#map",
       "icons": [{"src": "icons/icon-96.png", "sizes": "96x96"}]
     },
     {
       "name": "Документы",
-      "url": "/index.html#documents",
+      "url": "./index.html#documents",
       "icons": [{"src": "icons/icon-96.png", "sizes": "96x96"}]
     }
   ]

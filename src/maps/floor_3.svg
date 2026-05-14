@@ -142,16 +142,16 @@
   <text x="1130" y="168" class="dept-label" style="fill:#1565C0;font-size:13px">Каф. авиац.</text>
   <text x="1130" y="180" class="dept-label" style="fill:#1565C0;font-size:13px">двигателей</text>
   <rect x="1122" y="268" width="16" height="5" class="door"/>
-  <rect x="1190" y="50" width="120" height="220" class="room atif-color" data-room="327" data-type="atif" rx="2"/>
-  <text x="1250" y="150" class="room-num">327</text>
-  <text x="1250" y="168" class="dept-label" style="fill:#1565C0;font-size:13px">Дирекция</text>
-  <text x="1250" y="180" class="dept-label" style="fill:#1565C0;font-size:13px">ИАТИФ</text>
-  <rect x="1242" y="268" width="16" height="5" class="door"/>
-  <rect x="1310" y="50" width="80" height="220" class="room atif-color" data-room="329" data-type="atif" rx="2"/>
-  <text x="1350" y="150" class="room-num">329</text>
-  <text x="1350" y="168" class="dept-label" style="fill:#1565C0;font-size:13px">Каф. материа-</text>
-  <text x="1350" y="180" class="dept-label" style="fill:#1565C0;font-size:13px">ловедения</text>
-  <rect x="1342" y="268" width="16" height="5" class="door"/>
+  <rect x="1190" y="50" width="100" height="220" class="room atif-color" data-room="327" data-type="atif" rx="2"/>
+  <text x="1240" y="150" class="room-num">327</text>
+  <text x="1240" y="168" class="dept-label" style="fill:#1565C0;font-size:13px">Дирекция</text>
+  <text x="1240" y="180" class="dept-label" style="fill:#1565C0;font-size:13px">ИАТИФ</text>
+  <rect x="1232" y="268" width="16" height="5" class="door"/>
+  <rect x="1290" y="50" width="100" height="220" class="room atif-color" data-room="329" data-type="atif" rx="2"/>
+  <text x="1340" y="150" class="room-num">329</text>
+  <text x="1340" y="168" class="dept-label" style="fill:#1565C0;font-size:13px">Каф. материа-</text>
+  <text x="1340" y="180" class="dept-label" style="fill:#1565C0;font-size:13px">ловедения</text>
+  <rect x="1332" y="268" width="16" height="5" class="door"/>
   <rect x="1390" y="50" width="80" height="220" class="room atif-color" data-room="331" data-type="atif" rx="2"/>
   <text x="1430" y="150" class="room-num">331</text>
   <text x="1430" y="172" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
