@@ -3,6 +3,7 @@
   "short_name": "РГАТУ",
   "description": "Цифровой путеводитель для студентов РГАТУ им. П.А. Соловьёва",
   "start_url": "./index.html",
+  "id": "./index.html",
   "display": "standalone",
   "background_color": "#f5f7fa",
   "orientation": "any",
@@ -11,7 +12,8 @@
   "related_applications": [
     {
       "platform": "webapp",
-      "url": "https://calladius.github.io/rgatu-guide/manifest.json"
+      "url": "https://calladius.github.io/rgatu-guide/manifest.json",
+      "id": "./index.html"
     }
   ],
   "icons": [

@@ -1412,39 +1412,87 @@ if ('serviceWorker' in navigator) {
 // ============================================
 // PWA Install Prompt — баннер «Установить»
 // ============================================
+// Логика:
+// 1. localStorage — основной механизм (работает во всех браузерах)
+//    - appinstalled → записываем pwa_installed=true
+//    - standalone режим → тоже записываем (на случай если зайдут через браузер)
+//    - При загрузке: если pwa_installed=true → баннер НЕ показываем
+//
+// 2. getInstalledRelatedApps() — дополнительная проверка (Chrome/Edge 85+)
+//    - Если API говорит что PWA НЕ установлено, а localStorage стоит →
+//      значит пользователь удалил PWA → сбрасываем флаг, показываем баннер
+//
+// 3. beforeinstallprompt — может срабатывать даже после установки (баг Edge/Chrome)
+//    - Поэтому проверяем localStorage ПЕРЕД показом баннера
+// ============================================
 (function() {
   let deferredPrompt = null;
   const banner = document.getElementById('installBanner');
   const installBtn = document.getElementById('installBtn');
   const closeBtn = document.getElementById('installClose');
 
+  // Безопасная работа с localStorage (может быть заблокировано в приватном режиме)
+  function lsGet(key) { try { return localStorage.getItem(key); } catch(e) { return null; } }
+  function lsSet(key, val) { try { localStorage.setItem(key, val); } catch(e) {} }
+  function lsRemove(key) { try { localStorage.removeItem(key); } catch(e) {} }
+
   // Если запущено как установленное приложение — баннер не нужен
+  // Заодно записываем флаг в localStorage (при следующем заходе через браузер баннер не появится)
   if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+    lsSet('pwa_installed', 'true');
     return;
   }
 
   // Определяем iOS Safari — там нет beforeinstallprompt
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
-  // Проверяем, установлено ли PWA через getInstalledRelatedApps()
-  // Это надёжный способ — beforeinstallprompt в Edge может срабатывать
-  // даже после установки PWA, а getInstalledRelatedApps() даёт точный ответ
+  // Проверяем, установлено ли PWA
+  // Возвращает true если PWA установлено, false если нет или неизвестно
   async function isPWAInstalled() {
-    // Проверка через display-mode (если запущено как standalone — установлено)
+    // 1. display-mode — если запущено как standalone, точно установлено
     if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
       return true;
     }
-    // Проверка через getInstalledRelatedApps() (Chrome/Edge 85+)
+
+    // 2. localStorage — записывается при appinstalled и в standalone режиме
+    // Это самый надёжный кросс-браузерный способ
+    if (lsGet('pwa_installed') === 'true') {
+      // Подтверждаем через getInstalledRelatedApps() если доступно
+      // Это помогает обнаружить удаление PWA
+      if ('getInstalledRelatedApps' in navigator) {
+        try {
+          const apps = await navigator.getInstalledRelatedApps();
+          if (apps.some(app => app.platform === 'webapp')) {
+            // PWA всё ещё установлено — отлично
+            return true;
+          } else {
+            // localStorage стоит, но getInstalledRelatedApps() не нашёл PWA
+            // Значит пользователь удалил PWA — сбрасываем флаг
+            lsRemove('pwa_installed');
+            return false;
+          }
+        } catch (err) {
+          // API не работает — доверяем localStorage
+          return true;
+        }
+      }
+      // API нет — доверяем localStorage
+      return true;
+    }
+
+    // 3. getInstalledRelatedApps() без localStorage — на случай если
+    // пользователь установил PWA в другой вкладке/сессии
     if ('getInstalledRelatedApps' in navigator) {
       try {
         const apps = await navigator.getInstalledRelatedApps();
-        // Ищем себя — platform "webapp" с нашим URL
-        return apps.some(app => app.platform === 'webapp');
-      } catch (err) {
-        // API не поддерживается или нет прав — не критично
-        console.warn('getInstalledRelatedApps error:', err);
-      }
+        if (apps.some(app => app.platform === 'webapp')) {
+          // PWA установлено, но localStorage ещё не записан — исправляем
+          lsSet('pwa_installed', 'true');
+          return true;
+        }
+      } catch (err) { /* игнорируем */ }
     }
+
     return false;
   }
 
@@ -1457,12 +1505,11 @@ if ('serviceWorker' in navigator) {
   }
 
   // Перехватываем системный промпт (Chrome, Edge, Samsung Internet)
-  // ВАЖНО: Edge может вызывать это событие даже после установки PWA!
-  // Поэтому перед показом баннера проверяем getInstalledRelatedApps()
+  // ВАЖНО: некоторые браузеры вызывают это событие даже после установки PWA!
+  // Поэтому перед показом баннера проверяем isPWAInstalled()
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    // Проверяем установку перед показом — решает проблему Edge
     showBannerIfNotInstalled();
   });
 
@@ -1502,8 +1549,9 @@ if ('serviceWorker' in navigator) {
     });
   }
 
-  // При установке — скрываем баннер
+  // При установке — записываем флаг и скрываем баннер
   window.addEventListener('appinstalled', () => {
+    lsSet('pwa_installed', 'true');
     deferredPrompt = null;
     if (banner) banner.classList.remove('visible');
   });

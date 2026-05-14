@@ -1,10 +1,10 @@
 /**
  * Service Worker для Путеводителя РГАТУ
  * Обеспечивает офлайн-доступ и кэширование ресурсов
- * v9: getInstalledRelatedApps() для проверки установки PWA
+ * v10: localStorage для запоминания установки PWA
  */
 
-const CACHE_NAME = 'rgatu-guide-v9';
+const CACHE_NAME = 'rgatu-guide-v10';
 
 // Относительные пути — совпадают с окончанием URL независимо от базового пути
 const STATIC_ASSETS = [
