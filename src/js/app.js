@@ -1426,22 +1426,56 @@ if ('serviceWorker' in navigator) {
   // Определяем iOS Safari — там нет beforeinstallprompt
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
+  // Проверяем, установлено ли PWA через getInstalledRelatedApps()
+  // Это надёжный способ — beforeinstallprompt в Edge может срабатывать
+  // даже после установки PWA, а getInstalledRelatedApps() даёт точный ответ
+  async function isPWAInstalled() {
+    // Проверка через display-mode (если запущено как standalone — установлено)
+    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+      return true;
+    }
+    // Проверка через getInstalledRelatedApps() (Chrome/Edge 85+)
+    if ('getInstalledRelatedApps' in navigator) {
+      try {
+        const apps = await navigator.getInstalledRelatedApps();
+        // Ищем себя — platform "webapp" с нашим URL
+        return apps.some(app => app.platform === 'webapp');
+      } catch (err) {
+        // API не поддерживается или нет прав — не критично
+        console.warn('getInstalledRelatedApps error:', err);
+      }
+    }
+    return false;
+  }
+
+  // Показать баннер, только если PWA НЕ установлено
+  async function showBannerIfNotInstalled() {
+    const installed = await isPWAInstalled();
+    if (!installed && banner) {
+      banner.classList.add('visible');
+    }
+  }
+
   // Перехватываем системный промпт (Chrome, Edge, Samsung Internet)
-  // Событие вызывается только если приложение НЕ установлено
-  // Если пользователь удалит приложение — событие снова сработает
+  // ВАЖНО: Edge может вызывать это событие даже после установки PWA!
+  // Поэтому перед показом баннера проверяем getInstalledRelatedApps()
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    if (banner) banner.classList.add('visible');
+    // Проверяем установку перед показом — решает проблему Edge
+    showBannerIfNotInstalled();
   });
 
   // Fallback для iOS — там нет beforeinstallprompt
-  setTimeout(() => {
+  setTimeout(async () => {
     if (isIOS && banner && !banner.classList.contains('visible')) {
-      installBtn.textContent = 'Как установить';
-      const spanEl = banner.querySelector('span');
-      if (spanEl) spanEl.textContent = 'Нажмите  → «На экран Домой»';
-      banner.classList.add('visible');
+      const installed = await isPWAInstalled();
+      if (!installed) {
+        installBtn.textContent = 'Как установить';
+        const spanEl = banner.querySelector('span');
+        if (spanEl) spanEl.textContent = 'Нажмите  → «На экран Домой»';
+        banner.classList.add('visible');
+      }
     }
   }, 3000);
 

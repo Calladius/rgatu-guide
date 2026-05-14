@@ -8,6 +8,12 @@
   "orientation": "any",
   "lang": "ru",
   "categories": ["education", "navigation"],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://calladius.github.io/rgatu-guide/manifest.json"
+    }
+  ],
   "icons": [
     {
       "src": "icons/icon-72.png",
