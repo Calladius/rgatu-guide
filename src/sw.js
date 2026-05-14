@@ -1,10 +1,10 @@
 /**
  * Service Worker для Путеводителя РГАТУ
  * Обеспечивает офлайн-доступ и кэширование ресурсов
- * v7: относительные пути — работает на любом домене/подкаталоге
+ * v8: навигационные запросы обслуживаются из кэша в офлайне
  */
 
-const CACHE_NAME = 'rgatu-guide-v7';
+const CACHE_NAME = 'rgatu-guide-v8';
 
 // Относительные пути — совпадают с окончанием URL независимо от базового пути
 const STATIC_ASSETS = [
@@ -36,8 +36,7 @@ function isStaticAsset(pathname) {
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('SW: кэширование статики v7');
-      // Кэшируем относительно текущей области (scope)
+      console.log('SW: кэширование статики v8');
       return cache.addAll(STATIC_ASSETS.map(a => './' + a));
     })
   );
@@ -63,6 +62,27 @@ self.addEventListener('fetch', (event) => {
 
   // Только GET-запросы и только с того же источника
   if (request.method !== 'GET' || url.origin !== self.location.origin) return;
+
+  // Навигационные запросы (пользователь открывает URL в браузере)
+  // В офлайне отдаём index.html из кэша — PWA работает как приложение
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+          return response;
+        })
+        .catch(() => {
+          // Офлайн — ищем в кэше запрос или любой index.html
+          return caches.match(request).then((cached) => {
+            if (cached) return cached;
+            return caches.match('./index.html');
+          });
+        })
+    );
+    return;
+  }
 
   // Статические ресурсы (HTML, CSS, JS, JSON, SVG) — Cache First, обновляем в фоне
   if (isStaticAsset(url.pathname)) {
