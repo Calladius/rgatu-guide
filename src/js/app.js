@@ -144,7 +144,7 @@ function closeSidebar() {
 // ============================================
 function setupSearch() {
   const input = document.getElementById('searchInput');
-  const toggle = document.getElementById('searchToggle');
+  const searchBtn = document.getElementById('searchBtn');
   const results = document.getElementById('searchResults');
 
   input.addEventListener('input', () => {
@@ -160,6 +160,19 @@ function setupSearch() {
     }, 200);
   });
 
+  // Кнопка-лупа запускает поиск
+  if (searchBtn) {
+    searchBtn.addEventListener('click', () => {
+      const query = input.value.trim().toLowerCase();
+      if (query.length >= 2) {
+        performSearch(query);
+        results.classList.add('visible');
+      } else {
+        input.focus();
+      }
+    });
+  }
+
   input.addEventListener('focus', () => {
     if (input.value.trim().length >= 2) {
       results.classList.add('visible');
@@ -171,15 +184,6 @@ function setupSearch() {
       results.classList.remove('visible');
     }
   });
-
-  // Мобильный поиск
-  if (toggle) {
-    toggle.addEventListener('click', () => {
-      const wrap = document.querySelector('.header__search-wrap');
-      wrap.style.display = wrap.style.display === 'block' ? 'none' : 'block';
-      if (wrap.style.display === 'block') input.focus();
-    });
-  }
 }
 
 function performSearch(query) {
@@ -1422,6 +1426,50 @@ if ('serviceWorker' in navigator) {
       .catch(err => console.warn('SW ошибка:', err));
   });
 }
+
+// ============================================
+// PWA Install Prompt — баннер «Установить»
+// ============================================
+(function() {
+  let deferredPrompt = null;
+  const banner = document.getElementById('installBanner');
+  const installBtn = document.getElementById('installBtn');
+  const closeBtn = document.getElementById('installClose');
+
+  // Перехватываем системный промпт
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    // Показываем баннер
+    if (banner) banner.classList.add('visible');
+  });
+
+  // Кнопка «Установить»
+  if (installBtn) {
+    installBtn.addEventListener('click', () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((result) => {
+        console.log('PWA install:', result.outcome);
+        deferredPrompt = null;
+        if (banner) banner.classList.remove('visible');
+      });
+    });
+  }
+
+  // Кнопка закрыть
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      if (banner) banner.classList.remove('visible');
+    });
+  }
+
+  // Если уже установлено — не показываем
+  window.addEventListener('appinstalled', () => {
+    deferredPrompt = null;
+    if (banner) banner.classList.remove('visible');
+  });
+})();
 
 // ============================================
 // Обработка поворота экрана / изменения размера
