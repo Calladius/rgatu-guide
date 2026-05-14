@@ -5,7 +5,7 @@
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f5f7fa",
-  "theme_color": "#1565C0",
+  "theme_color": "#C62828",
   "orientation": "any",
   "lang": "ru",
   "categories": ["education", "navigation"],
