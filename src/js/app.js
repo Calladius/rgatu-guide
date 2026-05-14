@@ -85,8 +85,11 @@ function navigateTo(page) {
   const pageEl = document.getElementById(`page${capitalize(page)}`);
   if (pageEl) {
     pageEl.classList.add('active');
-    pageEl.classList.add('slide-up');
-    setTimeout(() => pageEl.classList.remove('slide-up'), 400);
+    // Анимация слайда только для обычных страниц (не полноэкранной карты)
+    if (!pageEl.classList.contains('page--map')) {
+      pageEl.classList.add('slide-up');
+      setTimeout(() => pageEl.classList.remove('slide-up'), 400);
+    }
   }
 
   // Обновляем меню
@@ -288,13 +291,12 @@ function handleSearchResult(item) {
   } else if (item.type === 'room' || item.type === 'dept' || item.type === 'person') {
     navigateTo('map');
     if (item.floor) {
-      setTimeout(() => {
-        selectFloor(item.floor);
+      setTimeout(async () => {
+        await selectFloor(item.floor);
         if (item.room) {
-          setTimeout(() => highlightRoom(item.room), 300);
+          highlightRoom(item.room);
         } else if (item.subType) {
-          // Особое помещение без номера — подсветить по типу
-          setTimeout(() => highlightSpecialRoom(item.subType), 300);
+          highlightSpecialRoom(item.subType);
         }
       }, 200);
     }
@@ -328,7 +330,8 @@ function selectFloor(floor) {
   document.querySelectorAll('.floor-tab').forEach(tab => {
     tab.classList.toggle('active', parseInt(tab.dataset.floor) === floor);
   });
-  loadFloorMap(floor);
+  closeRoomCard();
+  return loadFloorMap(floor);
 }
 
 function setupMapInteraction() {
@@ -397,6 +400,8 @@ function highlightSpecialRoom(roomType) {
 function showRoomCard(roomId, roomType, clickEvent) {
   const card = document.getElementById('roomCard');
   const content = document.getElementById('roomCardContent');
+  const backdrop = document.getElementById('roomCardBackdrop');
+  const isMobile = window.innerWidth < 600;
 
   // Ищем информацию о комнате
   let roomInfo = findRoomInfo(roomId, roomType);
@@ -424,15 +429,37 @@ function showRoomCard(roomId, roomType, clickEvent) {
     ${roomInfo.schedule ? `<div class="room-card__row" style="margin-top:8px"><span class="room-card__row-icon">🕐</span><span class="room-card__row-text">${roomInfo.schedule}</span></div>` : ''}
   `;
 
-  // Позиционирование карточки рядом с курсором
-  if (clickEvent) {
-    positionRoomCard(card, clickEvent.clientX, clickEvent.clientY);
+  // Мобильный режим: bottom sheet
+  if (isMobile) {
+    card.classList.add('room-card--bottom');
+    // Сбрасываем десктопные стили позиционирования
+    card.style.left = '';
+    card.style.top = '';
+    // Показываем подложку
+    backdrop.classList.add('visible');
+    // Клик по подложке = закрыть
+    backdrop.onclick = closeRoomCard;
+  } else {
+    // Десктопный режим: карточка рядом с курсором
+    card.classList.remove('room-card--bottom');
+    backdrop.classList.remove('visible');
+    backdrop.onclick = null;
+    if (clickEvent) {
+      positionRoomCard(card, clickEvent.clientX, clickEvent.clientY);
+    }
   }
 
   card.classList.add('visible');
+  card.classList.remove('hiding');
+
+  // Запускаем отслеживание свайпа на мобильных
+  if (isMobile) {
+    setupBottomSheetSwipe();
+  }
 }
 
 function positionRoomCard(card, clientX, clientY) {
+  // Десктопный режим — карточка рядом с курсором
   // Сначала показываем карточку скрытно чтобы измерить размер
   card.style.left = '-9999px';
   card.style.top = '-9999px';
@@ -491,6 +518,118 @@ function positionRoomCard(card, clientX, clientY) {
 
   card.style.left = left + 'px';
   card.style.top = top + 'px';
+}
+
+// ============================================
+// Свайп вниз для закрытия bottom sheet
+// ============================================
+let _bsSwipeY = 0;
+let _bsSwipeActive = false;
+let _bsMouseSwipeActive = false;
+let _bsMouseSwipeY = 0;
+
+function setupBottomSheetSwipe() {
+  const card = document.getElementById('roomCard');
+  const handle = card.querySelector('.room-card__handle');
+  if (!handle) return;
+
+  _bsSwipeActive = true;
+
+  // Убираем предыдущие слушатели (на случай повторного вызова)
+  handle.removeEventListener('touchstart', onBsTouchStart);
+  handle.removeEventListener('touchmove', onBsTouchMove);
+  handle.removeEventListener('touchend', onBsTouchEnd);
+  card.removeEventListener('touchstart', onBsTouchStart);
+  card.removeEventListener('touchmove', onBsTouchMove);
+  card.removeEventListener('touchend', onBsTouchEnd);
+  card.removeEventListener('mousedown', onBsMouseDown);
+  window.removeEventListener('mousemove', onBsMouseMove);
+  window.removeEventListener('mouseup', onBsMouseUp);
+
+  // Тач-события — слушаем и ручку, и всю карточку
+  handle.addEventListener('touchstart', onBsTouchStart, { passive: true });
+  handle.addEventListener('touchmove', onBsTouchMove, { passive: false });
+  handle.addEventListener('touchend', onBsTouchEnd);
+  card.addEventListener('touchstart', onBsTouchStart, { passive: true });
+  card.addEventListener('touchmove', onBsTouchMove, { passive: false });
+  card.addEventListener('touchend', onBsTouchEnd);
+
+  // Мышь — для проверки с ПК (только ручка и верхняя часть карточки)
+  handle.addEventListener('mousedown', onBsMouseDown);
+  card.addEventListener('mousedown', onBsMouseDown);
+  window.addEventListener('mousemove', onBsMouseMove);
+  window.addEventListener('mouseup', onBsMouseUp);
+}
+
+function onBsTouchStart(e) {
+  if (!_bsSwipeActive) return;
+  _bsSwipeY = e.touches[0].clientY;
+}
+
+function onBsTouchMove(e) {
+  if (!_bsSwipeActive) return;
+  const card = document.getElementById('roomCard');
+  const dy = e.touches[0].clientY - _bsSwipeY;
+
+  // Разрешаем свайп вниз только если карточка не прокручена
+  // (скролл в самом верху — scrollTop <= 0)
+  if (dy > 0 && card.scrollTop <= 0) {
+    card.style.transform = `translateY(${dy}px)`;
+    e.preventDefault(); // чтобы не скроллился контент под карточкой
+  }
+}
+
+function onBsTouchEnd(e) {
+  if (!_bsSwipeActive) return;
+  const card = document.getElementById('roomCard');
+  const currentTransform = card.style.transform;
+  const match = currentTransform.match(/translateY\((\d+(?:\.\d+)?)px\)/);
+  // Порог 40px — достаточно лёгкий свайп для закрытия
+  if (match && parseFloat(match[1]) > 40) {
+    closeRoomCard();
+  } else {
+    // Возвращаем на место с анимацией
+    card.style.transition = 'transform 0.25s cubic-bezier(0.4, 0, 0.2, 1)';
+    card.style.transform = '';
+    // Восстанавливаем обычный transition после анимации возврата
+    setTimeout(() => { card.style.transition = ''; }, 260);
+  }
+  _bsSwipeY = 0;
+}
+
+// --- Мышь (для проверки с ПК) ---
+function onBsMouseDown(e) {
+  if (!_bsSwipeActive) return;
+  // Только левая кнопка
+  if (e.button !== 0) return;
+  _bsMouseSwipeActive = true;
+  _bsMouseSwipeY = e.clientY;
+  e.preventDefault(); // чтобы не выделялся текст
+}
+
+function onBsMouseMove(e) {
+  if (!_bsMouseSwipeActive) return;
+  const card = document.getElementById('roomCard');
+  const dy = e.clientY - _bsMouseSwipeY;
+  if (dy > 0 && card.scrollTop <= 0) {
+    card.style.transform = `translateY(${dy}px)`;
+  }
+}
+
+function onBsMouseUp(e) {
+  if (!_bsMouseSwipeActive) return;
+  _bsMouseSwipeActive = false;
+  const card = document.getElementById('roomCard');
+  const currentTransform = card.style.transform;
+  const match = currentTransform.match(/translateY\((\d+(?:\.\d+)?)px\)/);
+  if (match && parseFloat(match[1]) > 40) {
+    closeRoomCard();
+  } else {
+    card.style.transition = 'transform 0.25s cubic-bezier(0.4, 0, 0.2, 1)';
+    card.style.transform = '';
+    setTimeout(() => { card.style.transition = ''; }, 260);
+  }
+  _bsMouseSwipeY = 0;
 }
 
 function findRoomInfo(roomId, roomType) {
@@ -613,13 +752,36 @@ function findRoomInfo(roomId, roomType) {
 
 function closeRoomCard() {
   const card = document.getElementById('roomCard');
-  card.classList.remove('visible');
-  // Очищаем содержимое, чтобы невидимые ссылки не перехватывали клики
-  setTimeout(() => {
-    if (!card.classList.contains('visible')) {
-      document.getElementById('roomCardContent').innerHTML = '';
-    }
-  }, 350); // после завершения анимации (0.3s)
+  const backdrop = document.getElementById('roomCardBackdrop');
+  const isMobile = window.innerWidth < 600;
+
+  // На мобильных — анимация свайпа вниз перед закрытием
+  if (isMobile && card.classList.contains('room-card--bottom')) {
+    card.classList.add('hiding');
+    card.classList.remove('visible');
+    card.style.transform = '';
+    backdrop.classList.remove('visible');
+    backdrop.onclick = null;
+    _bsSwipeActive = false;
+    setTimeout(() => {
+      card.classList.remove('hiding');
+      // Не очищать контент, если карточка уже снова открыта
+      if (!card.classList.contains('visible')) {
+        document.getElementById('roomCardContent').innerHTML = '';
+      }
+    }, 350);
+  } else {
+    card.classList.remove('visible');
+    backdrop.classList.remove('visible');
+    backdrop.onclick = null;
+    _bsSwipeActive = false;
+    setTimeout(() => {
+      if (!card.classList.contains('visible')) {
+        document.getElementById('roomCardContent').innerHTML = '';
+      }
+    }, 350);
+  }
+
   const container = document.getElementById('mapScroll');
   const svg = container.querySelector('svg');
   if (svg) {
@@ -657,7 +819,7 @@ function renderInstitutes() {
         </div>
         <div class="dept-list">
           ${inst.departments.map(dept => `
-            <div class="dept-item" onclick="navigateTo('map');setTimeout(()=>{selectFloor(${dept.floor});setTimeout(()=>highlightRoom('${dept.room}'),300)},200)">
+            <div class="dept-item" onclick="navigateTo('map');setTimeout(async()=>{await selectFloor(${dept.floor});highlightRoom('${dept.room}')},200)">
               <div class="dept-item__icon" style="color:${inst.color}">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
               </div>
@@ -1260,3 +1422,19 @@ if ('serviceWorker' in navigator) {
       .catch(err => console.warn('SW ошибка:', err));
   });
 }
+
+// ============================================
+// Обработка поворота экрана / изменения размера
+// ============================================
+let _prevIsMobile = window.innerWidth < 600;
+window.addEventListener('resize', () => {
+  const isMobile = window.innerWidth < 600;
+  const card = document.getElementById('roomCard');
+  const backdrop = document.getElementById('roomCardBackdrop');
+
+  // Если карточка видима и режим изменился — закрываем и переключаем
+  if (card.classList.contains('visible') && isMobile !== _prevIsMobile) {
+    closeRoomCard();
+  }
+  _prevIsMobile = isMobile;
+});

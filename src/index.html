@@ -3,12 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <meta name="description" content="Цифровой путеводитель для студентов РГАТУ им. П.А. Соловьёва — интерактивные карты этажей, справочник кафедр, инструкции по получению документов">
+  <meta name="description" content="Интерактивный путеводитель по главному корпусу РГАТУ им. П.А. Соловьёва. Карты 5 этажей, справочник кафедр, контакты, инструкции по получению документов.">
+  <meta name="keywords" content="РГАТУ, путеводитель, карта корпуса, кафедры, аудитории, Рыбинск, Соловьёв">
   <meta name="theme-color" content="#1565C0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="РГАТУ Путеводитель">
-  <title>Путеводитель РГАТУ</title>
+  <link rel="canonical" href="https://calladius.github.io/rgatu-guide/">
+  <title>Путеводитель РГАТУ — Карта главного корпуса</title>
+
+  <!-- Open Graph — красивый сниппет при шаринге -->
+  <meta property="og:title" content="Путеводитель РГАТУ">
+  <meta property="og:description" content="Интерактивная карта главного корпуса РГАТУ им. П.А. Соловьёва — 5 этажей, кафедры, контакты">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://calladius.github.io/rgatu-guide/">
+  <meta property="og:image" content="https://calladius.github.io/rgatu-guide/icons/icon-512.png">
+  <meta property="og:locale" content="ru_RU">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
@@ -55,7 +65,7 @@
           Главная</a></li>
         <li><a href="#" class="sidebar__link" data-page="map" onclick="navigateTo('map')">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
-          Карта корпусов</a></li>
+          Карта главного корпуса</a></li>
         <li><a href="#" class="sidebar__link" data-page="departments" onclick="navigateTo('departments')">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
           Институты и кафедры</a></li>
@@ -172,7 +182,9 @@
         </div>
       </div>
       <!-- Карточка комнаты -->
+      <div class="room-card__backdrop" id="roomCardBackdrop"></div>
       <div class="room-card" id="roomCard">
+        <div class="room-card__handle"></div>
         <button class="room-card__close" onclick="closeRoomCard()" aria-label="Закрыть">&times;</button>
         <div class="room-card__content" id="roomCardContent"></div>
       </div>
