@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="description" content="Цифровой путеводитель для студентов РГАТУ им. П.А. Соловьёва — интерактивные карты этажей, справочник кафедр, инструкции по получению документов">
+  <meta name="theme-color" content="#1565C0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="РГАТУ Путеводитель">
+  <title>Путеводитель РГАТУ</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Шапка -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <button class="header__menu-btn" id="menuBtn" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="#" class="header__logo" onclick="navigateTo('home')">
+        <svg class="header__logo-icon" viewBox="0 0 40 40" width="36" height="36">
+          <rect x="2" y="2" width="36" height="36" rx="8" fill="#C62828"/>
+          <text x="20" y="26" text-anchor="middle" fill="white" font-size="16" font-weight="bold" font-family="Arial">Р</text>
+        </svg>
+        <span class="header__logo-text">РГАТУ<br><small>Путеводитель</small></span>
+      </a>
+      <div class="header__search-wrap">
+        <input type="search" class="header__search" id="searchInput" placeholder="Поиск: кабинет, кафедра, документ..." autocomplete="off">
+        <div class="header__search-results" id="searchResults"></div>
+      </div>
+      <button class="header__search-toggle" id="searchToggle" aria-label="Поиск">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Боковое меню -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar__overlay" id="sidebarOverlay"></div>
+    <div class="sidebar__content">
+      <div class="sidebar__header">
+        <svg class="sidebar__logo" viewBox="0 0 40 40" width="40" height="40">
+          <rect x="2" y="2" width="36" height="36" rx="8" fill="#C62828"/>
+          <text x="20" y="26" text-anchor="middle" fill="white" font-size="16" font-weight="bold" font-family="Arial">Р</text>
+        </svg>
+        <span>РГАТУ Путеводитель</span>
+      </div>
+      <ul class="sidebar__nav">
+        <li><a href="#" class="sidebar__link active" data-page="home" onclick="navigateTo('home')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Главная</a></li>
+        <li><a href="#" class="sidebar__link" data-page="map" onclick="navigateTo('map')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+          Карта корпусов</a></li>
+        <li><a href="#" class="sidebar__link" data-page="departments" onclick="navigateTo('departments')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          Институты и кафедры</a></li>
+        <li><a href="#" class="sidebar__link" data-page="documents" onclick="navigateTo('documents')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          Документы</a></li>
+        <li><a href="#" class="sidebar__link" data-page="contacts" onclick="navigateTo('contacts')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          Контакты</a></li>
+      </ul>
+      <div class="sidebar__footer">
+        <p>РГАТУ им. П.А. Соловьёва</p>
+        <p class="sidebar__footer-small">г. Рыбинск, ул. Пушкина, д.53</p>
+        <a href="https://www.rsatu.ru" target="_blank" rel="noopener" class="sidebar__footer-link">www.rsatu.ru</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Основной контент -->
+  <main class="main" id="mainContent">
+
+    <!-- Главная страница -->
+    <section class="page page--home active" id="pageHome">
+      <div class="hero">
+        <div class="hero__content">
+          <h1 class="hero__title">Путеводитель<br>РГАТУ</h1>
+          <p class="hero__subtitle">Найди нужный кабинет, кафедру или документ за пару кликов</p>
+          <div class="hero__actions">
+            <button class="btn btn--primary" onclick="navigateTo('map')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg>
+              Открыть карту
+            </button>
+            <button class="btn btn--secondary" onclick="navigateTo('documents')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Как получить документ
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-access">
+        <h2 class="section-title">Быстрый доступ</h2>
+        <div class="quick-grid">
+          <div class="quick-card" onclick="navigateTo('map')">
+            <div class="quick-card__icon quick-card__icon--map">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg>
+            </div>
+            <span class="quick-card__title">Карта этажей</span>
+            <span class="quick-card__desc">Интерактивная навигация</span>
+          </div>
+          <div class="quick-card" onclick="navigateTo('departments')">
+            <div class="quick-card__icon quick-card__icon--dept">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            </div>
+            <span class="quick-card__title">Кафедры</span>
+            <span class="quick-card__desc">Справочник институтов</span>
+          </div>
+          <div class="quick-card" onclick="navigateTo('documents')">
+            <div class="quick-card__icon quick-card__icon--doc">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <span class="quick-card__title">Документы</span>
+            <span class="quick-card__desc">Как получить справку</span>
+          </div>
+          <div class="quick-card" onclick="navigateTo('contacts')">
+            <div class="quick-card__icon quick-card__icon--contact">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <span class="quick-card__title">Контакты</span>
+            <span class="quick-card__desc">Телефоны и адреса</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="popular-docs">
+        <h2 class="section-title">Часто ищут</h2>
+        <div class="popular-list" id="popularDocs"></div>
+      </div>
+
+      <div class="bell-schedule" id="bellSchedule">
+        <!-- Заполняется из JS -->
+      </div>
+    </section>
+
+    <!-- Страница карты -->
+    <section class="page page--map" id="pageMap">
+      <div class="map-controls">
+        <div class="floor-tabs" id="floorTabs">
+          <button class="floor-tab active" data-floor="1" onclick="selectFloor(1)">1 этаж</button>
+          <button class="floor-tab" data-floor="2" onclick="selectFloor(2)">2 этаж</button>
+          <button class="floor-tab" data-floor="3" onclick="selectFloor(3)">3 этаж</button>
+          <button class="floor-tab" data-floor="4" onclick="selectFloor(4)">4 этаж</button>
+          <button class="floor-tab" data-floor="5" onclick="selectFloor(5)">5 этаж</button>
+        </div>
+        <div class="map-legend">
+          <span class="legend-item"><span class="legend-color" style="background:#E3F2FD;border:2px solid #1565C0"></span>ИАТИФ</span>
+          <span class="legend-item"><span class="legend-color" style="background:#E8F5E9;border:2px solid #2E7D32"></span>ИИТСУ</span>
+          <span class="legend-item"><span class="legend-color" style="background:#F3E5F5;border:2px solid #6A1B9A"></span>ИНО</span>
+          <span class="legend-item"><span class="legend-color" style="background:#FFF8E1;border:2px solid #F9A825"></span>Лаборатории</span>
+          <span class="legend-item"><span class="legend-color" style="background:#ECEFF1;border:2px solid #546E7A"></span>Технические</span>
+          <span class="legend-item"><span class="legend-color" style="background:#F5F5F5;border:2px solid #BDBDBD"></span>Служебные</span>
+          <span class="legend-item"><span class="legend-color" style="background:#E0F2F1;border:2px solid #4DB6AC"></span>Туалет</span>
+          <span class="legend-item"><span class="legend-color" style="background:#FCE4EC;border:2px solid #F48FB1"></span>Особые</span>
+        </div>
+      </div>
+      <div class="map-container" id="mapContainer">
+        <div class="map-scroll" id="mapScroll">
+          <!-- SVG-карта загружается динамически -->
+        </div>
+        <div class="map-zoom-controls" id="zoomControls">
+          <button class="zoom-btn" onclick="zoomIn()" title="Увеличить">+</button>
+          <button class="zoom-btn" onclick="zoomOut()" title="Уменьшить">&minus;</button>
+          <button class="zoom-btn zoom-btn--reset" onclick="zoomReset()" title="Сбросить масштаб">⟲</button>
+        </div>
+      </div>
+      <!-- Карточка комнаты -->
+      <div class="room-card" id="roomCard">
+        <button class="room-card__close" onclick="closeRoomCard()" aria-label="Закрыть">&times;</button>
+        <div class="room-card__content" id="roomCardContent"></div>
+      </div>
+    </section>
+
+    <!-- Страница институтов и кафедр -->
+    <section class="page page--departments" id="pageDepartments">
+      <div class="page-header">
+        <h1 class="page-title">Институты и кафедры</h1>
+        <p class="page-subtitle">Структура РГАТУ им. П.А. Соловьёва</p>
+      </div>
+      <div class="institutes-list" id="institutesList"></div>
+    </section>
+
+    <!-- Страница документов -->
+    <section class="page page--documents" id="pageDocuments">
+      <div class="page-header">
+        <h1 class="page-title">Как получить документ</h1>
+        <p class="page-subtitle">Пошаговые инструкции для студентов</p>
+      </div>
+      <div class="doc-filters" id="docFilters"></div>
+      <div class="docs-list" id="docsList"></div>
+    </section>
+
+    <!-- Страница контактов -->
+    <section class="page page--contacts" id="pageContacts">
+      <div class="page-header">
+        <h1 class="page-title">Контакты</h1>
+        <p class="page-subtitle">Полезные контакты РГАТУ им. П.А. Соловьёва</p>
+      </div>
+      <div class="contacts-grid" id="contactsGrid"></div>
+    </section>
+  </main>
+
+  <!-- Модальное окно документа -->
+  <div class="modal" id="docModal">
+    <div class="modal__overlay" onclick="closeDocModal()"></div>
+    <div class="modal__content">
+      <button class="modal__close" onclick="closeDocModal()" aria-label="Закрыть">&times;</button>
+      <div id="docModalBody"></div>
+    </div>
+  </div>
+
+  <!-- Офлайн-уведомление -->
+  <div class="offline-banner" id="offlineBanner" style="display:none">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="1" y1="1" x2="23" y2="23"/><path d="M16.72 11.06A10.94 10.94 0 0119 12.55"/><path d="M5 12.55a10.94 10.94 0 015.17-2.39"/><path d="M10.71 5.05A16 16 0 0122.56 9"/><path d="M1.42 9a15.91 15.91 0 014.7-2.88"/><path d="M8.53 16.11a6 6 0 016.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+    <span>Нет подключения к интернету. Данные загружены из кэша.</span>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

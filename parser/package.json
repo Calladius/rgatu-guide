@@ -1,0 +1,18 @@
+{
+  "name": "rgatu-parser",
+  "version": "2.0.0",
+  "description": "Парсер данных с сайта РГАТУ + генератор SVG-карт",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "parse": "node parse.js",
+    "parse:data": "node parse.js --data-only",
+    "parse:svg": "node parse.js --svg-only"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,612 @@
+[
+  {
+    "name": "Вахта",
+    "head": "—",
+    "room": "90",
+    "floor": 1,
+    "phone": "",
+    "url": ""
+  },
+  {
+    "name": "Служба охраны",
+    "head": "—",
+    "room": "91",
+    "floor": 1,
+    "phone": "+7 (4855) 23-97-40",
+    "url": "https://www.rsatu.ru/university/struct/299/"
+  },
+  {
+    "name": "Ректорат (приёмная)",
+    "head": "Кошкин Валерий Иванович",
+    "room": "107",
+    "floor": 1,
+    "phone": "+7 (4855) 23-97-22",
+    "email": "rector@rsatu.ru",
+    "url": "https://www.rsatu.ru/university/administration/"
+  },
+  {
+    "name": "Приёмная комиссия",
+    "head": "—",
+    "room": "101",
+    "floor": 1,
+    "phone": "+7 (4855) 23-97-60",
+    "email": "pk@rsatu.ru",
+    "url": "https://www.rsatu.ru/applicants/the_admissions_committee/"
+  },
+  {
+    "name": "Бухгалтерия",
+    "head": "—",
+    "room": "100",
+    "floor": 1,
+    "phone": "+7 (4855) 23-97-25",
+    "url": "https://www.rsatu.ru/university/struct/298/"
+  },
+  {
+    "name": "Планово-финансовое управление",
+    "head": "Резник Татьяна Вячеславовна",
+    "room": "102",
+    "floor": 1,
+    "phone": "+7 (4855) 23-97-25",
+    "email": "pfu@rsatu.ru",
+    "url": "https://www.rsatu.ru/university/struct/297/"
+  },
+  {
+    "name": "Учебно-методическое управление",
+    "head": "Шпилева Юлия Владимировна",
+    "room": "103",
+    "floor": 1,
+    "phone": "+7 (4855) 23-97-85",
+    "email": "uvs@rsatu.ru",
+    "url": "https://www.rsatu.ru/university/struct/392/"
+  },
+  {
+    "name": "Управление имущественным комплексом",
+    "head": "Головкин Сергей Михайлович",
+    "room": "104",
+    "floor": 1,
+    "phone": "+7 (4855) 23-97-35",
+    "email": "golovkin-sm@rsatu.ru",
+    "url": "https://www.rsatu.ru/university/struct/335/"
+  },
+  {
+    "name": "Центр карьеры",
+    "head": "Манина Надежда Владимировна",
+    "room": "311",
+    "floor": 3,
+    "phone": "+7 (4855) 23-97-12",
+    "email": "manina_nv@rsatu.ru",
+    "url": "https://www.rsatu.ru/graduates/"
+  },
+  {
+    "name": "Управление по кадрам и делопроизводству",
+    "head": "Малышева Ирина Сергеевна",
+    "room": "106",
+    "floor": 1,
+    "phone": "+7 (4855) 27-50-26",
+    "url": "https://www.rsatu.ru/university/struct/303/"
+  },
+  {
+    "name": "Управление учёта",
+    "head": "—",
+    "room": "109",
+    "floor": 1,
+    "phone": "+7 (4855) 23-97-85",
+    "url": ""
+  },
+  {
+    "name": "Центр международного сотрудничества",
+    "head": "—",
+    "room": "108",
+    "floor": 1,
+    "phone": "+7 (4855) 23-97-47",
+    "url": "https://www.rsatu.ru/university/struct/305/"
+  },
+  {
+    "name": "Библиотека",
+    "head": "—",
+    "room": "110",
+    "floor": 1,
+    "phone": "+7 (4855) 23-97-52",
+    "url": "https://www.rsatu.ru/university/struct/"
+  },
+  {
+    "name": "Читальный зал (1 этаж)",
+    "head": "—",
+    "room": "111",
+    "floor": 1,
+    "phone": "+7 (4855) 23-97-52",
+    "url": ""
+  },
+  {
+    "name": "Спортивный зал",
+    "head": "—",
+    "room": "113",
+    "floor": 1,
+    "phone": "+7 (4855) 23-97-47",
+    "url": "https://www.rsatu.ru/university/struct/332/"
+  },
+  {
+    "name": "Актовый зал",
+    "head": "—",
+    "room": "115",
+    "floor": 1,
+    "phone": "+7 (4855) 23-97-46",
+    "url": "https://www.rsatu.ru/university/struct/327/"
+  },
+  {
+    "name": "Буфет",
+    "head": "—",
+    "room": "112",
+    "floor": 1,
+    "phone": "",
+    "url": ""
+  },
+  {
+    "name": "Вахта / Охрана",
+    "head": "—",
+    "room": "98",
+    "floor": 1,
+    "phone": "+7 (4855) 23-97-40",
+    "url": "https://www.rsatu.ru/university/struct/299/"
+  },
+  {
+    "name": "Медицинский пункт",
+    "head": "—",
+    "room": "108",
+    "floor": 1,
+    "phone": "+7 (4855) 23-97-47",
+    "url": "https://www.rsatu.ru/university/struct/333/"
+  },
+  {
+    "name": "Служба охраны",
+    "head": "—",
+    "room": "99",
+    "floor": 1,
+    "phone": "+7 (4855) 23-97-40",
+    "url": "https://www.rsatu.ru/university/struct/299/"
+  },
+  {
+    "name": "Гардероб",
+    "head": "—",
+    "room": "",
+    "floor": 1,
+    "phone": "",
+    "url": "",
+    "type": "cloakroom"
+  },
+  {
+    "name": "Зал заседаний",
+    "head": "—",
+    "room": "118",
+    "floor": 1,
+    "phone": "",
+    "url": ""
+  },
+  {
+    "name": "Учебный отдел",
+    "head": "—",
+    "room": "116",
+    "floor": 1,
+    "phone": "+7 (4855) 23-97-85",
+    "url": ""
+  },
+  {
+    "name": "ЦРО (Центр по работе с обучающимися)",
+    "head": "Семенова Юлия Валентиновна",
+    "room": "203",
+    "floor": 2,
+    "phone": "+7 (4855) 23-98-00",
+    "email": "cro@rsatu.ru",
+    "url": "https://www.rsatu.ru/university/struct/303/",
+    "type": "internet-class"
+  },
+  {
+    "name": "Проректор по молодежной политике и социальной работе",
+    "head": "Горячева Наталия Вадимовна",
+    "room": "221",
+    "floor": 2,
+    "phone": "+7 (4855) 23-97-47",
+    "email": "goryacheva@rsatu.ru",
+    "url": "https://www.rsatu.ru/university/administration/"
+  },
+  {
+    "name": "Факультет заочного обучения",
+    "head": "—",
+    "room": "215",
+    "floor": 2,
+    "phone": "+7 (4855) 23-97-52",
+    "email": "fzo@rsatu.ru",
+    "url": "https://www.rsatu.ru/university/struct/302/"
+  },
+  {
+    "name": "Центр международного сотрудничества (2 этаж)",
+    "head": "—",
+    "room": "210",
+    "floor": 2,
+    "phone": "+7 (4855) 23-97-47",
+    "url": "https://www.rsatu.ru/university/struct/305/"
+  },
+  {
+    "name": "Кафедра гуманитарных технологий и социального проектирования",
+    "head": "—",
+    "room": "218",
+    "floor": 2,
+    "phone": "+7 (4855) 23-97-52",
+    "url": "https://www.rsatu.ru/university/struct/293/"
+  },
+  {
+    "name": "Кафедра общественных наук",
+    "head": "—",
+    "room": "220",
+    "floor": 2,
+    "phone": "+7 (4855) 23-97-52",
+    "url": "https://www.rsatu.ru/university/struct/293/"
+  },
+  {
+    "name": "Институт непрерывного образования",
+    "head": "Шпилев Дмитрий Александрович",
+    "room": "223",
+    "floor": 2,
+    "phone": "+7 (4855) 23-97-52",
+    "email": "sda@rsatu.ru",
+    "url": "https://www.rsatu.ru/university/struct/293/"
+  },
+  {
+    "name": "Компьютерный класс (2 этаж)",
+    "head": "—",
+    "room": "224",
+    "floor": 2,
+    "phone": "",
+    "url": ""
+  },
+  {
+    "name": "Читальный зал",
+    "head": "—",
+    "room": "",
+    "floor": 2,
+    "phone": "+7 (4855) 23-97-52",
+    "url": "",
+    "type": "reading-room"
+  },
+  {
+    "name": "Интернет-класс",
+    "head": "—",
+    "room": "",
+    "floor": 2,
+    "phone": "+7 (4855) 23-97-52",
+    "url": "",
+    "type": "internet-class"
+  },
+  {
+    "name": "Библиографы",
+    "head": "—",
+    "room": "",
+    "floor": 2,
+    "phone": "+7 (4855) 23-97-52",
+    "url": "",
+    "type": "bibliographers"
+  },
+  {
+    "name": "Картотека",
+    "head": "—",
+    "room": "",
+    "floor": 2,
+    "phone": "+7 (4855) 23-97-52",
+    "url": "",
+    "type": "card-catalog"
+  },
+  {
+    "name": "Библиотечный фонд",
+    "head": "—",
+    "room": "",
+    "floor": 2,
+    "phone": "+7 (4855) 23-97-52",
+    "url": "",
+    "type": "library-fund"
+  },
+  {
+    "name": "Дирекция ИАТИФ",
+    "head": "Гурьянов Александр Игоревич",
+    "room": "327",
+    "floor": 3,
+    "phone": "+7 (4855) 23-97-54",
+    "email": "fad@rsatu.ru",
+    "url": "https://www.rsatu.ru/university/struct/291/"
+  },
+  {
+    "name": "Кафедра инновационного машиностроения",
+    "head": "Безъязычный Вячеслав Феоктистович",
+    "room": "311",
+    "floor": 3,
+    "phone": "+7 (4855) 23-97-54",
+    "url": "https://www.rsatu.ru/university/struct/291/"
+  },
+  {
+    "name": "Кафедра авиационных двигателей",
+    "head": "Храмин Роман Владимирович",
+    "room": "325",
+    "floor": 3,
+    "phone": "+7 (4855) 23-97-54",
+    "url": "https://www.rsatu.ru/university/struct/291/"
+  },
+  {
+    "name": "Кафедра материаловедения, литья и сварки",
+    "head": "Шатульский Александр Анатольевич",
+    "room": "329",
+    "floor": 3,
+    "phone": "+7 (4855) 23-97-54",
+    "url": "https://www.rsatu.ru/university/struct/291/"
+  },
+  {
+    "name": "Кафедра общей и технической физики",
+    "head": "Веретенников Сергей Владимирович",
+    "room": "335",
+    "floor": 3,
+    "phone": "+7 (4855) 23-97-54",
+    "url": "https://www.rsatu.ru/university/struct/291/"
+  },
+  {
+    "name": "Кафедра прикладной механики",
+    "head": "Болотин Алексей Николаевич",
+    "room": "337",
+    "floor": 3,
+    "phone": "+7 (4855) 23-97-54",
+    "url": "https://www.rsatu.ru/university/struct/291/"
+  },
+  {
+    "name": "Лаб. каф. иннов. машиностроения",
+    "head": "—",
+    "room": "313",
+    "floor": 3,
+    "phone": "+7 (4855) 23-97-54",
+    "url": ""
+  },
+  {
+    "name": "Лаб. каф. авиационных двигателей",
+    "head": "—",
+    "room": "317",
+    "floor": 3,
+    "phone": "+7 (4855) 23-97-54",
+    "url": ""
+  },
+  {
+    "name": "Лаб. каф. физики",
+    "head": "—",
+    "room": "320",
+    "floor": 3,
+    "phone": "+7 (4855) 23-97-54",
+    "url": ""
+  },
+  {
+    "name": "Лаб. каф. материаловедения",
+    "head": "—",
+    "room": "330",
+    "floor": 3,
+    "phone": "+7 (4855) 23-97-54",
+    "url": ""
+  },
+  {
+    "name": "Лаб. каф. механики",
+    "head": "—",
+    "room": "334",
+    "floor": 3,
+    "phone": "+7 (4855) 23-97-54",
+    "url": ""
+  },
+  {
+    "name": "Дирекция ИИТСУ",
+    "head": "Ломанов Алексей Николаевич",
+    "room": "426",
+    "floor": 4,
+    "phone": "+7 (4855) 23-97-59",
+    "email": "itms@rsatu.ru",
+    "url": "https://www.rsatu.ru/university/struct/292/"
+  },
+  {
+    "name": "Кафедра экономики, менеджмента и экономических информационных систем",
+    "head": "Камакина Ольга Владимировна",
+    "room": "428",
+    "floor": 4,
+    "phone": "+7 (4855) 23-97-59",
+    "url": "https://www.rsatu.ru/university/struct/292/"
+  },
+  {
+    "name": "Кафедра вычислительных систем",
+    "head": "Комаров Валерий Михайлович",
+    "room": "430",
+    "floor": 4,
+    "phone": "+7 (4855) 23-97-59",
+    "url": "https://www.rsatu.ru/university/struct/292/"
+  },
+  {
+    "name": "Кафедра мат. и прогр. обеспеч. ЭВС",
+    "head": "Паламарь Ирина Николаевна",
+    "room": "432",
+    "floor": 4,
+    "phone": "+7 (4855) 23-97-59",
+    "url": "https://www.rsatu.ru/university/struct/292/"
+  },
+  {
+    "name": "Кафедра электротехники и программируемой радиоэлектроники",
+    "head": "Юдин Алексей Викторович",
+    "room": "434",
+    "floor": 4,
+    "phone": "+7 (4855) 23-97-59",
+    "url": "https://www.rsatu.ru/university/struct/292/"
+  },
+  {
+    "name": "Кафедра высшей математики",
+    "head": "Башкин Михаил Анатольевич",
+    "room": "420",
+    "floor": 4,
+    "phone": "+7 (4855) 23-97-59",
+    "url": "https://www.rsatu.ru/university/struct/292/"
+  },
+  {
+    "name": "Кафедра иностранных языков",
+    "head": "Петрова Лариса Адольфовна",
+    "room": "422",
+    "floor": 4,
+    "phone": "+7 (4855) 23-97-59",
+    "url": "https://www.rsatu.ru/university/struct/292/"
+  },
+  {
+    "name": "Инжиниринговый центр «Цифровое энергомашиностроение»",
+    "head": "—",
+    "room": "401",
+    "floor": 4,
+    "phone": "+7 (4855) 23-97-43",
+    "url": "https://www.rsatu.ru/university/struct/328/"
+  },
+  {
+    "name": "Центр «Цифровая платформа университета»",
+    "head": "—",
+    "room": "403",
+    "floor": 4,
+    "phone": "+7 (4855) 23-97-43",
+    "url": "https://www.rsatu.ru/university/struct/329/"
+  },
+  {
+    "name": "Управление научно-исследовательской работы",
+    "head": "Курочкин Антон Валерьевич",
+    "room": "405",
+    "floor": 4,
+    "phone": "+7 (4855) 23-97-43",
+    "url": "https://www.rsatu.ru/university/struct/330/"
+  },
+  {
+    "name": "Лаборатория станков и инструментов",
+    "head": "—",
+    "room": "501",
+    "floor": 5,
+    "phone": "+7 (4855) 23-97-54",
+    "email": "fad@rsatu.ru",
+    "url": "https://www.rsatu.ru/university/struct/291/"
+  },
+  {
+    "name": "Лаборатория сварочных технологий",
+    "head": "—",
+    "room": "503",
+    "floor": 5,
+    "phone": "+7 (4855) 23-97-54",
+    "email": "fad@rsatu.ru",
+    "url": "https://www.rsatu.ru/university/struct/291/"
+  },
+  {
+    "name": "Лаборатория литейного производства",
+    "head": "—",
+    "room": "505",
+    "floor": 5,
+    "phone": "+7 (4855) 23-97-54",
+    "email": "fad@rsatu.ru",
+    "url": "https://www.rsatu.ru/university/struct/291/"
+  },
+  {
+    "name": "Лаборатория испытаний авиационных двигателей",
+    "head": "—",
+    "room": "507",
+    "floor": 5,
+    "phone": "+7 (4855) 23-97-54",
+    "email": "fad@rsatu.ru",
+    "url": "https://www.rsatu.ru/university/struct/291/"
+  },
+  {
+    "name": "Лаборатория электроники и радиоэлектроники",
+    "head": "—",
+    "room": "509",
+    "floor": 5,
+    "phone": "+7 (4855) 23-97-59",
+    "email": "itms@rsatu.ru",
+    "url": "https://www.rsatu.ru/university/struct/292/"
+  },
+  {
+    "name": "Компьютерный класс (5 этаж)",
+    "head": "—",
+    "room": "511",
+    "floor": 5,
+    "phone": "+7 (4855) 23-97-59",
+    "email": "itms@rsatu.ru",
+    "url": "https://www.rsatu.ru/university/struct/292/"
+  },
+  {
+    "name": "Серверная",
+    "head": "—",
+    "room": "513",
+    "floor": 5,
+    "phone": "+7 (4855) 23-97-43",
+    "email": "sutyagin.an@rsatu.ru",
+    "url": "https://www.rsatu.ru/university/struct/329/"
+  },
+  {
+    "name": "Лаборатория оптики и физики",
+    "head": "—",
+    "room": "515",
+    "floor": 5,
+    "phone": "+7 (4855) 23-97-54",
+    "email": "fad@rsatu.ru",
+    "url": "https://www.rsatu.ru/university/struct/291/"
+  },
+  {
+    "name": "Лаборатория испытания материалов",
+    "head": "—",
+    "room": "517",
+    "floor": 5,
+    "phone": "+7 (4855) 23-97-54",
+    "email": "fad@rsatu.ru",
+    "url": "https://www.rsatu.ru/university/struct/291/"
+  },
+  {
+    "name": "Лаборатория термодинамики и теплопередачи",
+    "head": "—",
+    "room": "519",
+    "floor": 5,
+    "phone": "+7 (4855) 23-97-54",
+    "email": "fad@rsatu.ru",
+    "url": "https://www.rsatu.ru/university/struct/291/"
+  },
+  {
+    "name": "Лаборатория САПР (компьютерная графика)",
+    "head": "—",
+    "room": "521",
+    "floor": 5,
+    "phone": "+7 (4855) 23-97-54",
+    "email": "fad@rsatu.ru",
+    "url": "https://www.rsatu.ru/university/struct/291/"
+  },
+  {
+    "name": "Лаборатория робототехники и автоматизации",
+    "head": "—",
+    "room": "523",
+    "floor": 5,
+    "phone": "+7 (4855) 23-97-59",
+    "email": "itms@rsatu.ru",
+    "url": "https://www.rsatu.ru/university/struct/292/"
+  },
+  {
+    "name": "Архив / Хранилище",
+    "head": "—",
+    "room": "527",
+    "floor": 5,
+    "phone": "+7 (4855) 23-97-35",
+    "email": "golovkin-sm@rsatu.ru",
+    "url": "https://www.rsatu.ru/university/struct/335/"
+  },
+  {
+    "name": "Технические помещения",
+    "head": "—",
+    "room": "529",
+    "floor": 5,
+    "phone": "+7 (4855) 23-97-35",
+    "email": "golovkin-sm@rsatu.ru",
+    "url": "https://www.rsatu.ru/university/struct/334/"
+  },
+  {
+    "name": "Авиационный колледж",
+    "head": "Попков Кирилл Николаевич",
+    "room": "200",
+    "floor": 0,
+    "phone": "+7 (4855) 28-04-30",
+    "email": "kirpopkov@mail.ru",
+    "url": "https://www.rsatu.ru/university/struct/310/"
+  }
+]
