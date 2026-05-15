@@ -1,10 +1,10 @@
 /**
  * Service Worker для Путеводителя РГАТУ
  * Обеспечивает офлайн-доступ и кэширование ресурсов
- * v11: таймаут сетевых запросов (3с) — защита от «подвисшего» интернета
+ * v12: перегенерированы иконки (красный фон), добавлен favicon.ico
  */
 
-const CACHE_NAME = 'rgatu-guide-v11';
+const CACHE_NAME = 'rgatu-guide-v12';
 
 // Таймаут для сетевых запросов (мс)
 // Если сеть не ответила за это время — отдаём из кэша
@@ -18,6 +18,7 @@ const STATIC_ASSETS = [
   'js/app.js',
   'manifest.json',
   'icons/favicon.svg',
+  'icons/favicon.ico',
   'data/data_departments.json',
   'data/data_documents.json',
   'data/data_contacts.json',
