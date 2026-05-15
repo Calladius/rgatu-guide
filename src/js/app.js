@@ -1,11 +1,6 @@
-/**
- * Путеводитель РГАТУ — Основной модуль приложения
- * PWA с интерактивными SVG-картами, поиском, справочником
- */
+// rgatu guide — pwa с картами, поиском, справочником
 
-// ============================================
-// Глобальное состояние
-// ============================================
+// глобальное состояние
 const App = {
   data: {
     departments: null,
@@ -23,33 +18,27 @@ const App = {
   },
 };
 
-// ============================================
-// Инициализация
-// ============================================
+// инит
 document.addEventListener('DOMContentLoaded', async () => {
-  // Сначала настраиваем критичный UI (меню, поиск, офлайн) — чтобы они работали
-  // даже если какая-то из функций рендеринга выбросит ошибку
+  // сначала меню и поиск — они должны работать даже если рендер сломается
   setupSidebar();
   setupSearch();
-  // setupOffline убран — офлайн-баннер не нужен, PWA работает бесшовно
+  // setupOffline убран — pwa и так работает
 
   await loadData();
 
-  // Каждая функция рендеринга обёрнута в try-catch, чтобы ошибка в одной
-  // не ломала остальные
+  // try-catch чтобы один сломаный рендер не убил всё
   try { renderPopularDocs(); } catch(e) { console.error('renderPopularDocs:', e); }
   try { renderInstitutes(); } catch(e) { console.error('renderInstitutes:', e); }
   try { renderDocuments(); } catch(e) { console.error('renderDocuments:', e); }
   try { renderContacts(); } catch(e) { console.error('renderContacts:', e); }
   try { renderBellSchedule(); } catch(e) { console.error('renderBellSchedule:', e); }
 
-  // Загружаем карту первого этажа
+  // карта первого этажа
   try { await loadFloorMap(1); } catch(e) { console.error('loadFloorMap:', e); }
 });
 
-// ============================================
-// Загрузка данных
-// ============================================
+// загрузка данных
 async function loadData() {
   const files = [
     { key: 'departments', file: 'data_departments.json' },
@@ -72,41 +61,36 @@ async function loadData() {
   }
 }
 
-// ============================================
-// Навигация
-// ============================================
+// навигация
 function navigateTo(page) {
   App.state.currentPage = page;
 
-  // Скрываем все страницы
+  // прячем все страницы
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
 
-  // Показываем нужную
+  // показываем нужную
   const pageEl = document.getElementById(`page${capitalize(page)}`);
   if (pageEl) {
     pageEl.classList.add('active');
-    // Анимация слайда только для обычных страниц (не полноэкранной карты)
+    // слайд-анимация, но не для карты
     if (!pageEl.classList.contains('page--map')) {
       pageEl.classList.add('slide-up');
       setTimeout(() => pageEl.classList.remove('slide-up'), 400);
     }
   }
 
-  // Обновляем меню
   document.querySelectorAll('.sidebar__link').forEach(link => {
     link.classList.toggle('active', link.dataset.page === page);
   });
 
-  // Закрываем сайдбар
   closeSidebar();
 
-  // Закрываем карточку комнаты при уходе со страницы
+  // закрываем карточку комнаты
   closeRoomCard();
 
-  // Скролл наверх
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  // Если карта — загружаем SVG
+  // если карта — грузим svg
   if (page === 'map') {
     loadFloorMap(App.state.currentFloor);
   }
@@ -118,9 +102,7 @@ function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-// ============================================
-// Боковое меню
-// ============================================
+// боковое меню
 function setupSidebar() {
   const btn = document.getElementById('menuBtn');
   const sidebar = document.getElementById('sidebar');
@@ -139,9 +121,7 @@ function closeSidebar() {
   document.getElementById('menuBtn').classList.remove('active');
 }
 
-// ============================================
-// Поиск
-// ============================================
+// поиск
 function setupSearch() {
   const input = document.getElementById('searchInput');
   const searchBtn = document.getElementById('searchBtn');
@@ -160,7 +140,7 @@ function setupSearch() {
     }, 200);
   });
 
-  // Кнопка-лупа запускает поиск
+  // кнопка лупы
   if (searchBtn) {
     searchBtn.addEventListener('click', () => {
       const query = input.value.trim().toLowerCase();
@@ -190,7 +170,7 @@ function performSearch(query) {
   const results = document.getElementById('searchResults');
   const items = [];
 
-  // Поиск по кабинетам (из подразделений)
+  // кабинеты из подразделений
   if (App.data.subdivisions) {
     App.data.subdivisions.forEach(sub => {
       const room = sub.room || '';
@@ -208,7 +188,7 @@ function performSearch(query) {
     });
   }
 
-  // Поиск по кафедрам
+  // кафедры
   if (App.data.departments) {
     App.data.departments.forEach(inst => {
       inst.departments.forEach(dept => {
@@ -224,7 +204,7 @@ function performSearch(query) {
           });
         }
       });
-      // Поиск по институту
+      // институт целиком
       if (inst.name.toLowerCase().includes(query) || inst.shortName.toLowerCase().includes(query)) {
         items.push({
           type: 'dept',
@@ -237,7 +217,7 @@ function performSearch(query) {
     });
   }
 
-  // Поиск по документам
+  // документы
   if (App.data.documents) {
     App.data.documents.forEach(doc => {
       if (doc.name.toLowerCase().includes(query) || doc.category.toLowerCase().includes(query)) {
@@ -251,7 +231,7 @@ function performSearch(query) {
     });
   }
 
-  // Поиск по руководству
+  // руководство
   if (App.data.leadership) {
     App.data.leadership.forEach(leader => {
       if (leader.name.toLowerCase().includes(query) || leader.position.toLowerCase().includes(query)) {
@@ -266,7 +246,7 @@ function performSearch(query) {
     });
   }
 
-  // Рендер результатов
+  // рендерим результаты
   if (items.length === 0) {
     results.innerHTML = '<div class="search-result-item"><div class="search-result-item__title">Ничего не найдено</div></div>';
   } else {
@@ -307,9 +287,7 @@ function handleSearchResult(item) {
   }
 }
 
-// ============================================
-// Карта этажей
-// ============================================
+// карта этажей
 async function loadFloorMap(floor) {
   App.state.currentFloor = floor;
   const container = document.getElementById('mapScroll');
@@ -343,12 +321,12 @@ function setupMapInteraction() {
   const svg = container.querySelector('svg');
   if (!svg) return;
 
-  // Клик по комнате, туалету или особому помещению
+  // клик по комнате/туалету/особому помещению
   const rooms = svg.querySelectorAll('.room[data-room], .toilet, .special');
   rooms.forEach(room => {
     room.addEventListener('click', (e) => {
       e.stopPropagation();
-      // Убираем активность со всех
+      // снимаем активность
       rooms.forEach(r => r.classList.remove('active'));
       room.classList.add('active');
       const roomId = room.dataset.room || null;
@@ -357,7 +335,7 @@ function setupMapInteraction() {
     });
   });
 
-  // Клик по пустому месту — закрыть карточку
+  // клик на пустое место = закрыть
   svg.addEventListener('click', () => {
     rooms.forEach(r => r.classList.remove('active'));
     closeRoomCard();
@@ -375,7 +353,7 @@ function highlightRoom(roomId) {
     if (r.dataset.room === roomId) {
       r.classList.add('active');
       r.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      // Получаем позицию элемента на экране для карточки
+      // позиция для карточки
       const rect = r.getBoundingClientRect();
       const fakeEvent = { clientX: rect.left + rect.width / 2, clientY: rect.top + rect.height / 2 };
       showRoomCard(r.dataset.room, r.dataset.type, fakeEvent);
@@ -407,7 +385,7 @@ function showRoomCard(roomId, roomType, clickEvent) {
   const backdrop = document.getElementById('roomCardBackdrop');
   const isMobile = window.innerWidth < 600;
 
-  // Ищем информацию о комнате
+  // ищем инфу о комнате
   let roomInfo = findRoomInfo(roomId, roomType);
 
   const badgeClass = roomInfo.institute === 'АТИФ' || roomInfo.institute === 'ИАТИФ' ? 'atif'
@@ -433,18 +411,17 @@ function showRoomCard(roomId, roomType, clickEvent) {
     ${roomInfo.schedule ? `<div class="room-card__row" style="margin-top:8px"><span class="room-card__row-icon">🕐</span><span class="room-card__row-text">${roomInfo.schedule}</span></div>` : ''}
   `;
 
-  // Мобильный режим: bottom sheet
+  // мобилка — bottom sheet
   if (isMobile) {
     card.classList.add('room-card--bottom');
-    // Сбрасываем десктопные стили позиционирования
+    // сбрасываем десктопные стили
     card.style.left = '';
     card.style.top = '';
-    // Показываем подложку
     backdrop.classList.add('visible');
-    // Клик по подложке = закрыть
+    // клик по подложке = закрыть
     backdrop.onclick = closeRoomCard;
   } else {
-    // Десктопный режим: карточка рядом с курсором
+    // десктоп — карточка у курсора
     card.classList.remove('room-card--bottom');
     backdrop.classList.remove('visible');
     backdrop.onclick = null;
@@ -456,15 +433,13 @@ function showRoomCard(roomId, roomType, clickEvent) {
   card.classList.add('visible');
   card.classList.remove('hiding');
 
-  // Запускаем отслеживание свайпа на мобильных
   if (isMobile) {
     setupBottomSheetSwipe();
   }
 }
 
 function positionRoomCard(card, clientX, clientY) {
-  // Десктопный режим — карточка рядом с курсором
-  // Сначала показываем карточку скрытно чтобы измерить размер
+  // прячем за экраном чтобы измерить
   card.style.left = '-9999px';
   card.style.top = '-9999px';
   card.classList.add('visible');
@@ -474,20 +449,19 @@ function positionRoomCard(card, clientX, clientY) {
   const cardH = cardRect.height;
   card.classList.remove('visible');
 
-  // Зона зум-кнопок: правый верхний угол map-container
+  // зона зум-кнопок
   const mapContainer = document.getElementById('mapContainer');
   const containerRect = mapContainer.getBoundingClientRect();
   const zoomControls = document.getElementById('zoomControls');
   const zoomRect = zoomControls.getBoundingClientRect();
 
-  // Отступ от курсора
   const offset = 12;
 
-  // Предпочитаем позицию справа от курсора
+  // лучше справа от курсора
   let left = clientX + offset;
   let top = clientY - cardH / 2;
 
-  // Проверяем: карточка перекрывает зум-кнопки?
+  // не перекрывает ли зум?
   const cardRight = left + cardW;
   const cardBottom = top + cardH;
   const overlapsZoom = (
@@ -497,24 +471,24 @@ function positionRoomCard(card, clientX, clientY) {
     top < zoomRect.bottom
   );
 
-  // Если перекрывает зум — ставим слева от курсора
+  // перекрывает или не влезает — ставим слева
   if (overlapsZoom || left + cardW > window.innerWidth - 10) {
     left = clientX - cardW - offset;
   }
 
-  // Если слева тоже не помещается — ставим справа, но ниже зум-кнопок
+  // если слева тоже не влезает — справа но ниже зума
   if (left < 10) {
     left = clientX + offset;
     top = zoomRect.bottom + offset;
   }
 
-  // Ограничиваем по вертикали
+  // ограничиваем по вертикали
   if (top < 10) top = 10;
   if (top + cardH > window.innerHeight - 10) {
     top = window.innerHeight - cardH - 10;
   }
 
-  // Ограничиваем по горизонтали
+  // и по горизонтали
   if (left + cardW > window.innerWidth - 10) {
     left = window.innerWidth - cardW - 10;
   }
@@ -524,9 +498,7 @@ function positionRoomCard(card, clientX, clientY) {
   card.style.top = top + 'px';
 }
 
-// ============================================
-// Свайп вниз для закрытия bottom sheet
-// ============================================
+// свайп для закрытия bottom sheet
 let _bsSwipeY = 0;
 let _bsSwipeActive = false;
 let _bsMouseSwipeActive = false;
@@ -539,7 +511,7 @@ function setupBottomSheetSwipe() {
 
   _bsSwipeActive = true;
 
-  // Убираем предыдущие слушатели (на случай повторного вызова)
+  // убираем старые слушатели
   handle.removeEventListener('touchstart', onBsTouchStart);
   handle.removeEventListener('touchmove', onBsTouchMove);
   handle.removeEventListener('touchend', onBsTouchEnd);
@@ -550,7 +522,7 @@ function setupBottomSheetSwipe() {
   window.removeEventListener('mousemove', onBsMouseMove);
   window.removeEventListener('mouseup', onBsMouseUp);
 
-  // Тач-события — слушаем и ручку, и всю карточку
+  // тач на ручку и карточку
   handle.addEventListener('touchstart', onBsTouchStart, { passive: true });
   handle.addEventListener('touchmove', onBsTouchMove, { passive: false });
   handle.addEventListener('touchend', onBsTouchEnd);
@@ -558,7 +530,7 @@ function setupBottomSheetSwipe() {
   card.addEventListener('touchmove', onBsTouchMove, { passive: false });
   card.addEventListener('touchend', onBsTouchEnd);
 
-  // Мышь — для проверки с ПК (только ручка и верхняя часть карточки)
+  // мышь для тестов с пк
   handle.addEventListener('mousedown', onBsMouseDown);
   card.addEventListener('mousedown', onBsMouseDown);
   window.addEventListener('mousemove', onBsMouseMove);
@@ -575,11 +547,10 @@ function onBsTouchMove(e) {
   const card = document.getElementById('roomCard');
   const dy = e.touches[0].clientY - _bsSwipeY;
 
-  // Разрешаем свайп вниз только если карточка не прокручена
-  // (скролл в самом верху — scrollTop <= 0)
+  // свайп вниз только если не прокручено (scrollTop <= 0)
   if (dy > 0 && card.scrollTop <= 0) {
     card.style.transform = `translateY(${dy}px)`;
-    e.preventDefault(); // чтобы не скроллился контент под карточкой
+    e.preventDefault(); // чтоб не скроллилось под карточкой
   }
 }
 
@@ -588,27 +559,27 @@ function onBsTouchEnd(e) {
   const card = document.getElementById('roomCard');
   const currentTransform = card.style.transform;
   const match = currentTransform.match(/translateY\((\d+(?:\.\d+)?)px\)/);
-  // Порог 40px — достаточно лёгкий свайп для закрытия
+  // порог 40px
   if (match && parseFloat(match[1]) > 40) {
     closeRoomCard();
   } else {
-    // Возвращаем на место с анимацией
+    // возвращаем назад
     card.style.transition = 'transform 0.25s cubic-bezier(0.4, 0, 0.2, 1)';
     card.style.transform = '';
-    // Восстанавливаем обычный transition после анимации возврата
+    // убираем transition после анимации
     setTimeout(() => { card.style.transition = ''; }, 260);
   }
   _bsSwipeY = 0;
 }
 
-// --- Мышь (для проверки с ПК) ---
+// мышь (для пк)
 function onBsMouseDown(e) {
   if (!_bsSwipeActive) return;
-  // Только левая кнопка
+  // только левая кнопка
   if (e.button !== 0) return;
   _bsMouseSwipeActive = true;
   _bsMouseSwipeY = e.clientY;
-  e.preventDefault(); // чтобы не выделялся текст
+  e.preventDefault(); // чтоб текст не выделялся
 }
 
 function onBsMouseMove(e) {
@@ -639,12 +610,12 @@ function onBsMouseUp(e) {
 function findRoomInfo(roomId, roomType) {
   let info = { name: '', head: '', phone: '', email: '', institute: '', schedule: '' };
 
-  // Поиск по подразделениям
+  // подразделения
   if (App.data.subdivisions) {
     const sub = App.data.subdivisions.find(s => {
-      // Для пронумерованных комнат — ищем по номеру и этажу
+      // по номеру и этажу
       if (roomId && s.room === roomId && s.floor === App.state.currentFloor) return true;
-      // Для особых помещений без номера — ищем по типу и этажу
+      // без номера — по типу и этажу
       if (!roomId && s.type && s.type === roomType && s.floor === App.state.currentFloor) return true;
       return false;
     });
@@ -657,10 +628,10 @@ function findRoomInfo(roomId, roomType) {
     }
   }
 
-  // Поиск по институтам и кафедрам
+  // институты и кафедры
   if (App.data.departments) {
     for (const inst of App.data.departments) {
-      // Дирекция института
+      // дирекция
       if (inst.room === roomId && inst.floor === App.state.currentFloor) {
         info.name = `Дирекция ${inst.shortName}`;
         info.head = inst.director;
@@ -670,7 +641,7 @@ function findRoomInfo(roomId, roomType) {
         info.schedule = 'Пн-Пт 9:00-17:00, обед 13:00-14:00';
         return info;
       }
-      // Кафедры
+      // кафедры
       for (const dept of inst.departments) {
         if (dept.room === roomId && dept.floor === App.state.currentFloor) {
           info.name = dept.name;
@@ -685,7 +656,7 @@ function findRoomInfo(roomId, roomType) {
     }
   }
 
-  // Поиск по руководству
+  // руководство
   if (App.data.leadership) {
     const leader = App.data.leadership.find(l => l.room === roomId && l.floor === App.state.currentFloor);
     if (leader) {
@@ -697,15 +668,15 @@ function findRoomInfo(roomId, roomType) {
     }
   }
 
-  // Определяем институт по этажу и типу комнаты
+  // определяем институт по этажу/типу
   if (!info.institute) {
-    // Туалеты (унифицированный тип, без М/Ж)
+    // туалеты
     if (roomType === 'toilet') {
       info.institute = 'Служба';
       info.name = 'Туалет';
       return info;
     }
-    // Особые помещения
+    // особые помещения
     const specialTypes = {
       'cloakroom': { name: 'Гардероб', institute: 'Служба' },
       'reading-room': { name: 'Читальный зал', institute: 'ИНО' },
@@ -721,7 +692,7 @@ function findRoomInfo(roomId, roomType) {
     }
     
     const floor = App.state.currentFloor;
-    // Определение по этажу (основной способ)
+    // по этажу — основной способ
     if (floor === 3) {
       info.institute = 'ИАТИФ';
     } else if (floor === 4) {
@@ -729,14 +700,14 @@ function findRoomInfo(roomId, roomType) {
     } else if (floor === 2) {
       info.institute = 'ИНО';
     } else if (floor === 5) {
-      // 5 этаж — лаборатории, определяем по типу
+      // 5 этаж — лабы
       if (roomType === 'tech') {
         info.institute = 'Технические помещения';
       } else {
         info.institute = 'Лаборатории';
       }
     } else if (floor === 1) {
-      // 1 этаж — администрация и службы
+      // 1 этаж — администрация
       if (roomType === 'admissions') {
         info.institute = 'Приёмная комиссия';
       } else if (roomType === 'leader' || roomType === 'rectorate' || roomType === 'security') {
@@ -759,7 +730,7 @@ function closeRoomCard() {
   const backdrop = document.getElementById('roomCardBackdrop');
   const isMobile = window.innerWidth < 600;
 
-  // На мобильных — анимация свайпа вниз перед закрытием
+  // мобилка — анимация свайпа
   if (isMobile && card.classList.contains('room-card--bottom')) {
     card.classList.add('hiding');
     card.classList.remove('visible');
@@ -769,7 +740,7 @@ function closeRoomCard() {
     _bsSwipeActive = false;
     setTimeout(() => {
       card.classList.remove('hiding');
-      // Не очищать контент, если карточка уже снова открыта
+      // не чистить если уже переоткрыли
       if (!card.classList.contains('visible')) {
         document.getElementById('roomCardContent').innerHTML = '';
       }
@@ -793,9 +764,7 @@ function closeRoomCard() {
   }
 }
 
-// ============================================
-// Институты и кафедры
-// ============================================
+// институты/кафедры
 function renderInstitutes() {
   const container = document.getElementById('institutesList');
   if (!App.data.departments) {
@@ -842,16 +811,14 @@ function toggleInstitute(idx) {
   card.classList.toggle('open');
 }
 
-// ============================================
-// Документы
-// ============================================
+// документы
 function renderDocuments() {
   if (!App.data.documents) return;
 
   const filtersContainer = document.getElementById('docFilters');
   const listContainer = document.getElementById('docsList');
 
-  // Получаем уникальные категории
+  // уникальные категории
   const categories = [...new Set(App.data.documents.map(d => d.category))];
 
   filtersContainer.innerHTML = `
@@ -954,9 +921,7 @@ function closeDocModal() {
   document.getElementById('docModal').classList.remove('visible');
 }
 
-// ============================================
-// Популярные документы (главная)
-// ============================================
+// популярные документы
 function renderPopularDocs() {
   const container = document.getElementById('popularDocs');
   if (!App.data.documents) return;
@@ -979,9 +944,7 @@ function renderPopularDocs() {
   `).join('');
 }
 
-// ============================================
-// Расписание звонков (главная)
-// ============================================
+// расписание звонков
 function renderBellSchedule() {
   const container = document.getElementById('bellSchedule');
   const contacts = App.data.contacts;
@@ -1015,9 +978,7 @@ function renderBellSchedule() {
   container.innerHTML = html;
 }
 
-// ============================================
-// Контакты
-// ============================================
+// контакты
 function renderContacts() {
   const container = document.getElementById('contactsGrid');
   const contacts = App.data.contacts;
@@ -1027,7 +988,7 @@ function renderContacts() {
 
   let html = '';
 
-  // Основные контакты
+  // универ
   const uni = contacts.university || {};
   html += `
     <div class="contact-card">
@@ -1167,11 +1128,10 @@ function renderContacts() {
 
   // Горячие линии
   const hot = contacts.hotlines;
-  // Безопасное извлечение телефона: берём всё до первого длинного тире
+  // берём телефон до длинного тире
   function extractPhone(str) {
     if (!str) return '';
-    // Разделяем только по длинному тире (em dash U+2014) и короткому тире (en dash U+2013),
-    // но НЕ по обычному дефису (hyphen U+002D) — он используется в номерах телефонов
+    // бьём по em/en dash но не по дефису (он в номерах телефонов)
     const parts = str.split(/[\u2014\u2013]/);
     return parts[0].trim();
   }
@@ -1216,9 +1176,7 @@ function renderContacts() {
   container.innerHTML = html;
 }
 
-// ============================================
-// Масштабирование и перемещение карты
-// ============================================
+// зум и перемещение карты
 const MapZoom = {
   svg: null,
   container: null,
@@ -1241,22 +1199,22 @@ function initMapZoom() {
   MapZoom.container = container;
   MapZoom.scale = 1;
 
-  // Сохраняем исходный viewBox
+  // исходный viewBox
   const vbAttr = svg.getAttribute('viewBox');
   if (vbAttr) {
     const parts = vbAttr.split(' ').map(Number);
     MapZoom.origVB = { x: parts[0], y: parts[1], w: parts[2], h: parts[3] };
   }
 
-  // Колёсико мыши — масштабирование
+  // колесо мыши = зум
   container.addEventListener('wheel', onZoomWheel, { passive: false });
 
-  // Перетаскивание мышью
+  // драг мышью
   container.addEventListener('mousedown', onDragStart);
   window.addEventListener('mousemove', onDragMove);
   window.addEventListener('mouseup', onDragEnd);
 
-  // Тач-жесты (пинч-зум и перетаскивание)
+  // тач: пинч-зум и драг
   container.addEventListener('touchstart', onTouchStart, { passive: false });
   container.addEventListener('touchmove', onTouchMove, { passive: false });
   container.addEventListener('touchend', onTouchEnd);
@@ -1280,15 +1238,15 @@ function zoomAtPoint(factor, clientX, clientY) {
   const newW = cur.w / factor;
   const newH = cur.h / factor;
 
-  // Ограничения масштаба
+  // лимиты зума
   const newScale = MapZoom.origVB.w / newW;
   if (newScale < MapZoom.minScale || newScale > MapZoom.maxScale) return;
 
-  // Точка в SVG-координатах под курсором
+  // точка под курсором в svg-координатах
   const svgX = cur.x + (cx / rect.width) * cur.w;
   const svgY = cur.y + (cy / rect.height) * cur.h;
 
-  // Новый viewBox: точка остаётся под курсором
+  // точка остаётся под курсором
   const newX = svgX - (cx / rect.width) * newW;
   const newY = svgY - (cy / rect.height) * newH;
 
@@ -1303,7 +1261,7 @@ function onZoomWheel(e) {
 }
 
 function onDragStart(e) {
-  // Предотвращаем выделение текста при перетаскивании
+  // чтоб текст не выделялся
   e.preventDefault();
   MapZoom.isDragging = true;
   MapZoom.dragStart = { x: e.clientX, y: e.clientY };
@@ -1333,7 +1291,7 @@ function onTouchStart(e) {
     const t1 = e.touches[0], t2 = e.touches[1];
     MapZoom.lastTouchDist = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
   } else if (e.touches.length === 1) {
-    // Разрешаем перетаскивание всегда — карта может не помещаться и при отдалении
+    // драг всегда — карта может не влезать
     MapZoom.isDragging = true;
     MapZoom.dragStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
     MapZoom.vbStart = getCurrentVB();
@@ -1383,110 +1341,87 @@ function zoomReset() {
   MapZoom.scale = 1;
 }
 
-// ============================================
-// Регистрация Service Worker с автообновлением
-// ============================================
+// service worker
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js')
       .then(reg => {
         console.log('SW зарегистрирован:', reg.scope);
-        // Проверяем обновления при каждой загрузке
+        // проверяем апдейты
         reg.addEventListener('updatefound', () => {
           const newWorker = reg.installing;
           newWorker.addEventListener('statechange', () => {
             if (newWorker.state === 'activated') {
-              // Новый SW активирован через clients.claim()
-              // Обновление применится при следующем заходе — не перезагружаем страницу
+              // новый sw активирован, применится при след заходе
               console.log('SW обновлён, применится при следующем заходе');
             }
           });
         });
-        // Принудительно проверяем обновление
+        // форсируем проверку обновы
         reg.update();
       })
       .catch(err => console.warn('SW ошибка:', err));
   });
 }
 
-// ============================================
-// PWA Install Prompt — баннер «Установить»
-// ============================================
-// Логика:
-// 1. localStorage — основной механизм (работает во всех браузерах)
-//    - appinstalled → записываем pwa_installed=true
-//    - standalone режим → тоже записываем (на случай если зайдут через браузер)
-//    - При загрузке: если pwa_installed=true → баннер НЕ показываем
-//
-// 2. getInstalledRelatedApps() — дополнительная проверка (Chrome/Edge 85+)
-//    - Если API говорит что PWA НЕ установлено, а localStorage стоит →
-//      значит пользователь удалил PWA → сбрасываем флаг, показываем баннер
-//
-// 3. beforeinstallprompt — может срабатывать даже после установки (баг Edge/Chrome)
-//    - Поэтому проверяем localStorage ПЕРЕД показом баннера
-// ============================================
+// pwa install баннер
+// localStorage + getInstalledRelatedApps чтобы не показывать после установки
 (function() {
   let deferredPrompt = null;
   const banner = document.getElementById('installBanner');
   const installBtn = document.getElementById('installBtn');
   const closeBtn = document.getElementById('installClose');
 
-  // Безопасная работа с localStorage (может быть заблокировано в приватном режиме)
+  // localStorage может быть заблокирован в приватном режиме
   function lsGet(key) { try { return localStorage.getItem(key); } catch(e) { return null; } }
   function lsSet(key, val) { try { localStorage.setItem(key, val); } catch(e) {} }
   function lsRemove(key) { try { localStorage.removeItem(key); } catch(e) {} }
 
-  // Если запущено как установленное приложение — баннер не нужен
-  // Заодно записываем флаг в localStorage (при следующем заходе через браузер баннер не появится)
+  // если standalone — баннер не нужен, пишем флаг
   if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
     lsSet('pwa_installed', 'true');
     return;
   }
 
-  // Определяем iOS Safari — там нет beforeinstallprompt
+  // ios safari — нет beforeinstallprompt
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
-  // Проверяем, установлено ли PWA
-  // Возвращает true если PWA установлено, false если нет или неизвестно
+  // проверка установлено ли pwa
   async function isPWAInstalled() {
-    // 1. display-mode — если запущено как standalone, точно установлено
+    // standalone = точно установлено
     if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
       return true;
     }
 
-    // 2. localStorage — записывается при appinstalled и в standalone режиме
-    // Это самый надёжный кросс-браузерный способ
+    // localStorage — самый надёжный способ
     if (lsGet('pwa_installed') === 'true') {
-      // Подтверждаем через getInstalledRelatedApps() если доступно
-      // Это помогает обнаружить удаление PWA
+      // проверяем getInstalledRelatedApps — помогает найти удаление
       if ('getInstalledRelatedApps' in navigator) {
         try {
           const apps = await navigator.getInstalledRelatedApps();
           if (apps.some(app => app.platform === 'webapp')) {
-            // PWA всё ещё установлено — отлично
+            // всё ещё установлено, ок
             return true;
           } else {
-            // localStorage стоит, но getInstalledRelatedApps() не нашёл PWA
-            // Значит пользователь удалил PWA — сбрасываем флаг
+            // ls стоит но pwa нет — удалили, сбрасываем
             lsRemove('pwa_installed');
             return false;
           }
         } catch (err) {
-          // API не работает — доверяем localStorage
+          // api сломалось — верим ls
           return true;
         }
       }
-      // API нет — доверяем localStorage
+      // api нет — верим ls
       return true;
     }
 
-    // 3. getInstalledRelatedApps() без localStorage — на случай если
-    // пользователь установил PWA в другой вкладке/сессии
+    // getInstalledRelatedApps без ls — вдруг установили в другой вкладке
     if ('getInstalledRelatedApps' in navigator) {
       try {
         const apps = await navigator.getInstalledRelatedApps();
         if (apps.some(app => app.platform === 'webapp')) {
-          // PWA установлено, но localStorage ещё не записан — исправляем
+          // установлено но ls пустой — исправляем
           lsSet('pwa_installed', 'true');
           return true;
         }
@@ -1496,7 +1431,7 @@ if ('serviceWorker' in navigator) {
     return false;
   }
 
-  // Показать баннер, только если PWA НЕ установлено
+  // показываем баннер только если pwa не установлено
   async function showBannerIfNotInstalled() {
     const installed = await isPWAInstalled();
     if (!installed && banner) {
@@ -1504,16 +1439,15 @@ if ('serviceWorker' in navigator) {
     }
   }
 
-  // Перехватываем системный промпт (Chrome, Edge, Samsung Internet)
-  // ВАЖНО: некоторые браузеры вызывают это событие даже после установки PWA!
-  // Поэтому перед показом баннера проверяем isPWAInstalled()
+  // перехватываем промпт установки
+  // хром/едг могут вызывать это даже после установки, проверяем
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
     showBannerIfNotInstalled();
   });
 
-  // Fallback для iOS — там нет beforeinstallprompt
+  // ios фоллбэк
   setTimeout(async () => {
     if (isIOS && banner && !banner.classList.contains('visible')) {
       const installed = await isPWAInstalled();
@@ -1526,7 +1460,7 @@ if ('serviceWorker' in navigator) {
     }
   }, 3000);
 
-  // Кнопка «Установить»
+  // кнопка установить
   if (installBtn) {
     installBtn.addEventListener('click', () => {
       if (deferredPrompt) {
@@ -1542,14 +1476,14 @@ if ('serviceWorker' in navigator) {
     });
   }
 
-  // Кнопка закрыть
+  // кнопка закрыть
   if (closeBtn) {
     closeBtn.addEventListener('click', () => {
       if (banner) banner.classList.remove('visible');
     });
   }
 
-  // При установке — записываем флаг и скрываем баннер
+  // установили — пишем флаг, прячем баннер
   window.addEventListener('appinstalled', () => {
     lsSet('pwa_installed', 'true');
     deferredPrompt = null;
@@ -1557,16 +1491,14 @@ if ('serviceWorker' in navigator) {
   });
 })();
 
-// ============================================
-// Обработка поворота экрана / изменения размера
-// ============================================
+// поворот экрана / ресайз
 let _prevIsMobile = window.innerWidth < 600;
 window.addEventListener('resize', () => {
   const isMobile = window.innerWidth < 600;
   const card = document.getElementById('roomCard');
   const backdrop = document.getElementById('roomCardBackdrop');
 
-  // Если карточка видима и режим изменился — закрываем и переключаем
+  // карточка видима и сменился режим — закрываем
   if (card.classList.contains('visible') && isMobile !== _prevIsMobile) {
     closeRoomCard();
   }

@@ -1,17 +1,11 @@
-/**
- * Service Worker для Путеводителя РГАТУ
- * Обеспечивает офлайн-доступ и кэширование ресурсов
- * v14: подсказки поиска шире на мобильных, word-break
- */
+// sw для путеводителя ргату
 
 const CACHE_NAME = 'rgatu-guide-v14';
 
-// Таймаут для сетевых запросов (мс)
-// Если сеть не ответила за это время — отдаём из кэша
-// Защищает от ситуации: интернет «есть», но заблокирован (firewall, РКН и т.д.)
+// таймаут сети — если инет "есть" но заблокирован, не висим
 const NETWORK_TIMEOUT = 3000;
 
-// Относительные пути — совпадают с окончанием URL независимо от базового пути
+// относительные пути чтобы работало на любом домене
 const STATIC_ASSETS = [
   'index.html',
   'css/style.css',
@@ -25,7 +19,7 @@ const STATIC_ASSETS = [
   'data/data_leadership.json',
   'data/data_subdivisions.json',
   'data/data_meta.json',
-  // SVG-карты — кэшируем для полного офлайна
+  // svg карты для офлайна
   'maps/floor_1.svg',
   'maps/floor_2.svg',
   'maps/floor_3.svg',
@@ -33,13 +27,12 @@ const STATIC_ASSETS = [
   'maps/floor_5.svg',
 ];
 
-// Проверяет, соответствует ли путь запроса одному из кэшируемых ресурсов
+// проверка на статический ассет
 function isStaticAsset(pathname) {
   return STATIC_ASSETS.some(asset => pathname.endsWith(asset));
 }
 
-// Запрос к сети с таймаутом
-// Если сеть не ответила за timeoutMs — промис отклоняется
+// фетч с таймаутом, если сеть не ответила — промис отваливается
 function fetchWithTimeout(request, timeoutMs) {
   return new Promise((resolve, reject) => {
     const controller = new AbortController();
@@ -60,7 +53,7 @@ function fetchWithTimeout(request, timeoutMs) {
   });
 }
 
-// Установка — кэшируем статику
+// кэшируем статику при установке
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -71,7 +64,7 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
-// Активация — удаляем старый кэш
+// удаляем старый кэш
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
@@ -83,16 +76,15 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Перехват запросов
+// перехват запросов
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Только GET-запросы и только с того же источника
+  // только GET и только со своего origin
   if (request.method !== 'GET' || url.origin !== self.location.origin) return;
 
-  // Навигационные запросы (пользователь открывает URL в браузере)
-  // Network First с таймаутом: если сеть не ответила за 3с — отдаём из кэша
+  // навигация — network first с таймаутом
   if (request.mode === 'navigate') {
     event.respondWith(
       fetchWithTimeout(request, NETWORK_TIMEOUT)
@@ -102,7 +94,7 @@ self.addEventListener('fetch', (event) => {
           return response;
         })
         .catch(() => {
-          // Таймаут или ошибка сети — отдаём из кэша
+          // сеть отвалилась — отдаём из кэша
           return caches.match(request).then((cached) => {
             if (cached) return cached;
             return caches.match('./index.html');
@@ -112,11 +104,11 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Статические ресурсы (HTML, CSS, JS, JSON, SVG) — Cache First, обновляем в фоне
+  // ститика — cache first, обновляем в фоне
   if (isStaticAsset(url.pathname)) {
     event.respondWith(
       caches.match(request).then((cached) => {
-        // Фоновое обновление с таймаутом — не блокирует отдачу из кэша
+        // фоновое обновление, не блокирует отдачу
         const fetchPromise = fetchWithTimeout(request, NETWORK_TIMEOUT)
           .then((response) => {
             if (response.ok) {
@@ -132,7 +124,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Всё остальное — Network First с таймаутом и fallback на кэш
+  // остальное — network first
   event.respondWith(
     fetchWithTimeout(request, NETWORK_TIMEOUT)
       .then((response) => {

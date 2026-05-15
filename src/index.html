@@ -13,7 +13,7 @@
   <meta name="yandex-verification" content="cc04385767d04ecb" />
   <title>Путеводитель РГАТУ — Карта главного корпуса</title>
 
-  <!-- Open Graph — красивый сниппет при шаринге -->
+  <!-- og для шаринга -->
   <meta property="og:title" content="Путеводитель РГАТУ">
   <meta property="og:description" content="Интерактивная карта главного корпуса РГАТУ им. П.А. Соловьёва — 5 этажей, кафедры, контакты">
   <meta property="og:type" content="website">
@@ -27,7 +27,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- Шапка -->
+  <!-- шапка -->
   <header class="header" id="header">
     <div class="header__inner">
       <button class="header__menu-btn" id="menuBtn" aria-label="Меню">
@@ -50,7 +50,7 @@
     </div>
   </header>
 
-  <!-- Баннер установки PWA -->
+  <!-- pwa install -->
   <div class="install-banner" id="installBanner">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
     <span>Установить приложение на главный экран</span>
@@ -58,7 +58,7 @@
     <button class="install-banner__close" id="installClose" aria-label="Закрыть">&times;</button>
   </div>
 
-  <!-- Боковое меню -->
+  <!-- сайдбар -->
   <nav class="sidebar" id="sidebar">
     <div class="sidebar__overlay" id="sidebarOverlay"></div>
     <div class="sidebar__content">
@@ -94,10 +94,10 @@
     </div>
   </nav>
 
-  <!-- Основной контент -->
+  <!-- контент -->
   <main class="main" id="mainContent">
 
-    <!-- Главная страница -->
+    <!-- главная -->
     <section class="page page--home active" id="pageHome">
       <div class="hero">
         <div class="hero__content">
@@ -156,11 +156,11 @@
       </div>
 
       <div class="bell-schedule" id="bellSchedule">
-        <!-- Заполняется из JS -->
+        <!-- js заполнит -->
       </div>
     </section>
 
-    <!-- Страница карты -->
+    <!-- карта -->
     <section class="page page--map" id="pageMap">
       <div class="map-controls">
         <div class="floor-tabs" id="floorTabs">
@@ -183,7 +183,7 @@
       </div>
       <div class="map-container" id="mapContainer">
         <div class="map-scroll" id="mapScroll">
-          <!-- SVG-карта загружается динамически -->
+          <!-- svg грузится динамически -->
         </div>
         <div class="map-zoom-controls" id="zoomControls">
           <button class="zoom-btn" onclick="zoomIn()" title="Увеличить">+</button>
@@ -191,7 +191,7 @@
           <button class="zoom-btn zoom-btn--reset" onclick="zoomReset()" title="Сбросить масштаб">⟲</button>
         </div>
       </div>
-      <!-- Карточка комнаты -->
+      <!-- карточка комнаты -->
       <div class="room-card__backdrop" id="roomCardBackdrop"></div>
       <div class="room-card" id="roomCard">
         <div class="room-card__handle"></div>
@@ -200,7 +200,7 @@
       </div>
     </section>
 
-    <!-- Страница институтов и кафедр -->
+    <!-- институты и кафедры -->
     <section class="page page--departments" id="pageDepartments">
       <div class="page-header">
         <h1 class="page-title">Институты и кафедры</h1>
@@ -209,7 +209,7 @@
       <div class="institutes-list" id="institutesList"></div>
     </section>
 
-    <!-- Страница документов -->
+    <!-- документы -->
     <section class="page page--documents" id="pageDocuments">
       <div class="page-header">
         <h1 class="page-title">Как получить документ</h1>
@@ -219,7 +219,7 @@
       <div class="docs-list" id="docsList"></div>
     </section>
 
-    <!-- Страница контактов -->
+    <!-- контакты -->
     <section class="page page--contacts" id="pageContacts">
       <div class="page-header">
         <h1 class="page-title">Контакты</h1>
@@ -229,7 +229,7 @@
     </section>
   </main>
 
-  <!-- Модальное окно документа -->
+  <!-- модалка документа -->
   <div class="modal" id="docModal">
     <div class="modal__overlay" onclick="closeDocModal()"></div>
     <div class="modal__content">

@@ -1,9 +1,4 @@
-/* ============================================
-   Путеводитель РГАТУ — Стили
-   Mobile-first, адаптивный дизайн
-   ============================================ */
-
-/* --- Переменные --- */
+/* переменные */
 :root {
   --primary: #1565C0;
   --primary-light: #1E88E5;
@@ -27,7 +22,7 @@
   --ino: #6A1B9A;
 }
 
-/* --- Сброс --- */
+/* сброс */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
@@ -44,14 +39,14 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 img, svg { display: block; max-width: 100%; }
 ul { list-style: none; }
 
-/* --- Шапка --- */
+/* шапка */
 .header {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   height: var(--header-h);
   background: var(--primary);
   color: white;
   box-shadow: 0 2px 12px rgba(21,101,192,0.3);
-  /* iPhone с вырезом: отступ сверху */
+  /* нотч айфона */
   padding-top: env(safe-area-inset-top);
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
@@ -127,7 +122,7 @@ ul { list-style: none; }
   padding: 8px; color: white;
 }
 
-/* --- Боковое меню --- */
+/* сайдбар */
 .sidebar__overlay {
   position: fixed; top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(0,0,0,0.4); z-index: 200;
@@ -169,7 +164,7 @@ ul { list-style: none; }
   font-weight: 600; font-size: 13px;
 }
 
-/* --- Основной контент --- */
+/* контент */
 .main {
   margin-top: var(--header-h);
   min-height: calc(100vh - var(--header-h));
@@ -177,7 +172,7 @@ ul { list-style: none; }
 .page { display: none; padding: 16px; max-width: 1200px; margin: 0 auto; }
 .page.active { display: block; }
 
-/* --- Герой --- */
+/* герой */
 .hero {
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, #42A5F5 100%);
   border-radius: var(--radius); padding: 32px 24px;
@@ -196,7 +191,6 @@ ul { list-style: none; }
 .hero__subtitle { font-size: 15px; opacity: 0.9; margin-bottom: 20px; max-width: 400px; }
 .hero__actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
-/* --- Кнопки --- */
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 10px 20px; border-radius: var(--radius-sm);
@@ -208,12 +202,11 @@ ul { list-style: none; }
 .btn--secondary { background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.4); }
 .btn--secondary:hover { background: rgba(255,255,255,0.3); }
 
-/* --- Секция --- */
 .section-title {
   font-size: 18px; font-weight: 700; margin-bottom: 16px; color: var(--text);
 }
 
-/* --- Быстрый доступ --- */
+/* быстрый доступ */
 .quick-grid {
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
   margin-bottom: 24px;
@@ -236,7 +229,7 @@ ul { list-style: none; }
 .quick-card__title { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
 .quick-card__desc { font-size: 12px; color: var(--text-secondary); }
 
-/* --- Популярные документы --- */
+/* популярные доки */
 .popular-list { display: flex; flex-direction: column; gap: 8px; }
 .popular-docs { margin-bottom: 24px; }
 .popular-item {
@@ -255,7 +248,7 @@ ul { list-style: none; }
 .popular-item__meta { font-size: 12px; color: var(--text-secondary); }
 .popular-item__arrow { color: var(--text-light); }
 
-/* --- Карта (полноэкранный режим, как Яндекс Карты) --- */
+/* карта — фуллскрин как яндекс */
 .page--map {
   padding: 0 !important;
   max-width: 100% !important;
@@ -305,7 +298,7 @@ ul { list-style: none; }
 .map-scroll:active { cursor: grabbing; }
 .map-scroll svg { width: 100%; height: 100%; display: block; }
 
-/* --- Зум-контроли --- */
+/* зум */
 .map-zoom-controls {
   position: absolute; top: 12px; right: 12px;
   display: flex; flex-direction: column; gap: 4px; z-index: 60;
@@ -320,7 +313,7 @@ ul { list-style: none; }
 .zoom-btn:hover { background: white; border-color: var(--primary); color: var(--primary); box-shadow: 0 2px 12px rgba(0,0,0,0.2); }
 .zoom-btn--reset { font-size: 20px; }
 
-/* --- Карточка комнаты --- */
+/* карточка комнаты */
 .room-card {
   position: fixed;
   background: white; border-radius: var(--radius);
@@ -368,9 +361,9 @@ ul { list-style: none; }
   margin-top: 12px; font-size: 14px; font-weight: 600;
 }
 
-/* --- Карточка комнаты: Bottom Sheet (мобильные) --- */
+/* bottom sheet на мобилках */
 .room-card--bottom {
-  /* Переопределяем позиционирование на мобильных */
+  /* мобилочный оверрайд */
   left: 0 !important;
   right: 0 !important;
   top: auto !important;
@@ -398,7 +391,7 @@ ul { list-style: none; }
   transform: translateY(100%);
   pointer-events: none;
 }
-/* Ручка для свайпа */
+/* ручка для свайпа */
 .room-card__handle {
   display: none;
   width: 36px; height: 4px;
@@ -412,7 +405,7 @@ ul { list-style: none; }
   width: 28px; height: 28px; font-size: 18px;
 }
 .room-card--bottom .room-card__title { font-size: 16px; padding-right: 40px; }
-/* Подложка-затемнение под bottom sheet */
+/* бэкдроп */
 .room-card__backdrop {
   display: none;
   position: fixed; inset: 0;
@@ -426,7 +419,7 @@ ul { list-style: none; }
   opacity: 1;
 }
 
-/* --- Институты --- */
+/* институты */
 .page-header { margin-bottom: 24px; }
 .page-title { font-size: 24px; font-weight: 800; margin-bottom: 4px; }
 .page-subtitle { font-size: 14px; color: var(--text-secondary); }
@@ -479,7 +472,7 @@ ul { list-style: none; }
   background: white; padding: 2px 8px; border-radius: 4px;
 }
 
-/* --- Документы --- */
+/* доки */
 .doc-filters {
   display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px;
 }
@@ -508,7 +501,7 @@ ul { list-style: none; }
 }
 .doc-card__meta-item { display: flex; align-items: center; gap: 4px; }
 
-/* --- Модальное окно документа --- */
+/* модалка */
 .modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 300; display: none; }
 .modal.visible { display: flex; }
 .modal__overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.5); }
@@ -565,7 +558,7 @@ ul { list-style: none; }
   border-radius: 4px; font-size: 13px;
 }
 
-/* --- Контакты --- */
+/* контакты */
 .contacts-grid { display: flex; flex-direction: column; gap: 16px; }
 .contact-card {
   background: white; border-radius: var(--radius); box-shadow: var(--shadow);
@@ -598,7 +591,7 @@ ul { list-style: none; }
 .leader-card__position { font-size: 12px; color: var(--text-secondary); margin-bottom: 4px; }
 .leader-card__contacts { font-size: 12px; color: var(--text-light); }
 
-/* --- Баннер установки PWA --- */
+/* pwa баннер */
 .install-banner {
   position: fixed; top: var(--header-h); left: 0; right: 0;
   background: #1a237e; color: white; padding: 10px 16px;
@@ -621,9 +614,9 @@ ul { list-style: none; }
 }
 .install-banner__close:hover { color: white; }
 
-/* --- Адаптив --- */
+/* адаптив */
 @media (max-width: 599px) {
-  /* Подсказки поиска шире строки — чтобы текст влезал */
+  /* подсказки вылазят за край */
   .header__search-results {
     left: -16px; right: -16px;
     min-width: calc(100% + 32px);
@@ -643,19 +636,18 @@ ul { list-style: none; }
   .leadership-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
 }
 
-/* --- Анимации --- */
+/* анимации */
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes slideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 .fade-in { animation: fadeIn 0.3s ease; }
 .slide-up { animation: slideUp 0.4s ease; }
 
-/* --- Скроллбар --- */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #c0c0c0; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #999; }
 
-/* --- Печать --- */
+/* печать */
 @media print {
   .header, .sidebar, .room-card, .modal { display: none !important; }
   .main { margin-top: 0; }
