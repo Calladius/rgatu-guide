@@ -560,7 +560,7 @@ function onBsTouchMove(e) {
     _bsCurrentOffset = Math.max(0, _bsCurrentOffset + dy);
     card.style.transform = `translateY(${_bsCurrentOffset}px)`;
     _bsSwipeY = e.touches[0].clientY; // обновляем базу для следующего движения
-    if (_bsCurrentOffset > 0) {
+    if (_bsCurrentOffset > 0 && e.cancelable) {
       e.preventDefault(); // чтоб не скроллилось под карточкой
     }
   }
@@ -1314,7 +1314,7 @@ function onDragEnd() {
 
 function onTouchStart(e) {
   if (e.touches.length === 2) {
-    e.preventDefault();
+    if (e.cancelable) e.preventDefault();
     const t1 = e.touches[0], t2 = e.touches[1];
     MapZoom.lastTouchDist = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
   } else if (e.touches.length === 1) {
@@ -1329,7 +1329,7 @@ function onTouchStart(e) {
 
 function onTouchMove(e) {
   if (e.touches.length === 2) {
-    e.preventDefault();
+    if (e.cancelable) e.preventDefault();
     const t1 = e.touches[0], t2 = e.touches[1];
     const dist = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
     const center = { x: (t1.clientX + t2.clientX) / 2, y: (t1.clientY + t2.clientY) / 2 };
@@ -1470,10 +1470,12 @@ if ('serviceWorker' in navigator) {
 
   // перехватываем промпт установки
   // хром/едг могут вызывать это даже после установки, проверяем
-  window.addEventListener('beforeinstallprompt', (e) => {
+  window.addEventListener('beforeinstallprompt', async (e) => {
+    const installed = await isPWAInstalled();
+    if (installed) return; // не preventDefault — пусть браузер сам разберётся
     e.preventDefault();
     deferredPrompt = e;
-    showBannerIfNotInstalled();
+    if (banner) banner.classList.add('visible');
   });
 
   // ios фоллбэк
