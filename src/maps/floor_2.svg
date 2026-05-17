@@ -86,7 +86,7 @@
   <line x1="2090" y1="540" x2="2140" y2="540" stroke="#bbb" stroke-width="0.5"/>
 
   <!-- ВЕРХНИЙ РЯД (НЕЧЁТНЫЕ) -->
-  <rect x="70" y="50" width="122" height="220" class="special" data-type="cro" rx="2"/>
+  <rect x="70" y="50" width="122" height="220" class="special" data-room="203" data-type="cro" rx="2"/>
   <text x="131" y="160" class="dept-label" style="fill:#AD1457;font-size:15px;font-weight:600">ЦРО</text>
   <rect x="123" y="268" width="16" height="5" class="door"/>
   <rect x="192" y="50" width="122" height="220" class="special" data-type="bibliographers" rx="2"/>
