@@ -275,16 +275,16 @@ function handleSearchResult(item) {
   } else if (item.type === 'room' || item.type === 'dept' || item.type === 'person') {
     navigateTo('map');
     if (item.floor) {
+      // ждём пока карта загрузится, потом подсвечиваем
       setTimeout(async () => {
         await selectFloor(item.floor);
-        // особые помещения (цро, гардероб и тд) — ищем по типу, не по номеру
-        // у них на карте data-type вместо data-room
+        // особые помещения (цро, гардероб и тд) — ищем по типу
         if (item.subType && ['cloakroom','reading-room','cro','bibliographers','card-catalog','library-fund','toilet'].includes(item.subType)) {
           highlightSpecialRoom(item.subType);
         } else if (item.room) {
           highlightRoom(item.room);
         }
-      }, 200);
+      }, 400);
     }
   }
 }
