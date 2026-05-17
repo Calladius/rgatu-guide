@@ -502,11 +502,13 @@ function positionRoomCard(card, clientX, clientY) {
 
 // свайп для закрытия bottom sheet
 let _bsSwipeY = 0;
-let _bsCurrentOffset = 0; // текущее смещение карточки
+let _bsCurrentOffset = 0;
 let _bsSwipeActive = false;
+let _bsRafId = 0; // requestAnimationFrame id — обновляем DOM раз за кадр
 let _bsMouseSwipeActive = false;
 let _bsMouseSwipeY = 0;
 let _bsMouseOffset = 0;
+let _bsMouseRafId = 0;
 
 function setupBottomSheetSwipe() {
   const card = document.getElementById('roomCard');
@@ -544,7 +546,6 @@ function setupBottomSheetSwipe() {
 function onBsTouchStart(e) {
   if (!_bsSwipeActive) return;
   _bsSwipeY = e.touches[0].clientY;
-  // убираем transition чтобы карточка сразу следовала за пальцем
   const card = document.getElementById('roomCard');
   card.style.transition = 'none';
 }
@@ -553,27 +554,32 @@ function onBsTouchMove(e) {
   if (!_bsSwipeActive) return;
   const card = document.getElementById('roomCard');
   const dy = e.touches[0].clientY - _bsSwipeY;
+  _bsSwipeY = e.touches[0].clientY;
 
-  // свайп вниз только если не прокручено (scrollTop <= 0)
   if (card.scrollTop <= 0) {
-    // смещение = текущий offset + движение пальца, но не выше исходной позиции
     _bsCurrentOffset = Math.max(0, _bsCurrentOffset + dy);
-    card.style.transform = `translateY(${_bsCurrentOffset}px)`;
-    _bsSwipeY = e.touches[0].clientY; // обновляем базу для следующего движения
     if (_bsCurrentOffset > 0 && e.cancelable) {
-      e.preventDefault(); // чтоб не скроллилось под карточкой
+      e.preventDefault();
+    }
+    // обновляем DOM через rAF — не чаще 1 раза за кадр
+    if (!_bsRafId) {
+      _bsRafId = requestAnimationFrame(() => {
+        card.style.transform = `translateY(${_bsCurrentOffset}px)`;
+        _bsRafId = 0;
+      });
     }
   }
 }
 
 function onBsTouchEnd(e) {
   if (!_bsSwipeActive) return;
+  cancelAnimationFrame(_bsRafId);
+  _bsRafId = 0;
   const card = document.getElementById('roomCard');
   // порог 40px
   if (_bsCurrentOffset > 40) {
     closeRoomCard();
   } else {
-    // возвращаем назад с анимацией
     card.style.transition = 'transform 0.25s cubic-bezier(0.4, 0, 0.2, 1)';
     card.style.transform = '';
     setTimeout(() => { card.style.transition = ''; }, 260);
@@ -598,16 +604,23 @@ function onBsMouseMove(e) {
   if (!_bsMouseSwipeActive) return;
   const card = document.getElementById('roomCard');
   const dy = e.clientY - _bsMouseSwipeY;
+  _bsMouseSwipeY = e.clientY;
   if (card.scrollTop <= 0) {
     _bsMouseOffset = Math.max(0, _bsMouseOffset + dy);
-    card.style.transform = `translateY(${_bsMouseOffset}px)`;
-    _bsMouseSwipeY = e.clientY;
+    if (!_bsMouseRafId) {
+      _bsMouseRafId = requestAnimationFrame(() => {
+        card.style.transform = `translateY(${_bsMouseOffset}px)`;
+        _bsMouseRafId = 0;
+      });
+    }
   }
 }
 
 function onBsMouseUp(e) {
   if (!_bsMouseSwipeActive) return;
   _bsMouseSwipeActive = false;
+  cancelAnimationFrame(_bsMouseRafId);
+  _bsMouseRafId = 0;
   const card = document.getElementById('roomCard');
   if (_bsMouseOffset > 40) {
     closeRoomCard();
