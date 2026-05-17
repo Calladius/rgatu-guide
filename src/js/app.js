@@ -502,9 +502,11 @@ function positionRoomCard(card, clientX, clientY) {
 
 // свайп для закрытия bottom sheet
 let _bsSwipeY = 0;
+let _bsCurrentOffset = 0; // текущее смещение карточки
 let _bsSwipeActive = false;
 let _bsMouseSwipeActive = false;
 let _bsMouseSwipeY = 0;
+let _bsMouseOffset = 0;
 
 function setupBottomSheetSwipe() {
   const card = document.getElementById('roomCard');
@@ -542,6 +544,9 @@ function setupBottomSheetSwipe() {
 function onBsTouchStart(e) {
   if (!_bsSwipeActive) return;
   _bsSwipeY = e.touches[0].clientY;
+  // убираем transition чтобы карточка сразу следовала за пальцем
+  const card = document.getElementById('roomCard');
+  card.style.transition = 'none';
 }
 
 function onBsTouchMove(e) {
@@ -550,46 +555,53 @@ function onBsTouchMove(e) {
   const dy = e.touches[0].clientY - _bsSwipeY;
 
   // свайп вниз только если не прокручено (scrollTop <= 0)
-  if (dy > 0 && card.scrollTop <= 0) {
-    card.style.transform = `translateY(${dy}px)`;
-    e.preventDefault(); // чтоб не скроллилось под карточкой
+  if (card.scrollTop <= 0) {
+    // смещение = текущий offset + движение пальца, но не выше исходной позиции
+    _bsCurrentOffset = Math.max(0, _bsCurrentOffset + dy);
+    card.style.transform = `translateY(${_bsCurrentOffset}px)`;
+    _bsSwipeY = e.touches[0].clientY; // обновляем базу для следующего движения
+    if (_bsCurrentOffset > 0) {
+      e.preventDefault(); // чтоб не скроллилось под карточкой
+    }
   }
 }
 
 function onBsTouchEnd(e) {
   if (!_bsSwipeActive) return;
   const card = document.getElementById('roomCard');
-  const currentTransform = card.style.transform;
-  const match = currentTransform.match(/translateY\((\d+(?:\.\d+)?)px\)/);
   // порог 40px
-  if (match && parseFloat(match[1]) > 40) {
+  if (_bsCurrentOffset > 40) {
     closeRoomCard();
   } else {
-    // возвращаем назад
+    // возвращаем назад с анимацией
     card.style.transition = 'transform 0.25s cubic-bezier(0.4, 0, 0.2, 1)';
     card.style.transform = '';
-    // убираем transition после анимации
     setTimeout(() => { card.style.transition = ''; }, 260);
   }
   _bsSwipeY = 0;
+  _bsCurrentOffset = 0;
 }
 
 // мышь (для пк)
 function onBsMouseDown(e) {
   if (!_bsSwipeActive) return;
-  // только левая кнопка
   if (e.button !== 0) return;
   _bsMouseSwipeActive = true;
   _bsMouseSwipeY = e.clientY;
-  e.preventDefault(); // чтоб текст не выделялся
+  _bsMouseOffset = 0;
+  const card = document.getElementById('roomCard');
+  card.style.transition = 'none';
+  e.preventDefault();
 }
 
 function onBsMouseMove(e) {
   if (!_bsMouseSwipeActive) return;
   const card = document.getElementById('roomCard');
   const dy = e.clientY - _bsMouseSwipeY;
-  if (dy > 0 && card.scrollTop <= 0) {
-    card.style.transform = `translateY(${dy}px)`;
+  if (card.scrollTop <= 0) {
+    _bsMouseOffset = Math.max(0, _bsMouseOffset + dy);
+    card.style.transform = `translateY(${_bsMouseOffset}px)`;
+    _bsMouseSwipeY = e.clientY;
   }
 }
 
@@ -597,9 +609,7 @@ function onBsMouseUp(e) {
   if (!_bsMouseSwipeActive) return;
   _bsMouseSwipeActive = false;
   const card = document.getElementById('roomCard');
-  const currentTransform = card.style.transform;
-  const match = currentTransform.match(/translateY\((\d+(?:\.\d+)?)px\)/);
-  if (match && parseFloat(match[1]) > 40) {
+  if (_bsMouseOffset > 40) {
     closeRoomCard();
   } else {
     card.style.transition = 'transform 0.25s cubic-bezier(0.4, 0, 0.2, 1)';
@@ -607,6 +617,7 @@ function onBsMouseUp(e) {
     setTimeout(() => { card.style.transition = ''; }, 260);
   }
   _bsMouseSwipeY = 0;
+  _bsMouseOffset = 0;
 }
 
 function findRoomInfo(roomId, roomType) {
