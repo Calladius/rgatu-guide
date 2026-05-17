@@ -318,7 +318,7 @@ ul { list-style: none; }
   position: fixed;
   background: white; border-radius: var(--radius);
   box-shadow: var(--shadow-lg);
-  padding: 20px; z-index: 50;
+  padding: 20px; z-index: 70;
   opacity: 0; visibility: hidden;
   transition: opacity 0.2s ease, visibility 0.2s ease;
   max-width: 360px; min-width: 260px;

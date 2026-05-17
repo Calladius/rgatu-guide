@@ -1281,6 +1281,8 @@ function onDragStart(e) {
   MapZoom.dragStart = { x: e.clientX, y: e.clientY };
   MapZoom.vbStart = getCurrentVB();
   MapZoom.container.style.cursor = 'grabbing';
+  // закрываем карточку при перетаскивании карты
+  closeRoomCard();
 }
 
 function onDragMove(e) {
@@ -1309,6 +1311,8 @@ function onTouchStart(e) {
     MapZoom.isDragging = true;
     MapZoom.dragStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
     MapZoom.vbStart = getCurrentVB();
+    // закрываем карточку при перетаскивании
+    closeRoomCard();
   }
 }
 
