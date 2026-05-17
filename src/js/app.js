@@ -612,15 +612,27 @@ function onBsMouseUp(e) {
 function findRoomInfo(roomId, roomType) {
   let info = { name: '', head: '', phone: '', email: '', institute: '', schedule: '' };
 
-  // подразделения
-  if (App.data.subdivisions) {
-    const sub = App.data.subdivisions.find(s => {
-      // по номеру и этажу
-      if (roomId && s.room === roomId && s.floor === App.state.currentFloor) return true;
-      // без номера — по типу и этажу
-      if (!roomId && s.type && s.type === roomType && s.floor === App.state.currentFloor) return true;
-      return false;
-    });
+  // особые помещения — ищем по type в первую очередь
+  // у них может быть и номер комнаты, но данные в subdivisions по type
+  const specialTypes = ['cloakroom','reading-room','cro','bibliographers','card-catalog','library-fund','toilet'];
+  if (specialTypes.includes(roomType) && App.data.subdivisions) {
+    const sub = App.data.subdivisions.find(s =>
+      s.type === roomType && s.floor === App.state.currentFloor
+    );
+    if (sub) {
+      info.name = sub.name;
+      info.head = sub.head || '';
+      info.phone = sub.phone || '';
+      info.email = sub.email || '';
+      info.schedule = sub.schedule || 'Пн-Пт 9:00-17:00';
+    }
+  }
+
+  // обычные подразделения — по номеру комнаты
+  if (!info.name && App.data.subdivisions) {
+    const sub = App.data.subdivisions.find(s =>
+      roomId && s.room === roomId && s.floor === App.state.currentFloor
+    );
     if (sub) {
       info.name = sub.name;
       info.head = sub.head || '';
@@ -678,18 +690,18 @@ function findRoomInfo(roomId, roomType) {
       info.name = 'Туалет';
       return info;
     }
-    // особые помещения
-    const specialTypes = {
-      'cloakroom': { name: 'Гардероб', institute: 'Служба' },
-      'reading-room': { name: 'Читальный зал', institute: 'ИНО' },
-      'cro': { name: 'ЦРО (Центр по работе с обучающимися)', institute: 'ИНО' },
-      'bibliographers': { name: 'Библиографы', institute: 'ИНО' },
-      'card-catalog': { name: 'Картотека', institute: 'ИНО' },
-      'library-fund': { name: 'Библиотечный фонд', institute: 'ИНО' },
+    // особые помещения — только institute, name уже из subdivisions
+    const specialInstitutes = {
+      'cloakroom': { institute: 'Служба' },
+      'reading-room': { institute: 'ИНО' },
+      'cro': { institute: 'ИНО' },
+      'bibliographers': { institute: 'ИНО' },
+      'card-catalog': { institute: 'ИНО' },
+      'library-fund': { institute: 'ИНО' },
     };
-    if (specialTypes[roomType]) {
-      info.name = specialTypes[roomType].name;
-      info.institute = specialTypes[roomType].institute;
+    if (specialInstitutes[roomType]) {
+      if (!info.name) info.name = roomType; // fallback если subdivisions не нашёл
+      info.institute = specialInstitutes[roomType].institute;
       return info;
     }
     
