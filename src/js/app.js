@@ -277,10 +277,12 @@ function handleSearchResult(item) {
     if (item.floor) {
       setTimeout(async () => {
         await selectFloor(item.floor);
-        if (item.room) {
-          highlightRoom(item.room);
-        } else if (item.subType) {
+        // особые помещения (цро, гардероб и тд) — ищем по типу, не по номеру
+        // у них на карте data-type вместо data-room
+        if (item.subType && ['cloakroom','reading-room','cro','bibliographers','card-catalog','library-fund','toilet'].includes(item.subType)) {
           highlightSpecialRoom(item.subType);
+        } else if (item.room) {
+          highlightRoom(item.room);
         }
       }, 200);
     }
