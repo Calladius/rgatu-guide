@@ -43,111 +43,110 @@
   <text x="20" y="25" class="floor-label">5 этаж</text>
 
   <!-- КОРИДОР -->
-  <rect x="70" y="270" width="2015" height="80" class="corridor" rx="2"/>
+  <rect x="10" y="270" width="2135" height="80" class="corridor" rx="2"/>
   <text x="1077.5" y="310" class="label" style="font-size:13px;fill:#aaa">К О Р И Д О Р</text>
 
-
   <!-- ВЕРХНИЙ РЯД (НЕЧЁТНЫЕ) -->
-  <rect x="70" y="50" width="121" height="220" class="room lab-color" data-room="501" data-type="lab" rx="2"/>
-  <text x="130.5" y="150" class="room-num">501</text>
-  <text x="130.5" y="168" class="dept-label" style="fill:#E65100;font-size:7.5px">Лаб. станков</text>
-  <text x="130.5" y="180" class="dept-label" style="fill:#E65100;font-size:7.5px">и инструментов</text>
-  <rect x="122.5" y="268" width="16" height="5" class="door"/>
-  <rect x="191" y="50" width="121" height="220" class="room lab-color" data-room="503" data-type="lab" rx="2"/>
-  <text x="251.5" y="150" class="room-num">503</text>
-  <text x="251.5" y="168" class="dept-label" style="fill:#E65100;font-size:7.5px">Лаб. сварочных</text>
-  <text x="251.5" y="180" class="dept-label" style="fill:#E65100;font-size:7.5px">технологий</text>
-  <rect x="243.5" y="268" width="16" height="5" class="door"/>
-  <rect x="312" y="50" width="121" height="220" class="room lab-color" data-room="505" data-type="lab" rx="2"/>
-  <text x="372.5" y="150" class="room-num">505</text>
-  <text x="372.5" y="168" class="dept-label" style="fill:#E65100;font-size:7.5px">Лаб. литейного</text>
-  <text x="372.5" y="180" class="dept-label" style="fill:#E65100;font-size:7.5px">производства</text>
-  <rect x="364.5" y="268" width="16" height="5" class="door"/>
-  <rect x="433" y="50" width="121" height="220" class="room lab-color" data-room="507" data-type="lab" rx="2"/>
-  <text x="493.5" y="150" class="room-num">507</text>
-  <text x="493.5" y="168" class="dept-label" style="fill:#E65100;font-size:7.5px">Лаб. испытаний</text>
-  <text x="493.5" y="180" class="dept-label" style="fill:#E65100;font-size:7.5px">авиац. двигат.</text>
-  <rect x="485.5" y="268" width="16" height="5" class="door"/>
-  <rect x="554" y="50" width="121" height="220" class="room lab-color" data-room="509" data-type="lab" rx="2"/>
-  <text x="614.5" y="150" class="room-num">509</text>
-  <text x="614.5" y="168" class="dept-label" style="fill:#E65100;font-size:7.5px">Лаб. электроники</text>
-  <text x="614.5" y="180" class="dept-label" style="fill:#E65100;font-size:7.5px">и радиоэлектр.</text>
-  <rect x="606.5" y="268" width="16" height="5" class="door"/>
-  <rect x="675" y="50" width="121" height="220" class="room lab-color" data-room="511" data-type="lab" rx="2"/>
-  <text x="735.5" y="150" class="room-num">511</text>
-  <text x="735.5" y="168" class="dept-label" style="fill:#E65100;font-size:7.5px">Компьютерный</text>
-  <text x="735.5" y="180" class="dept-label" style="fill:#E65100;font-size:7.5px">класс</text>
-  <rect x="727.5" y="268" width="16" height="5" class="door"/>
-  <rect x="796" y="50" width="121" height="220" class="room tech-color" data-room="513" data-type="tech" rx="2"/>
-  <text x="856.5" y="150" class="room-num">513</text>
-  <text x="856.5" y="172" class="dept-label" style="fill:#37474F;font-size:7.5px">Серверная</text>
-  <rect x="848.5" y="268" width="16" height="5" class="door"/>
-  <rect x="917" y="50" width="121" height="220" class="room lab-color" data-room="515" data-type="lab" rx="2"/>
-  <text x="977.5" y="150" class="room-num">515</text>
-  <text x="977.5" y="168" class="dept-label" style="fill:#E65100;font-size:7.5px">Лаб. оптики</text>
-  <text x="977.5" y="180" class="dept-label" style="fill:#E65100;font-size:7.5px">и физики</text>
-  <rect x="969.5" y="268" width="16" height="5" class="door"/>
-  <rect x="1038" y="50" width="121" height="220" class="room lab-color" data-room="517" data-type="lab" rx="2"/>
-  <text x="1098.5" y="150" class="room-num">517</text>
-  <text x="1098.5" y="168" class="dept-label" style="fill:#E65100;font-size:7.5px">Лаб. испытания</text>
-  <text x="1098.5" y="180" class="dept-label" style="fill:#E65100;font-size:7.5px">материалов</text>
-  <rect x="1090.5" y="268" width="16" height="5" class="door"/>
-  <rect x="1159" y="50" width="121" height="220" class="room lab-color" data-room="519" data-type="lab" rx="2"/>
-  <text x="1219.5" y="150" class="room-num">519</text>
-  <text x="1219.5" y="168" class="dept-label" style="fill:#E65100;font-size:7.5px">Лаб. термодин.</text>
-  <text x="1219.5" y="180" class="dept-label" style="fill:#E65100;font-size:7.5px">и теплопер.</text>
-  <rect x="1211.5" y="268" width="16" height="5" class="door"/>
-  <rect x="1280" y="50" width="121" height="220" class="room lab-color" data-room="521" data-type="lab" rx="2"/>
-  <text x="1340.5" y="150" class="room-num">521</text>
-  <text x="1340.5" y="172" class="dept-label" style="fill:#E65100;font-size:7.5px">Аудитория</text>
-  <rect x="1332.5" y="268" width="16" height="5" class="door"/>
-  <rect x="1401" y="50" width="121" height="220" class="room lab-color" data-room="523" data-type="lab" rx="2"/>
-  <text x="1461.5" y="150" class="room-num">523</text>
-  <text x="1461.5" y="172" class="dept-label" style="fill:#E65100;font-size:7.5px">Аудитория</text>
-  <rect x="1453.5" y="268" width="16" height="5" class="door"/>
-  <rect x="1522" y="50" width="83" height="220" class="toilet" data-type="toilet" rx="2"/>
-  <text x="1563.5" y="160" class="dept-label" style="fill:#00695C;font-size:9px;font-weight:600">Туалет</text>
-  <rect x="1555.5" y="268" width="16" height="5" class="door"/>
-  <rect x="1605" y="50" width="121" height="220" class="room lab-color" data-room="525" data-type="lab" rx="2"/>
-  <text x="1665.5" y="150" class="room-num">525</text>
-  <text x="1665.5" y="172" class="dept-label" style="fill:#E65100;font-size:7.5px">Лаб. САПР</text>
-  <rect x="1657.5" y="268" width="16" height="5" class="door"/>
-  <rect x="1726" y="50" width="121" height="220" class="room tech-color" data-room="527" data-type="tech" rx="2"/>
-  <text x="1786.5" y="150" class="room-num">527</text>
-  <text x="1786.5" y="168" class="dept-label" style="fill:#37474F;font-size:7.5px">Архив /</text>
-  <text x="1786.5" y="180" class="dept-label" style="fill:#37474F;font-size:7.5px">Хранилище</text>
-  <rect x="1778.5" y="268" width="16" height="5" class="door"/>
-  <rect x="1847" y="50" width="121" height="220" class="room tech-color" data-room="529" data-type="tech" rx="2"/>
-  <text x="1907.5" y="150" class="room-num">529</text>
-  <text x="1907.5" y="168" class="dept-label" style="fill:#37474F;font-size:7.5px">Технические</text>
-  <text x="1907.5" y="180" class="dept-label" style="fill:#37474F;font-size:7.5px">помещения</text>
-  <rect x="1899.5" y="268" width="16" height="5" class="door"/>
-  <rect x="1968" y="50" width="117" height="220" class="room lab-color" data-room="531" data-type="lab" rx="2"/>
-  <text x="2026.5" y="150" class="room-num">531</text>
-  <text x="2026.5" y="172" class="dept-label" style="fill:#E65100;font-size:7.5px">Аудитория</text>
-  <rect x="2018.5" y="268" width="16" height="5" class="door"/>
+  <rect x="10.0" y="50" width="128.2" height="220" class="room lab-color" data-room="501" data-type="lab" rx="2"/>
+  <text x="74.1" y="150" class="room-num">501</text>
+  <text x="74.1" y="168" class="dept-label" style="fill:#E65100;font-size:7.5px">Лаб. станков</text>
+  <text x="74.1" y="180" class="dept-label" style="fill:#E65100;font-size:7.5px">и инструментов</text>
+  <rect x="65.6" y="268" width="17.0" height="5" class="door"/>
+  <rect x="138.2" y="50" width="128.2" height="220" class="room lab-color" data-room="503" data-type="lab" rx="2"/>
+  <text x="202.3" y="150" class="room-num">503</text>
+  <text x="202.3" y="168" class="dept-label" style="fill:#E65100;font-size:7.5px">Лаб. сварочных</text>
+  <text x="202.3" y="180" class="dept-label" style="fill:#E65100;font-size:7.5px">технологий</text>
+  <rect x="193.8" y="268" width="17.0" height="5" class="door"/>
+  <rect x="266.4" y="50" width="128.2" height="220" class="room lab-color" data-room="505" data-type="lab" rx="2"/>
+  <text x="330.5" y="150" class="room-num">505</text>
+  <text x="330.5" y="168" class="dept-label" style="fill:#E65100;font-size:7.5px">Лаб. литейного</text>
+  <text x="330.5" y="180" class="dept-label" style="fill:#E65100;font-size:7.5px">производства</text>
+  <rect x="322.0" y="268" width="17.0" height="5" class="door"/>
+  <rect x="394.6" y="50" width="128.2" height="220" class="room lab-color" data-room="507" data-type="lab" rx="2"/>
+  <text x="458.7" y="150" class="room-num">507</text>
+  <text x="458.7" y="168" class="dept-label" style="fill:#E65100;font-size:7.5px">Лаб. испытаний</text>
+  <text x="458.7" y="180" class="dept-label" style="fill:#E65100;font-size:7.5px">авиац. двигат.</text>
+  <rect x="450.2" y="268" width="17.0" height="5" class="door"/>
+  <rect x="522.8" y="50" width="128.2" height="220" class="room lab-color" data-room="509" data-type="lab" rx="2"/>
+  <text x="586.9" y="150" class="room-num">509</text>
+  <text x="586.9" y="168" class="dept-label" style="fill:#E65100;font-size:7.5px">Лаб. электроники</text>
+  <text x="586.9" y="180" class="dept-label" style="fill:#E65100;font-size:7.5px">и радиоэлектр.</text>
+  <rect x="578.5" y="268" width="17.0" height="5" class="door"/>
+  <rect x="651.0" y="50" width="128.2" height="220" class="room lab-color" data-room="511" data-type="lab" rx="2"/>
+  <text x="715.1" y="150" class="room-num">511</text>
+  <text x="715.1" y="168" class="dept-label" style="fill:#E65100;font-size:7.5px">Компьютерный</text>
+  <text x="715.1" y="180" class="dept-label" style="fill:#E65100;font-size:7.5px">класс</text>
+  <rect x="706.7" y="268" width="17.0" height="5" class="door"/>
+  <rect x="779.2" y="50" width="128.2" height="220" class="room tech-color" data-room="513" data-type="tech" rx="2"/>
+  <text x="843.3" y="150" class="room-num">513</text>
+  <text x="843.3" y="172" class="dept-label" style="fill:#37474F;font-size:7.5px">Серверная</text>
+  <rect x="834.9" y="268" width="17.0" height="5" class="door"/>
+  <rect x="907.4" y="50" width="128.2" height="220" class="room lab-color" data-room="515" data-type="lab" rx="2"/>
+  <text x="971.5" y="150" class="room-num">515</text>
+  <text x="971.5" y="168" class="dept-label" style="fill:#E65100;font-size:7.5px">Лаб. оптики</text>
+  <text x="971.5" y="180" class="dept-label" style="fill:#E65100;font-size:7.5px">и физики</text>
+  <rect x="963.1" y="268" width="17.0" height="5" class="door"/>
+  <rect x="1035.6" y="50" width="128.2" height="220" class="room lab-color" data-room="517" data-type="lab" rx="2"/>
+  <text x="1099.8" y="150" class="room-num">517</text>
+  <text x="1099.8" y="168" class="dept-label" style="fill:#E65100;font-size:7.5px">Лаб. испытания</text>
+  <text x="1099.8" y="180" class="dept-label" style="fill:#E65100;font-size:7.5px">материалов</text>
+  <rect x="1091.3" y="268" width="17.0" height="5" class="door"/>
+  <rect x="1163.9" y="50" width="128.2" height="220" class="room lab-color" data-room="519" data-type="lab" rx="2"/>
+  <text x="1228.0" y="150" class="room-num">519</text>
+  <text x="1228.0" y="168" class="dept-label" style="fill:#E65100;font-size:7.5px">Лаб. термодин.</text>
+  <text x="1228.0" y="180" class="dept-label" style="fill:#E65100;font-size:7.5px">и теплопер.</text>
+  <rect x="1219.5" y="268" width="17.0" height="5" class="door"/>
+  <rect x="1292.1" y="50" width="128.2" height="220" class="room lab-color" data-room="521" data-type="lab" rx="2"/>
+  <text x="1356.2" y="150" class="room-num">521</text>
+  <text x="1356.2" y="172" class="dept-label" style="fill:#E65100;font-size:7.5px">Аудитория</text>
+  <rect x="1347.7" y="268" width="17.0" height="5" class="door"/>
+  <rect x="1420.3" y="50" width="128.2" height="220" class="room lab-color" data-room="523" data-type="lab" rx="2"/>
+  <text x="1484.4" y="150" class="room-num">523</text>
+  <text x="1484.4" y="172" class="dept-label" style="fill:#E65100;font-size:7.5px">Аудитория</text>
+  <rect x="1475.9" y="268" width="17.0" height="5" class="door"/>
+  <rect x="1548.5" y="50" width="87.9" height="220" class="toilet" data-type="toilet" rx="2"/>
+  <text x="1592.4" y="160" class="dept-label" style="fill:#00695C;font-size:9px;font-weight:600">Туалет</text>
+  <rect x="1584.0" y="268" width="17.0" height="5" class="door"/>
+  <rect x="1636.4" y="50" width="128.2" height="220" class="room lab-color" data-room="525" data-type="lab" rx="2"/>
+  <text x="1700.5" y="150" class="room-num">525</text>
+  <text x="1700.5" y="172" class="dept-label" style="fill:#E65100;font-size:7.5px">Лаб. САПР</text>
+  <rect x="1692.0" y="268" width="17.0" height="5" class="door"/>
+  <rect x="1764.6" y="50" width="128.2" height="220" class="room tech-color" data-room="527" data-type="tech" rx="2"/>
+  <text x="1828.7" y="150" class="room-num">527</text>
+  <text x="1828.7" y="168" class="dept-label" style="fill:#37474F;font-size:7.5px">Архив /</text>
+  <text x="1828.7" y="180" class="dept-label" style="fill:#37474F;font-size:7.5px">Хранилище</text>
+  <rect x="1820.2" y="268" width="17.0" height="5" class="door"/>
+  <rect x="1892.8" y="50" width="128.2" height="220" class="room tech-color" data-room="529" data-type="tech" rx="2"/>
+  <text x="1956.9" y="150" class="room-num">529</text>
+  <text x="1956.9" y="168" class="dept-label" style="fill:#37474F;font-size:7.5px">Технические</text>
+  <text x="1956.9" y="180" class="dept-label" style="fill:#37474F;font-size:7.5px">помещения</text>
+  <rect x="1948.5" y="268" width="17.0" height="5" class="door"/>
+  <rect x="2021.0" y="50" width="124.0" height="220" class="room lab-color" data-room="531" data-type="lab" rx="2"/>
+  <text x="2083.0" y="150" class="room-num">531</text>
+  <text x="2083.0" y="172" class="dept-label" style="fill:#E65100;font-size:7.5px">Аудитория</text>
+  <rect x="2074.5" y="268" width="17.0" height="5" class="door"/>
 
   <!-- НИЖНИЙ РЯД (ЧЁТНЫЕ) -->
-  <rect x="70" y="350" width="108" height="220" class="room lab-color" data-room="500" data-type="lab" rx="2"/>
-  <text x="124" y="450" class="room-num">500</text>
-  <text x="124" y="472" class="dept-label" style="fill:#E65100;font-size:7.5px">Аудитория</text>
-  <rect x="116" y="347" width="16" height="5" class="door"/>
-  <rect x="178" y="350" width="108" height="220" class="room lab-color" data-room="502" data-type="lab" rx="2"/>
-  <text x="232" y="450" class="room-num">502</text>
-  <text x="232" y="472" class="dept-label" style="fill:#E65100;font-size:7.5px">Аудитория</text>
-  <rect x="224" y="347" width="16" height="5" class="door"/>
-  <rect x="286" y="350" width="108" height="220" class="room lab-color" data-room="504" data-type="lab" rx="2"/>
-  <text x="340" y="450" class="room-num">504</text>
-  <text x="340" y="472" class="dept-label" style="fill:#E65100;font-size:7.5px">Аудитория</text>
-  <rect x="332" y="347" width="16" height="5" class="door"/>
-  <rect x="394" y="350" width="108" height="220" class="room lab-color" data-room="506" data-type="lab" rx="2"/>
-  <text x="448" y="450" class="room-num">506</text>
-  <text x="448" y="472" class="dept-label" style="fill:#E65100;font-size:7.5px">Аудитория</text>
-  <rect x="440" y="347" width="16" height="5" class="door"/>
-  <rect x="502" y="350" width="108" height="220" class="room lab-color" data-room="508" data-type="lab" rx="2"/>
-  <text x="556" y="450" class="room-num">508</text>
-  <text x="556" y="472" class="dept-label" style="fill:#E65100;font-size:7.5px">Аудитория</text>
-  <rect x="548" y="347" width="16" height="5" class="door"/>
+  <rect x="10.0" y="350" width="108" height="220" class="room lab-color" data-room="500" data-type="lab" rx="2"/>
+  <text x="64.0" y="450" class="room-num">500</text>
+  <text x="64.0" y="472" class="dept-label" style="fill:#E65100;font-size:7.5px">Аудитория</text>
+  <rect x="56.0" y="347" width="16" height="5" class="door"/>
+  <rect x="118.0" y="350" width="108" height="220" class="room lab-color" data-room="502" data-type="lab" rx="2"/>
+  <text x="172.0" y="450" class="room-num">502</text>
+  <text x="172.0" y="472" class="dept-label" style="fill:#E65100;font-size:7.5px">Аудитория</text>
+  <rect x="164.0" y="347" width="16" height="5" class="door"/>
+  <rect x="226.0" y="350" width="108" height="220" class="room lab-color" data-room="504" data-type="lab" rx="2"/>
+  <text x="280.0" y="450" class="room-num">504</text>
+  <text x="280.0" y="472" class="dept-label" style="fill:#E65100;font-size:7.5px">Аудитория</text>
+  <rect x="272.0" y="347" width="16" height="5" class="door"/>
+  <rect x="334.0" y="350" width="108" height="220" class="room lab-color" data-room="506" data-type="lab" rx="2"/>
+  <text x="388.0" y="450" class="room-num">506</text>
+  <text x="388.0" y="472" class="dept-label" style="fill:#E65100;font-size:7.5px">Аудитория</text>
+  <rect x="380.0" y="347" width="16" height="5" class="door"/>
+  <rect x="442.0" y="350" width="108" height="220" class="room lab-color" data-room="508" data-type="lab" rx="2"/>
+  <text x="496.0" y="450" class="room-num">508</text>
+  <text x="496.0" y="472" class="dept-label" style="fill:#E65100;font-size:7.5px">Аудитория</text>
+  <rect x="488.0" y="347" width="16" height="5" class="door"/>
   <rect x="610" y="350" width="74" height="220" class="toilet" data-type="toilet" rx="2"/>
   <text x="647" y="460" class="dept-label" style="fill:#00695C;font-size:9px;font-weight:600">Туалет</text>
   <rect x="639" y="347" width="16" height="5" class="door"/>
@@ -177,77 +176,77 @@
   <text x="1350.5" y="468" class="dept-label" style="fill:#E65100;font-size:7.5px">Лаб. робото-</text>
   <text x="1350.5" y="480" class="dept-label" style="fill:#E65100;font-size:7.5px">техники</text>
   <rect x="1342.5" y="347" width="16" height="5" class="door"/>
-  <rect x="1411" y="350" width="108" height="220" class="room lab-color" data-room="522" data-type="lab" rx="2"/>
-  <text x="1465" y="450" class="room-num">522</text>
-  <text x="1465" y="472" class="dept-label" style="fill:#E65100;font-size:7.5px">Аудитория</text>
-  <rect x="1457" y="347" width="16" height="5" class="door"/>
-  <rect x="1519" y="350" width="121" height="220" class="room lab-color" data-room="524" data-type="lab" rx="2"/>
-  <text x="1579.5" y="450" class="room-num">524</text>
-  <text x="1579.5" y="472" class="dept-label" style="fill:#E65100;font-size:7.5px">Аудитория</text>
-  <rect x="1571.5" y="347" width="16" height="5" class="door"/>
-  <rect x="1640" y="350" width="121" height="220" class="room lab-color" data-room="526" data-type="lab" rx="2"/>
-  <text x="1700.5" y="450" class="room-num">526</text>
-  <text x="1700.5" y="468" class="dept-label" style="fill:#E65100;font-size:7.5px">Лаб. автомати-</text>
-  <text x="1700.5" y="480" class="dept-label" style="fill:#E65100;font-size:7.5px">зации</text>
-  <rect x="1692.5" y="347" width="16" height="5" class="door"/>
-  <rect x="1761" y="350" width="108" height="220" class="room tech-color" data-room="528" data-type="tech" rx="2"/>
-  <text x="1815" y="450" class="room-num">528</text>
-  <text x="1815" y="468" class="dept-label" style="fill:#37474F;font-size:7.5px">Кладовая /</text>
-  <text x="1815" y="480" class="dept-label" style="fill:#37474F;font-size:7.5px">Подсобка</text>
-  <rect x="1807" y="347" width="16" height="5" class="door"/>
-  <rect x="1869" y="350" width="108" height="220" class="room tech-color" data-room="530" data-type="tech" rx="2"/>
-  <text x="1923" y="450" class="room-num">530</text>
-  <text x="1923" y="468" class="dept-label" style="fill:#37474F;font-size:7.5px">Технич.</text>
-  <text x="1923" y="480" class="dept-label" style="fill:#37474F;font-size:7.5px">помещение</text>
-  <rect x="1915" y="347" width="16" height="5" class="door"/>
-  <rect x="1977" y="350" width="108" height="220" class="room lab-color" data-room="532" data-type="lab" rx="2"/>
-  <text x="2031" y="450" class="room-num">532</text>
-  <text x="2031" y="472" class="dept-label" style="fill:#E65100;font-size:7.5px">Аудитория</text>
-  <rect x="2023" y="347" width="16" height="5" class="door"/>
+  <rect x="1471.0" y="350" width="108" height="220" class="room lab-color" data-room="522" data-type="lab" rx="2"/>
+  <text x="1525.0" y="450" class="room-num">522</text>
+  <text x="1525.0" y="472" class="dept-label" style="fill:#E65100;font-size:7.5px">Аудитория</text>
+  <rect x="1517.0" y="347" width="16" height="5" class="door"/>
+  <rect x="1579.0" y="350" width="121" height="220" class="room lab-color" data-room="524" data-type="lab" rx="2"/>
+  <text x="1639.5" y="450" class="room-num">524</text>
+  <text x="1639.5" y="472" class="dept-label" style="fill:#E65100;font-size:7.5px">Аудитория</text>
+  <rect x="1631.5" y="347" width="16" height="5" class="door"/>
+  <rect x="1700.0" y="350" width="121" height="220" class="room lab-color" data-room="526" data-type="lab" rx="2"/>
+  <text x="1760.5" y="450" class="room-num">526</text>
+  <text x="1760.5" y="468" class="dept-label" style="fill:#E65100;font-size:7.5px">Лаб. автомати-</text>
+  <text x="1760.5" y="480" class="dept-label" style="fill:#E65100;font-size:7.5px">зации</text>
+  <rect x="1752.5" y="347" width="16" height="5" class="door"/>
+  <rect x="1821.0" y="350" width="108" height="220" class="room tech-color" data-room="528" data-type="tech" rx="2"/>
+  <text x="1875.0" y="450" class="room-num">528</text>
+  <text x="1875.0" y="468" class="dept-label" style="fill:#37474F;font-size:7.5px">Кладовая /</text>
+  <text x="1875.0" y="480" class="dept-label" style="fill:#37474F;font-size:7.5px">Подсобка</text>
+  <rect x="1867.0" y="347" width="16" height="5" class="door"/>
+  <rect x="1929.0" y="350" width="108" height="220" class="room tech-color" data-room="530" data-type="tech" rx="2"/>
+  <text x="1983.0" y="450" class="room-num">530</text>
+  <text x="1983.0" y="468" class="dept-label" style="fill:#37474F;font-size:7.5px">Технич.</text>
+  <text x="1983.0" y="480" class="dept-label" style="fill:#37474F;font-size:7.5px">помещение</text>
+  <rect x="1975.0" y="347" width="16" height="5" class="door"/>
+  <rect x="2037.0" y="350" width="108" height="220" class="room lab-color" data-room="532" data-type="lab" rx="2"/>
+  <text x="2091.0" y="450" class="room-num">532</text>
+  <text x="2091.0" y="472" class="dept-label" style="fill:#E65100;font-size:7.5px">Аудитория</text>
+  <rect x="2083.0" y="347" width="16" height="5" class="door"/>
 
 
   <!-- ЛЕСТНИЦЫ -->
-  <rect x="590" y="350" width="40" height="220" class="stairs" data-type="stairs" rx="3"/>
-  <text x="610" y="460" class="label" style="font-size:13px;fill:#666;transform:rotate(-90deg);transform-origin:610px 460px;transform-box:view-box">Лестница</text>
-  <line x1="595" y1="380" x2="625" y2="380" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="595" y1="410" x2="625" y2="410" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="595" y1="440" x2="625" y2="440" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="595" y1="470" x2="625" y2="470" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="595" y1="500" x2="625" y2="500" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="595" y1="530" x2="625" y2="530" stroke="#bbb" stroke-width="0.5"/>
-  <rect x="1391" y="350" width="40" height="220" class="stairs" data-type="stairs" rx="3"/>
-  <text x="1411" y="460" class="label" style="font-size:13px;fill:#666;transform:rotate(-90deg);transform-origin:1411px 460px;transform-box:view-box">Лестница</text>
-  <line x1="1396" y1="380" x2="1426" y2="380" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="1396" y1="410" x2="1426" y2="410" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="1396" y1="440" x2="1426" y2="440" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="1396" y1="470" x2="1426" y2="470" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="1396" y1="500" x2="1426" y2="500" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="1396" y1="530" x2="1426" y2="530" stroke="#bbb" stroke-width="0.5"/>
+  <rect x="550" y="350" width="60" height="220" class="stairs" data-type="stairs" rx="3"/>
+  <text x="580" y="460" class="label" style="font-size:14px;fill:#666;transform:rotate(-90deg);transform-origin:580px 460px;transform-box:view-box">Лестница</text>
+  <line x1="555" y1="380" x2="605" y2="380" stroke="#bbb" stroke-width="0.5"/>
+  <line x1="555" y1="410" x2="605" y2="410" stroke="#bbb" stroke-width="0.5"/>
+  <line x1="555" y1="440" x2="605" y2="440" stroke="#bbb" stroke-width="0.5"/>
+  <line x1="555" y1="470" x2="605" y2="470" stroke="#bbb" stroke-width="0.5"/>
+  <line x1="555" y1="500" x2="605" y2="500" stroke="#bbb" stroke-width="0.5"/>
+  <line x1="555" y1="530" x2="605" y2="530" stroke="#bbb" stroke-width="0.5"/>
+  <rect x="1411" y="350" width="60" height="220" class="stairs" data-type="stairs" rx="3"/>
+  <text x="1441" y="460" class="label" style="font-size:14px;fill:#666;transform:rotate(-90deg);transform-origin:1441px 460px;transform-box:view-box">Лестница</text>
+  <line x1="1416" y1="380" x2="1466" y2="380" stroke="#bbb" stroke-width="0.5"/>
+  <line x1="1416" y1="410" x2="1466" y2="410" stroke="#bbb" stroke-width="0.5"/>
+  <line x1="1416" y1="440" x2="1466" y2="440" stroke="#bbb" stroke-width="0.5"/>
+  <line x1="1416" y1="470" x2="1466" y2="470" stroke="#bbb" stroke-width="0.5"/>
+  <line x1="1416" y1="500" x2="1466" y2="500" stroke="#bbb" stroke-width="0.5"/>
+  <line x1="1416" y1="530" x2="1466" y2="530" stroke="#bbb" stroke-width="0.5"/>
 
   <!-- СТЕНЫ -->
   <rect x="8" y="48" width="2139" height="524" class="wall" rx="4"/>
-  <line x1="70" y1="270" x2="2085" y2="270" class="inner-wall"/>
-  <line x1="70" y1="350" x2="2085" y2="350" class="inner-wall"/>
-  <line x1="191" y1="50" x2="191" y2="270" class="inner-wall"/>
-  <line x1="312" y1="50" x2="312" y2="270" class="inner-wall"/>
-  <line x1="433" y1="50" x2="433" y2="270" class="inner-wall"/>
-  <line x1="554" y1="50" x2="554" y2="270" class="inner-wall"/>
-  <line x1="675" y1="50" x2="675" y2="270" class="inner-wall"/>
-  <line x1="796" y1="50" x2="796" y2="270" class="inner-wall"/>
-  <line x1="917" y1="50" x2="917" y2="270" class="inner-wall"/>
-  <line x1="1038" y1="50" x2="1038" y2="270" class="inner-wall"/>
-  <line x1="1159" y1="50" x2="1159" y2="270" class="inner-wall"/>
-  <line x1="1280" y1="50" x2="1280" y2="270" class="inner-wall"/>
-  <line x1="1401" y1="50" x2="1401" y2="270" class="inner-wall"/>
-  <line x1="1522" y1="50" x2="1522" y2="270" class="inner-wall"/>
-  <line x1="1605" y1="50" x2="1605" y2="270" class="inner-wall"/>
-  <line x1="1726" y1="50" x2="1726" y2="270" class="inner-wall"/>
-  <line x1="1847" y1="50" x2="1847" y2="270" class="inner-wall"/>
-  <line x1="1968" y1="50" x2="1968" y2="270" class="inner-wall"/>
-  <line x1="178" y1="350" x2="178" y2="570" class="inner-wall"/>
-  <line x1="286" y1="350" x2="286" y2="570" class="inner-wall"/>
-  <line x1="394" y1="350" x2="394" y2="570" class="inner-wall"/>
-  <line x1="502" y1="350" x2="502" y2="570" class="inner-wall"/>
+  <line x1="10" y1="270" x2="2145" y2="270" class="inner-wall"/>
+  <line x1="10" y1="350" x2="2145" y2="350" class="inner-wall"/>
+  <line x1="138.2" y1="50" x2="138.2" y2="270" class="inner-wall"/>
+  <line x1="266.4" y1="50" x2="266.4" y2="270" class="inner-wall"/>
+  <line x1="394.6" y1="50" x2="394.6" y2="270" class="inner-wall"/>
+  <line x1="522.8" y1="50" x2="522.8" y2="270" class="inner-wall"/>
+  <line x1="651.0" y1="50" x2="651.0" y2="270" class="inner-wall"/>
+  <line x1="779.2" y1="50" x2="779.2" y2="270" class="inner-wall"/>
+  <line x1="907.4" y1="50" x2="907.4" y2="270" class="inner-wall"/>
+  <line x1="1035.6" y1="50" x2="1035.6" y2="270" class="inner-wall"/>
+  <line x1="1163.9" y1="50" x2="1163.9" y2="270" class="inner-wall"/>
+  <line x1="1292.1" y1="50" x2="1292.1" y2="270" class="inner-wall"/>
+  <line x1="1420.3" y1="50" x2="1420.3" y2="270" class="inner-wall"/>
+  <line x1="1548.5" y1="50" x2="1548.5" y2="270" class="inner-wall"/>
+  <line x1="1636.4" y1="50" x2="1636.4" y2="270" class="inner-wall"/>
+  <line x1="1764.6" y1="50" x2="1764.6" y2="270" class="inner-wall"/>
+  <line x1="1892.8" y1="50" x2="1892.8" y2="270" class="inner-wall"/>
+  <line x1="2021.0" y1="50" x2="2021.0" y2="270" class="inner-wall"/>
+  <line x1="118.0" y1="350" x2="118.0" y2="570" class="inner-wall"/>
+  <line x1="226.0" y1="350" x2="226.0" y2="570" class="inner-wall"/>
+  <line x1="334.0" y1="350" x2="334.0" y2="570" class="inner-wall"/>
+  <line x1="442.0" y1="350" x2="442.0" y2="570" class="inner-wall"/>
   <line x1="610" y1="350" x2="610" y2="570" class="inner-wall"/>
   <line x1="684" y1="350" x2="684" y2="570" class="inner-wall"/>
   <line x1="792" y1="350" x2="792" y2="570" class="inner-wall"/>
@@ -256,16 +255,13 @@
   <line x1="1182" y1="350" x2="1182" y2="570" class="inner-wall"/>
   <line x1="1290" y1="350" x2="1290" y2="570" class="inner-wall"/>
   <line x1="1411" y1="350" x2="1411" y2="570" class="inner-wall"/>
-  <line x1="1519" y1="350" x2="1519" y2="570" class="inner-wall"/>
-  <line x1="1640" y1="350" x2="1640" y2="570" class="inner-wall"/>
-  <line x1="1761" y1="350" x2="1761" y2="570" class="inner-wall"/>
-  <line x1="1869" y1="350" x2="1869" y2="570" class="inner-wall"/>
-  <line x1="1977" y1="350" x2="1977" y2="570" class="inner-wall"/>
+  <line x1="1579.0" y1="350" x2="1579.0" y2="570" class="inner-wall"/>
+  <line x1="1700.0" y1="350" x2="1700.0" y2="570" class="inner-wall"/>
+  <line x1="1821.0" y1="350" x2="1821.0" y2="570" class="inner-wall"/>
+  <line x1="1929.0" y1="350" x2="1929.0" y2="570" class="inner-wall"/>
+  <line x1="2037.0" y1="350" x2="2037.0" y2="570" class="inner-wall"/>
 
-  <line x1="590" y1="350" x2="590" y2="570" class="inner-wall"/>
-  <line x1="630" y1="350" x2="630" y2="570" class="inner-wall"/>
-
-  <line x1="1391" y1="350" x2="1391" y2="570" class="inner-wall"/>
-  <line x1="1431" y1="350" x2="1431" y2="570" class="inner-wall"/>
+  <line x1="550" y1="350" x2="550" y2="570" class="inner-wall"/>
+  <line x1="1471" y1="350" x2="1471" y2="570" class="inner-wall"/>
 
 </svg>
