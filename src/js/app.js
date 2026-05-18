@@ -1244,7 +1244,6 @@ function initMapZoom() {
     MapZoom.origVB = { x: parts[0], y: parts[1], w: parts[2], h: parts[3] };
   }
 
-  // колесо мыши = зум
   container.addEventListener('wheel', onZoomWheel, { passive: false });
 
   // драг мышью
@@ -1256,6 +1255,9 @@ function initMapZoom() {
   container.addEventListener('touchstart', onTouchStart, { passive: false });
   container.addEventListener('touchmove', onTouchMove, { passive: false });
   container.addEventListener('touchend', onTouchEnd);
+
+  // начальный размер текста
+  updateTextScale(1);
 }
 
 function setViewBox(x, y, w, h) {
@@ -1278,18 +1280,35 @@ function zoomAtPoint(factor, clientX, clientY) {
 
   // лимиты зума
   const newScale = MapZoom.origVB.w / newW;
-  if (newScale < MapZoom.minScale || newScale > MapZoom.maxScale) return;
+  if (newScale > MapZoom.maxScale) return;
+
+  // при отдалении до minScale — сбрасываем на исходный viewBox
+  if (newScale < MapZoom.minScale) {
+    const o = MapZoom.origVB;
+    setViewBox(o.x, o.y, o.w, o.h);
+    MapZoom.scale = 1;
+    updateTextScale(1);
+    return;
+  }
 
   // точка под курсором в svg-координатах
   const svgX = cur.x + (cx / rect.width) * cur.w;
   const svgY = cur.y + (cy / rect.height) * cur.h;
 
   // точка остаётся под курсором
-  const newX = svgX - (cx / rect.width) * newW;
-  const newY = svgY - (cy / rect.height) * newH;
+  let newX = svgX - (cx / rect.width) * newW;
+  let newY = svgY - (cy / rect.height) * newH;
+
+  // ограничиваем viewBox чтобы карта не уходила за пределы
+  const o = MapZoom.origVB;
+  if (newX < o.x) newX = o.x;
+  if (newY < o.y) newY = o.y;
+  if (newX + newW > o.x + o.w) newX = o.x + o.w - newW;
+  if (newY + newH > o.y + o.h) newY = o.y + o.h - newH;
 
   setViewBox(newX, newY, newW, newH);
   MapZoom.scale = newScale;
+  updateTextScale(newScale);
 }
 
 function onZoomWheel(e) {
@@ -1381,6 +1400,44 @@ function zoomReset() {
   const o = MapZoom.origVB;
   setViewBox(o.x, o.y, o.w, o.h);
   MapZoom.scale = 1;
+  updateTextScale(1);
+}
+
+// динамический размер текста при зуме
+// при приближении уменьшаем font-size чтобы текст не раздувался
+function updateTextScale(scale) {
+  const svg = MapZoom.svg;
+  if (!svg) return;
+  // базовые размеры из CSS
+  const baseSizes = {
+    'room-num': 24,
+    'dept-label': 13,
+    'label': 15
+  };
+  // при зуме > 1 уменьшаем шрифт обратно
+  const factor = 1 / Math.max(scale, 1);
+  Object.entries(baseSizes).forEach(([cls, base]) => {
+    const newSize = Math.round(base * factor * 10) / 10;
+    const minSize = cls === 'room-num' ? 8 : cls === 'dept-label' ? 5 : 6;
+    const finalSize = Math.max(newSize, minSize);
+    svg.querySelectorAll(`.${cls}`).forEach(t => {
+      // не трогаем инлайн font-size (особые помещения с крупным текстом)
+      const inlineFs = t.style.fontSize;
+      if (inlineFs && cls !== 'room-num') {
+        const origInline = parseFloat(inlineFs);
+        if (origInline > base) {
+          // крупный текст (ЦРО, Туалет, Гардероб и тд) — масштабируем от его размера
+          t.style.fontSize = Math.max(Math.round(origInline * factor * 10) / 10, minSize) + 'px';
+          return;
+        }
+      }
+      if (cls === 'room-num') {
+        t.style.fontSize = finalSize + 'px';
+      } else {
+        t.style.fontSize = finalSize + 'px';
+      }
+    });
+  });
 }
 
 // service worker

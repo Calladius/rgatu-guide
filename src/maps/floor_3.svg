@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2155 680" width="2155" height="680">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2155 680" preserveAspectRatio="xMidYMid meet">
   <defs>
     <style>
   .wall{fill:none;stroke:#4a4a4a;stroke-width:3;stroke-linecap:round}
@@ -16,10 +16,10 @@
   .special:hover{fill:#F8BBD0}
   .special.active{fill:#F48FB1;stroke:#C2185B;stroke-width:2}
   .service{fill:#fff3e0;stroke:#ffb74d;stroke-width:1}
-  .label{font-family:'Segoe UI',Arial,sans-serif;font-size:10px;fill:#333;text-anchor:middle;dominant-baseline:middle;pointer-events:none}
-  .room-num{font-family:'Segoe UI',Arial,sans-serif;font-size:11px;fill:#333;text-anchor:middle;dominant-baseline:middle;pointer-events:none;font-weight:700}
-  .dept-label{font-family:'Segoe UI',Arial,sans-serif;font-size:7.5px;fill:#555;text-anchor:middle;dominant-baseline:middle;pointer-events:none}
-  .floor-label{font-family:'Segoe UI',Arial,sans-serif;font-size:16px;fill:#333;font-weight:800}
+  .label{font-family:'Segoe UI',Arial,sans-serif;font-size:15px;fill:#333;text-anchor:middle;dominant-baseline:middle;pointer-events:none;paint-order:stroke;stroke:white;stroke-width:6px;stroke-linejoin:round}
+  .room-num{font-family:'Segoe UI',Arial,sans-serif;font-size:24px;fill:#222;text-anchor:middle;dominant-baseline:middle;pointer-events:none;font-weight:800;paint-order:stroke;stroke:white;stroke-width:7px;stroke-linejoin:round}
+  .dept-label{font-family:'Segoe UI',Arial,sans-serif;font-size:13px;fill:#444;text-anchor:middle;dominant-baseline:middle;pointer-events:none;paint-order:stroke;stroke:white;stroke-width:5px;stroke-linejoin:round}
+  .floor-label{font-family:'Segoe UI',Arial,sans-serif;font-size:18px;fill:#333;font-weight:800}
   .door{fill:#fff;stroke:#999;stroke-width:1}
   .atif-color{fill:#E3F2FD;stroke:#1565C0;stroke-width:1.5;cursor:pointer;transition:fill .2s}
   .atif-color:hover{fill:#BBDEFB}
@@ -36,6 +36,7 @@
   .tech-color{fill:#ECEFF1;stroke:#546E7A;stroke-width:1.5;cursor:pointer;transition:fill .2s}
   .tech-color:hover{fill:#CFD8DC}
   .tech-color.active{fill:#B0BEC5;stroke:#546E7A;stroke-width:2}
+  
     </style>
   </defs>
 
@@ -44,197 +45,197 @@
 
   <!-- КОРИДОР -->
   <rect x="10" y="270" width="2135" height="80" class="corridor" rx="2"/>
-  <text x="1077.5" y="310" class="label" style="font-size:13px;fill:#aaa">К О Р И Д О Р</text>
+  <text x="1077.5" y="310" class="label" style="font-size:16px;fill:#aaa">К О Р И Д О Р</text>
 
   <!-- ВЕРХНИЙ РЯД (НЕЧЁТНЫЕ) -->
   <rect x="10.0" y="50" width="84.8" height="220" class="room atif-color" data-room="301" data-type="atif" rx="2"/>
   <text x="52.4" y="150" class="room-num">301</text>
-  <text x="52.4" y="172" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="52.4" y="172" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="43.9" y="268" width="17.0" height="5" class="door"/>
   <rect x="94.8" y="50" width="84.8" height="220" class="room atif-color" data-room="303" data-type="atif" rx="2"/>
   <text x="137.1" y="150" class="room-num">303</text>
-  <text x="137.1" y="172" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="137.1" y="172" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="128.7" y="268" width="17.0" height="5" class="door"/>
   <rect x="179.5" y="50" width="84.8" height="220" class="room atif-color" data-room="305" data-type="atif" rx="2"/>
   <text x="221.9" y="150" class="room-num">305</text>
-  <text x="221.9" y="172" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="221.9" y="172" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="213.4" y="268" width="17.0" height="5" class="door"/>
   <rect x="264.3" y="50" width="84.8" height="220" class="room atif-color" data-room="307" data-type="atif" rx="2"/>
   <text x="306.7" y="150" class="room-num">307</text>
-  <text x="306.7" y="172" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="306.7" y="172" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="298.2" y="268" width="17.0" height="5" class="door"/>
   <rect x="349.1" y="50" width="84.8" height="220" class="room atif-color" data-room="309" data-type="atif" rx="2"/>
   <text x="391.4" y="150" class="room-num">309</text>
-  <text x="391.4" y="172" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="391.4" y="172" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="383.0" y="268" width="17.0" height="5" class="door"/>
   <rect x="433.8" y="50" width="127.1" height="220" class="room atif-color" data-room="311" data-type="atif" rx="2"/>
   <text x="497.4" y="150" class="room-num">311</text>
-  <text x="497.4" y="168" class="dept-label" style="fill:#1565C0;font-size:7.5px">Каф. иннов.</text>
-  <text x="497.4" y="180" class="dept-label" style="fill:#1565C0;font-size:7.5px">машиностроения</text>
+  <text x="497.4" y="168" class="dept-label" style="fill:#1565C0;font-size:13px">Каф. иннов.</text>
+  <text x="497.4" y="180" class="dept-label" style="fill:#1565C0;font-size:13px">машиностроения</text>
   <rect x="488.9" y="268" width="17.0" height="5" class="door"/>
   <rect x="561.0" y="50" width="84.8" height="220" class="room atif-color" data-room="313" data-type="atif" rx="2"/>
   <text x="603.3" y="150" class="room-num">313</text>
-  <text x="603.3" y="168" class="dept-label" style="fill:#1565C0;font-size:7.5px">Лаб. каф.</text>
-  <text x="603.3" y="180" class="dept-label" style="fill:#1565C0;font-size:7.5px">иннов. маш.</text>
+  <text x="603.3" y="168" class="dept-label" style="fill:#1565C0;font-size:13px">Лаб. каф.</text>
+  <text x="603.3" y="180" class="dept-label" style="fill:#1565C0;font-size:13px">иннов. маш.</text>
   <rect x="594.9" y="268" width="17.0" height="5" class="door"/>
   <rect x="645.7" y="50" width="84.8" height="220" class="room atif-color" data-room="315" data-type="atif" rx="2"/>
   <text x="688.1" y="150" class="room-num">315</text>
-  <text x="688.1" y="172" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="688.1" y="172" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="679.6" y="268" width="17.0" height="5" class="door"/>
   <rect x="730.5" y="50" width="84.8" height="220" class="room atif-color" data-room="317" data-type="atif" rx="2"/>
   <text x="772.9" y="150" class="room-num">317</text>
-  <text x="772.9" y="168" class="dept-label" style="fill:#1565C0;font-size:7.5px">Лаб. каф.</text>
-  <text x="772.9" y="180" class="dept-label" style="fill:#1565C0;font-size:7.5px">авиац. дв.</text>
+  <text x="772.9" y="168" class="dept-label" style="fill:#1565C0;font-size:13px">Лаб. каф.</text>
+  <text x="772.9" y="180" class="dept-label" style="fill:#1565C0;font-size:13px">авиац. дв.</text>
   <rect x="764.4" y="268" width="17.0" height="5" class="door"/>
   <rect x="815.3" y="50" width="84.8" height="220" class="room atif-color" data-room="319" data-type="atif" rx="2"/>
   <text x="857.6" y="150" class="room-num">319</text>
-  <text x="857.6" y="172" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="857.6" y="172" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="849.2" y="268" width="17.0" height="5" class="door"/>
   <rect x="900.0" y="50" width="84.8" height="220" class="room atif-color" data-room="321" data-type="atif" rx="2"/>
   <text x="942.4" y="150" class="room-num">321</text>
-  <text x="942.4" y="172" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="942.4" y="172" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="933.9" y="268" width="17.0" height="5" class="door"/>
   <rect x="984.8" y="50" width="84.8" height="220" class="room atif-color" data-room="323" data-type="atif" rx="2"/>
   <text x="1027.2" y="150" class="room-num">323</text>
-  <text x="1027.2" y="172" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="1027.2" y="172" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="1018.7" y="268" width="17.0" height="5" class="door"/>
   <rect x="1069.6" y="50" width="127.1" height="220" class="room atif-color" data-room="325" data-type="atif" rx="2"/>
   <text x="1133.1" y="150" class="room-num">325</text>
-  <text x="1133.1" y="168" class="dept-label" style="fill:#1565C0;font-size:7.5px">Каф. авиац.</text>
-  <text x="1133.1" y="180" class="dept-label" style="fill:#1565C0;font-size:7.5px">двигателей</text>
+  <text x="1133.1" y="168" class="dept-label" style="fill:#1565C0;font-size:13px">Каф. авиац.</text>
+  <text x="1133.1" y="180" class="dept-label" style="fill:#1565C0;font-size:13px">двигателей</text>
   <rect x="1124.7" y="268" width="17.0" height="5" class="door"/>
-  <rect x="1196.7" y="50" width="127.1" height="220" class="room atif-color" data-room="327" data-type="atif" rx="2"/>
-  <text x="1260.3" y="150" class="room-num">327</text>
-  <text x="1260.3" y="168" class="dept-label" style="fill:#1565C0;font-size:7.5px">Дирекция</text>
-  <text x="1260.3" y="180" class="dept-label" style="fill:#1565C0;font-size:7.5px">ИАТИФ</text>
-  <rect x="1251.8" y="268" width="17.0" height="5" class="door"/>
-  <rect x="1323.8" y="50" width="84.8" height="220" class="room atif-color" data-room="329" data-type="atif" rx="2"/>
-  <text x="1366.2" y="150" class="room-num">329</text>
-  <text x="1366.2" y="168" class="dept-label" style="fill:#1565C0;font-size:7.5px">Каф. материа-</text>
-  <text x="1366.2" y="180" class="dept-label" style="fill:#1565C0;font-size:7.5px">ловедения</text>
-  <rect x="1357.8" y="268" width="17.0" height="5" class="door"/>
+  <rect x="1196.7" y="50" width="106.0" height="220" class="room atif-color" data-room="327" data-type="atif" rx="2"/>
+  <text x="1249.7" y="150" class="room-num">327</text>
+  <text x="1249.7" y="168" class="dept-label" style="fill:#1565C0;font-size:13px">Дирекция</text>
+  <text x="1249.7" y="180" class="dept-label" style="fill:#1565C0;font-size:13px">ИАТИФ</text>
+  <rect x="1241.2" y="268" width="17.0" height="5" class="door"/>
+  <rect x="1302.7" y="50" width="106.0" height="220" class="room atif-color" data-room="329" data-type="atif" rx="2"/>
+  <text x="1355.6" y="150" class="room-num">329</text>
+  <text x="1355.6" y="168" class="dept-label" style="fill:#1565C0;font-size:13px">Каф. материа-</text>
+  <text x="1355.6" y="180" class="dept-label" style="fill:#1565C0;font-size:13px">ловедения</text>
+  <rect x="1347.2" y="268" width="17.0" height="5" class="door"/>
   <rect x="1408.6" y="50" width="84.8" height="220" class="room atif-color" data-room="331" data-type="atif" rx="2"/>
   <text x="1451.0" y="150" class="room-num">331</text>
-  <text x="1451.0" y="172" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="1451.0" y="172" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="1442.5" y="268" width="17.0" height="5" class="door"/>
   <rect x="1493.4" y="50" width="58.3" height="220" class="toilet" data-type="toilet" rx="2"/>
-  <text x="1522.5" y="160" class="dept-label" style="fill:#00695C;font-size:9px;font-weight:600">Туалет</text>
+  <text x="1522.5" y="160" class="dept-label" style="fill:#00695C;font-size:15px;font-weight:600">Туалет</text>
   <rect x="1514.0" y="268" width="17.0" height="5" class="door"/>
   <rect x="1551.7" y="50" width="84.8" height="220" class="room atif-color" data-room="333" data-type="atif" rx="2"/>
   <text x="1594.0" y="150" class="room-num">333</text>
-  <text x="1594.0" y="172" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="1594.0" y="172" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="1585.6" y="268" width="17.0" height="5" class="door"/>
   <rect x="1636.4" y="50" width="127.1" height="220" class="room atif-color" data-room="335" data-type="atif" rx="2"/>
   <text x="1700.0" y="150" class="room-num">335</text>
-  <text x="1700.0" y="168" class="dept-label" style="fill:#1565C0;font-size:7.5px">Каф. общей и</text>
-  <text x="1700.0" y="180" class="dept-label" style="fill:#1565C0;font-size:7.5px">техн. физики</text>
+  <text x="1700.0" y="168" class="dept-label" style="fill:#1565C0;font-size:13px">Каф. общей и</text>
+  <text x="1700.0" y="180" class="dept-label" style="fill:#1565C0;font-size:13px">техн. физики</text>
   <rect x="1691.5" y="268" width="17.0" height="5" class="door"/>
   <rect x="1763.6" y="50" width="127.1" height="220" class="room atif-color" data-room="337" data-type="atif" rx="2"/>
   <text x="1827.1" y="150" class="room-num">337</text>
-  <text x="1827.1" y="168" class="dept-label" style="fill:#1565C0;font-size:7.5px">Каф. приклад.</text>
-  <text x="1827.1" y="180" class="dept-label" style="fill:#1565C0;font-size:7.5px">механики</text>
+  <text x="1827.1" y="168" class="dept-label" style="fill:#1565C0;font-size:13px">Каф. приклад.</text>
+  <text x="1827.1" y="180" class="dept-label" style="fill:#1565C0;font-size:13px">механики</text>
   <rect x="1818.7" y="268" width="17.0" height="5" class="door"/>
   <rect x="1890.7" y="50" width="84.8" height="220" class="room atif-color" data-room="339" data-type="atif" rx="2"/>
   <text x="1933.1" y="150" class="room-num">339</text>
-  <text x="1933.1" y="172" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="1933.1" y="172" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="1924.6" y="268" width="17.0" height="5" class="door"/>
   <rect x="1975.5" y="50" width="84.8" height="220" class="room atif-color" data-room="341" data-type="atif" rx="2"/>
   <text x="2017.9" y="150" class="room-num">341</text>
-  <text x="2017.9" y="172" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="2017.9" y="172" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="2009.4" y="268" width="17.0" height="5" class="door"/>
   <rect x="2060.2" y="50" width="84.8" height="220" class="room atif-color" data-room="343" data-type="atif" rx="2"/>
   <text x="2102.6" y="150" class="room-num">343</text>
-  <text x="2102.6" y="172" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="2102.6" y="172" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="2094.1" y="268" width="17.0" height="5" class="door"/>
 
   <!-- НИЖНИЙ РЯД (ЧЁТНЫЕ) -->
   <rect x="10.0" y="350" width="94" height="220" class="room atif-color" data-room="302" data-type="atif" rx="2"/>
   <text x="57.0" y="450" class="room-num">302</text>
-  <text x="57.0" y="472" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="57.0" y="472" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="49.0" y="347" width="16" height="5" class="door"/>
   <rect x="104.0" y="350" width="94" height="220" class="room atif-color" data-room="304" data-type="atif" rx="2"/>
   <text x="151.0" y="450" class="room-num">304</text>
-  <text x="151.0" y="472" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="151.0" y="472" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="143.0" y="347" width="16" height="5" class="door"/>
   <rect x="198.0" y="350" width="94" height="220" class="room atif-color" data-room="306" data-type="atif" rx="2"/>
   <text x="245.0" y="450" class="room-num">306</text>
-  <text x="245.0" y="472" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="245.0" y="472" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="237.0" y="347" width="16" height="5" class="door"/>
   <rect x="292.0" y="350" width="94" height="220" class="room atif-color" data-room="308" data-type="atif" rx="2"/>
   <text x="339.0" y="450" class="room-num">308</text>
-  <text x="339.0" y="472" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="339.0" y="472" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="331.0" y="347" width="16" height="5" class="door"/>
   <rect x="386.0" y="350" width="94" height="220" class="room atif-color" data-room="310" data-type="atif" rx="2"/>
   <text x="433.0" y="450" class="room-num">310</text>
-  <text x="433.0" y="472" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="433.0" y="472" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="425.0" y="347" width="16" height="5" class="door"/>
   <rect x="540" y="350" width="57" height="220" class="toilet" data-type="toilet" rx="2"/>
-  <text x="568.5" y="460" class="dept-label" style="fill:#00695C;font-size:9px;font-weight:600">Туалет</text>
+  <text x="568.5" y="460" class="dept-label" style="fill:#00695C;font-size:15px;font-weight:600">Туалет</text>
   <rect x="560.5" y="347" width="16" height="5" class="door"/>
   <rect x="597" y="350" width="125" height="220" class="room atif-color" data-room="312" data-type="atif" rx="2"/>
   <text x="659.5" y="450" class="room-num">312</text>
-  <text x="659.5" y="468" class="dept-label" style="fill:#1565C0;font-size:7.5px">Лаб. каф.</text>
-  <text x="659.5" y="480" class="dept-label" style="fill:#1565C0;font-size:7.5px">иннов. маш.</text>
+  <text x="659.5" y="468" class="dept-label" style="fill:#1565C0;font-size:13px">Лаб. каф.</text>
+  <text x="659.5" y="480" class="dept-label" style="fill:#1565C0;font-size:13px">иннов. маш.</text>
   <rect x="651.5" y="347" width="16" height="5" class="door"/>
   <rect x="722" y="350" width="94" height="220" class="room atif-color" data-room="314" data-type="atif" rx="2"/>
   <text x="769" y="450" class="room-num">314</text>
-  <text x="769" y="468" class="dept-label" style="fill:#1565C0;font-size:7.5px">Лаб. каф.</text>
-  <text x="769" y="480" class="dept-label" style="fill:#1565C0;font-size:7.5px">авиац. дв.</text>
+  <text x="769" y="468" class="dept-label" style="fill:#1565C0;font-size:13px">Лаб. каф.</text>
+  <text x="769" y="480" class="dept-label" style="fill:#1565C0;font-size:13px">авиац. дв.</text>
   <rect x="761" y="347" width="16" height="5" class="door"/>
   <rect x="816" y="350" width="94" height="220" class="room atif-color" data-room="316" data-type="atif" rx="2"/>
   <text x="863" y="450" class="room-num">316</text>
-  <text x="863" y="472" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="863" y="472" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="855" y="347" width="16" height="5" class="door"/>
   <rect x="910" y="350" width="94" height="220" class="room atif-color" data-room="318" data-type="atif" rx="2"/>
   <text x="957" y="450" class="room-num">318</text>
-  <text x="957" y="472" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="957" y="472" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="949" y="347" width="16" height="5" class="door"/>
   <rect x="1004" y="350" width="115" height="220" class="room atif-color" data-room="320" data-type="atif" rx="2"/>
   <text x="1061.5" y="450" class="room-num">320</text>
-  <text x="1061.5" y="468" class="dept-label" style="fill:#1565C0;font-size:7.5px">Лаб. каф.</text>
-  <text x="1061.5" y="480" class="dept-label" style="fill:#1565C0;font-size:7.5px">физики</text>
+  <text x="1061.5" y="468" class="dept-label" style="fill:#1565C0;font-size:13px">Лаб. каф.</text>
+  <text x="1061.5" y="480" class="dept-label" style="fill:#1565C0;font-size:13px">физики</text>
   <rect x="1053.5" y="347" width="16" height="5" class="door"/>
   <rect x="1119" y="350" width="94" height="220" class="room atif-color" data-room="322" data-type="atif" rx="2"/>
   <text x="1166" y="450" class="room-num">322</text>
-  <text x="1166" y="472" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="1166" y="472" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="1158" y="347" width="16" height="5" class="door"/>
   <rect x="1213" y="350" width="94" height="220" class="room atif-color" data-room="324" data-type="atif" rx="2"/>
   <text x="1260" y="450" class="room-num">324</text>
-  <text x="1260" y="472" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="1260" y="472" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="1252" y="347" width="16" height="5" class="door"/>
   <rect x="1307" y="350" width="94" height="220" class="room atif-color" data-room="326" data-type="atif" rx="2"/>
   <text x="1354" y="450" class="room-num">326</text>
-  <text x="1354" y="472" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="1354" y="472" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="1346" y="347" width="16" height="5" class="door"/>
   <rect x="1401" y="350" width="94" height="220" class="room atif-color" data-room="328" data-type="atif" rx="2"/>
   <text x="1448" y="450" class="room-num">328</text>
-  <text x="1448" y="472" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="1448" y="472" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="1440" y="347" width="16" height="5" class="door"/>
-  <rect x="1555.0" y="350" width="115" height="220" class="room atif-color" data-room="330" data-type="atif" rx="2"/>
+  <rect x="1495" y="350" width="115" height="220" class="room atif-color" data-room="330" data-type="atif" rx="2"/>
   <text x="1612.5" y="450" class="room-num">330</text>
-  <text x="1612.5" y="468" class="dept-label" style="fill:#1565C0;font-size:7.5px">Лаб. каф.</text>
-  <text x="1612.5" y="480" class="dept-label" style="fill:#1565C0;font-size:7.5px">материаловед.</text>
+  <text x="1612.5" y="468" class="dept-label" style="fill:#1565C0;font-size:13px">Лаб. каф.</text>
+  <text x="1612.5" y="480" class="dept-label" style="fill:#1565C0;font-size:13px">материаловед.</text>
   <rect x="1604.5" y="347" width="16" height="5" class="door"/>
   <rect x="1670.0" y="350" width="94" height="220" class="room atif-color" data-room="332" data-type="atif" rx="2"/>
   <text x="1717.0" y="450" class="room-num">332</text>
-  <text x="1717.0" y="472" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="1717.0" y="472" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="1709.0" y="347" width="16" height="5" class="door"/>
   <rect x="1764.0" y="350" width="115" height="220" class="room atif-color" data-room="334" data-type="atif" rx="2"/>
   <text x="1821.5" y="450" class="room-num">334</text>
-  <text x="1821.5" y="468" class="dept-label" style="fill:#1565C0;font-size:7.5px">Лаб. каф.</text>
-  <text x="1821.5" y="480" class="dept-label" style="fill:#1565C0;font-size:7.5px">механики</text>
+  <text x="1821.5" y="468" class="dept-label" style="fill:#1565C0;font-size:13px">Лаб. каф.</text>
+  <text x="1821.5" y="480" class="dept-label" style="fill:#1565C0;font-size:13px">механики</text>
   <rect x="1813.5" y="347" width="16" height="5" class="door"/>
   <rect x="1879.0" y="350" width="94" height="220" class="room atif-color" data-room="336" data-type="atif" rx="2"/>
   <text x="1926.0" y="450" class="room-num">336</text>
-  <text x="1926.0" y="472" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="1926.0" y="472" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="1918.0" y="347" width="16" height="5" class="door"/>
   <rect x="1973.0" y="350" width="94" height="220" class="room atif-color" data-room="338" data-type="atif" rx="2"/>
   <text x="2020.0" y="450" class="room-num">338</text>
-  <text x="2020.0" y="472" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="2020.0" y="472" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="2012.0" y="347" width="16" height="5" class="door"/>
   <rect x="2067.0" y="350" width="78" height="220" class="room atif-color" data-room="340" data-type="atif" rx="2"/>
   <text x="2106.0" y="450" class="room-num">340</text>
-  <text x="2106.0" y="472" class="dept-label" style="fill:#1565C0;font-size:7.5px">Аудитория</text>
+  <text x="2106.0" y="472" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="2098.0" y="347" width="16" height="5" class="door"/>
 
 
@@ -273,7 +274,6 @@
   <line x1="984.8" y1="50" x2="984.8" y2="270" class="inner-wall"/>
   <line x1="1069.6" y1="50" x2="1069.6" y2="270" class="inner-wall"/>
   <line x1="1196.7" y1="50" x2="1196.7" y2="270" class="inner-wall"/>
-  <line x1="1323.8" y1="50" x2="1323.8" y2="270" class="inner-wall"/>
   <line x1="1408.6" y1="50" x2="1408.6" y2="270" class="inner-wall"/>
   <line x1="1493.4" y1="50" x2="1493.4" y2="270" class="inner-wall"/>
   <line x1="1551.7" y1="50" x2="1551.7" y2="270" class="inner-wall"/>
