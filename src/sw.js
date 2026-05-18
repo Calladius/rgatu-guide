@@ -1,6 +1,6 @@
 // sw для путеводителя ргату
 
-const CACHE_NAME = 'rgatu-guide-v17';
+const CACHE_NAME = 'rgatu-guide-v18';
 
 // таймаут сети — если инет "есть" но заблокирован, не висим
 const NETWORK_TIMEOUT = 3000;
@@ -64,13 +64,18 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
-// удаляем старый кэш
+// удаляем старый кэш и перезакачиваем статику
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
         keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
       );
+    }).then(() => {
+      // перезакачиваем все файлы чтобы сразу были свежие
+      return caches.open(CACHE_NAME).then((cache) => {
+        return cache.addAll(STATIC_ASSETS.map(a => './' + a));
+      });
     })
   );
   self.clients.claim();
