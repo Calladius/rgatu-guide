@@ -1258,6 +1258,11 @@ function initMapZoom() {
 
   // начальный размер текста под экран
   initTextScale();
+
+  // пересчёт при повороте/ресайзе
+  window.addEventListener('resize', () => {
+    if (MapZoom.svg) initTextScale();
+  });
 }
 
 function setViewBox(x, y, w, h) {
@@ -1406,30 +1411,29 @@ function zoomReset() {
 }
 
 // адаптируем шрифты под размер экрана
-// на мобильном SVG маленький — шрифты нужно увеличить
-// при зуме текст масштабируется естественно (вместе с картой)
+// SVG viewBox 2155px вписывается в контейнер — на мобильном ~360px
+// без корректировки 24px в SVG → ~4px на экране (нечитаемо)
+// увеличиваем шрифт так чтобы на экране было ~24px для номеров
 function initTextScale() {
   const svg = MapZoom.svg;
   if (!svg) return;
   const container = MapZoom.container;
   if (!container) return;
 
-  // во сколько раз SVG уменьшен на экране
   const displayWidth = container.getBoundingClientRect().width;
   const svgWidth = MapZoom.origVB.w; // 2155
-  const displayScale = displayWidth / svgWidth; // ~0.17 на мобильном, ~0.56 на ПК
+  const displayScale = displayWidth / svgWidth;
 
-  // на мобильном displayScale ~0.17, шрифт 24px → 4px на экране
-  // нужно увеличить в 1/displayScale раз чтобы было ~24px на экране
-  // но не слишком — на ПК displayScale ~0.56, 24/0.56=43 — многовато
-  // компромисс: увеличиваем пропорционально но с лимитом
-  const boost = Math.min(1 / displayScale, 3); // максимум x3
+  // boost = во сколько раз увеличить шрифт в SVG-координатах
+  // чтобы на экране получился базовый размер
+  // мобильный: displayScale~0.17, boost~5.9 → 24*5.9=141 → 141*0.17≈24px ✓
+  // ПК: displayScale~0.56, boost~1.8 → 24*1.8=43 → 43*0.56≈24px ✓
+  const boost = 1 / displayScale;
 
   const baseSizes = { 'room-num': 24, 'dept-label': 13, 'label': 15 };
   Object.entries(baseSizes).forEach(([cls, base]) => {
     const boosted = Math.round(base * boost);
     svg.querySelectorAll(`.${cls}`).forEach(t => {
-      // инлайн font-size (особые помещения) — увеличиваем пропорционально
       const inlineFs = t.style.fontSize;
       if (inlineFs) {
         const origInline = parseFloat(inlineFs);
