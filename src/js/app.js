@@ -1391,6 +1391,11 @@ function zoomIn() {
 }
 
 function zoomOut() {
+  // если уже близко к полному виду — сразу сбрасываем
+  if (MapZoom.scale <= 1.3) {
+    zoomReset();
+    return;
+  }
   const rect = MapZoom.container.getBoundingClientRect();
   zoomAtPoint(1 / 1.3, rect.left + rect.width / 2, rect.top + rect.height / 2);
 }
