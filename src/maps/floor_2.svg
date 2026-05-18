@@ -46,43 +46,6 @@
   <rect x="70" y="270" width="2015" height="80" class="corridor" rx="2"/>
   <text x="1077.5" y="310" class="label" style="font-size:13px;fill:#aaa">К О Р И Д О Р</text>
 
-  <!-- ЛЕСТНИЦЫ -->
-  <rect x="10" y="50" width="60" height="520" class="stairs" rx="3"/>
-  <text x="40" y="310" class="label" style="font-size:8px;fill:#666" transform="rotate(-90,40,310)">Лестница</text>
-  <line x1="15" y1="90" x2="65" y2="90" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="15" y1="120" x2="65" y2="120" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="15" y1="150" x2="65" y2="150" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="15" y1="180" x2="65" y2="180" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="15" y1="210" x2="65" y2="210" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="15" y1="240" x2="65" y2="240" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="15" y1="270" x2="65" y2="270" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="15" y1="300" x2="65" y2="300" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="15" y1="330" x2="65" y2="330" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="15" y1="360" x2="65" y2="360" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="15" y1="390" x2="65" y2="390" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="15" y1="420" x2="65" y2="420" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="15" y1="450" x2="65" y2="450" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="15" y1="480" x2="65" y2="480" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="15" y1="510" x2="65" y2="510" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="15" y1="540" x2="65" y2="540" stroke="#bbb" stroke-width="0.5"/>
-  <rect x="2085" y="50" width="60" height="520" class="stairs" rx="3"/>
-  <text x="2115" y="310" class="label" style="font-size:8px;fill:#666" transform="rotate(-90,2115,310)">Лестница</text>
-  <line x1="2090" y1="90" x2="2140" y2="90" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="2090" y1="120" x2="2140" y2="120" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="2090" y1="150" x2="2140" y2="150" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="2090" y1="180" x2="2140" y2="180" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="2090" y1="210" x2="2140" y2="210" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="2090" y1="240" x2="2140" y2="240" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="2090" y1="270" x2="2140" y2="270" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="2090" y1="300" x2="2140" y2="300" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="2090" y1="330" x2="2140" y2="330" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="2090" y1="360" x2="2140" y2="360" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="2090" y1="390" x2="2140" y2="390" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="2090" y1="420" x2="2140" y2="420" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="2090" y1="450" x2="2140" y2="450" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="2090" y1="480" x2="2140" y2="480" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="2090" y1="510" x2="2140" y2="510" stroke="#bbb" stroke-width="0.5"/>
-  <line x1="2090" y1="540" x2="2140" y2="540" stroke="#bbb" stroke-width="0.5"/>
 
   <!-- ВЕРХНИЙ РЯД (НЕЧЁТНЫЕ) -->
   <rect x="70" y="50" width="122" height="220" class="special" data-type="internet-class" rx="2"/>
@@ -238,6 +201,25 @@
   <text x="2034" y="472" class="dept-label" style="fill:#6A1B9A;font-size:7.5px">Аудитория</text>
   <rect x="2026" y="347" width="16" height="5" class="door"/>
 
+
+  <!-- ЛЕСТНИЦЫ -->
+  <rect x="439" y="350" width="40" height="220" class="stairs" data-type="stairs" rx="3"/>
+  <text x="459" y="460" class="label" style="font-size:13px;fill:#666;transform:rotate(-90deg);transform-origin:459px 460px;transform-box:view-box">Лестница</text>
+  <line x1="444" y1="380" x2="474" y2="380" stroke="#bbb" stroke-width="0.5"/>
+  <line x1="444" y1="410" x2="474" y2="410" stroke="#bbb" stroke-width="0.5"/>
+  <line x1="444" y1="440" x2="474" y2="440" stroke="#bbb" stroke-width="0.5"/>
+  <line x1="444" y1="470" x2="474" y2="470" stroke="#bbb" stroke-width="0.5"/>
+  <line x1="444" y1="500" x2="474" y2="500" stroke="#bbb" stroke-width="0.5"/>
+  <line x1="444" y1="530" x2="474" y2="530" stroke="#bbb" stroke-width="0.5"/>
+  <rect x="1769" y="350" width="40" height="220" class="stairs" data-type="stairs" rx="3"/>
+  <text x="1789" y="460" class="label" style="font-size:13px;fill:#666;transform:rotate(-90deg);transform-origin:1789px 460px;transform-box:view-box">Лестница</text>
+  <line x1="1774" y1="380" x2="1804" y2="380" stroke="#bbb" stroke-width="0.5"/>
+  <line x1="1774" y1="410" x2="1804" y2="410" stroke="#bbb" stroke-width="0.5"/>
+  <line x1="1774" y1="440" x2="1804" y2="440" stroke="#bbb" stroke-width="0.5"/>
+  <line x1="1774" y1="470" x2="1804" y2="470" stroke="#bbb" stroke-width="0.5"/>
+  <line x1="1774" y1="500" x2="1804" y2="500" stroke="#bbb" stroke-width="0.5"/>
+  <line x1="1774" y1="530" x2="1804" y2="530" stroke="#bbb" stroke-width="0.5"/>
+
   <!-- СТЕНЫ -->
   <rect x="8" y="48" width="2139" height="524" class="wall" rx="4"/>
   <line x1="70" y1="270" x2="2085" y2="270" class="inner-wall"/>
@@ -277,5 +259,11 @@
   <line x1="1789" y1="350" x2="1789" y2="570" class="inner-wall"/>
   <line x1="1886" y1="350" x2="1886" y2="570" class="inner-wall"/>
   <line x1="1983" y1="350" x2="1983" y2="570" class="inner-wall"/>
+
+  <line x1="439" y1="350" x2="439" y2="570" class="inner-wall"/>
+  <line x1="479" y1="350" x2="479" y2="570" class="inner-wall"/>
+
+  <line x1="1769" y1="350" x2="1769" y2="570" class="inner-wall"/>
+  <line x1="1809" y1="350" x2="1809" y2="570" class="inner-wall"/>
 
 </svg>
