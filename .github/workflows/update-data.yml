@@ -30,20 +30,20 @@ jobs:
         run: npm install
         working-directory: parser
 
-      - name: Запуск парсера
-        run: node parse.js
+      - name: Запуск парсера (только данные, без SVG)
+        run: node parse.js --data-only
         working-directory: parser
 
       - name: Проверка изменений
         id: check_changes
         run: |
-          if git diff --quiet src/data/ src/maps/; then
+          if git diff --quiet src/data/; then
             echo "has_changes=false" >> $GITHUB_OUTPUT
             echo "Нет изменений данных"
           else
             echo "has_changes=true" >> $GITHUB_OUTPUT
             echo "Обнаружены изменения:"
-            git diff --stat src/data/ src/maps/
+            git diff --stat src/data/
           fi
 
       - name: Коммит и пуш изменений
@@ -51,6 +51,6 @@ jobs:
         run: |
           git config user.name "RGATU Parser Bot"
           git config user.email "parser-bot@rsatu-guide.local"
-          git add src/data/ src/maps/
+          git add src/data/
           git commit -m "🔄 Автообновление данных: $(date +%Y-%m-%d)"
           git push
