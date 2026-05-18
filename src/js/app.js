@@ -1424,11 +1424,8 @@ function initTextScale() {
   const svgWidth = MapZoom.origVB.w; // 2155
   const displayScale = displayWidth / svgWidth;
 
-  // boost = во сколько раз увеличить шрифт в SVG-координатах
-  // чтобы на экране получился базовый размер
-  // мобильный: displayScale~0.17, boost~5.9 → 24*5.9=141 → 141*0.17≈24px ✓
-  // ПК: displayScale~0.56, boost~1.8 → 24*1.8=43 → 43*0.56≈24px ✓
-  const boost = 1 / displayScale;
+  // компромисс: увеличиваем пропорционально но с лимитом
+  const boost = Math.min(1 / displayScale, 3); // максимум x3
 
   const baseSizes = { 'room-num': 24, 'dept-label': 13, 'label': 15 };
   Object.entries(baseSizes).forEach(([cls, base]) => {
