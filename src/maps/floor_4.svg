@@ -190,7 +190,7 @@
   <text x="1442.5" y="468" class="dept-label" style="fill:#2E7D32;font-size:13px">Дирекция</text>
   <text x="1442.5" y="480" class="dept-label" style="fill:#2E7D32;font-size:13px">ИИТСУ</text>
   <rect x="1434.5" y="347" width="16" height="5" class="door"/>
-  <rect x="1514" y="350" width="143" height="220" class="room itsu-color" data-room="428" data-type="itsu" rx="2"/>
+  <rect x="1574" y="350" width="143" height="220" class="room itsu-color" data-room="428" data-type="itsu" rx="2"/>
   <text x="1645.5" y="450" class="room-num">428</text>
   <text x="1645.5" y="468" class="dept-label" style="fill:#2E7D32;font-size:13px">Каф. экономики</text>
   <text x="1645.5" y="480" class="dept-label" style="fill:#2E7D32;font-size:13px">и менеджм.</text>

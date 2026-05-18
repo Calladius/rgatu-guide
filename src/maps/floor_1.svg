@@ -164,7 +164,7 @@
   <text x="1571.5" y="450" class="room-num">116</text>
   <text x="1571.5" y="472" class="dept-label" style="fill:#555;font-size:13px">Учеб. отдел</text>
   <rect x="1563.5" y="347" width="16" height="5" class="door"/>
-  <rect x="1662" y="350" width="181" height="220" class="room" data-room="118" data-type="service" rx="2"/>
+  <rect x="1722" y="350" width="181" height="220" class="room" data-room="118" data-type="service" rx="2"/>
   <text x="1812.5" y="450" class="room-num">118</text>
   <text x="1812.5" y="468" class="dept-label" style="fill:#555;font-size:13px">Зал</text>
   <text x="1812.5" y="480" class="dept-label" style="fill:#555;font-size:13px">заседаний</text>

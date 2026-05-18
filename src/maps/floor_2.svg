@@ -187,7 +187,7 @@
   <text x="1740.5" y="450" class="room-num">230</text>
   <text x="1740.5" y="472" class="dept-label" style="fill:#6A1B9A;font-size:13px">Аудитория</text>
   <rect x="1732.5" y="347" width="16" height="5" class="door"/>
-  <rect x="1789" y="350" width="97" height="220" class="room ino-color" data-room="232" data-type="ino" rx="2"/>
+  <rect x="1849" y="350" width="97" height="220" class="room ino-color" data-room="232" data-type="ino" rx="2"/>
   <text x="1897.5" y="450" class="room-num">232</text>
   <text x="1897.5" y="472" class="dept-label" style="fill:#6A1B9A;font-size:13px">Аудитория</text>
   <rect x="1889.5" y="347" width="16" height="5" class="door"/>

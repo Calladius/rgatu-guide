@@ -177,7 +177,7 @@
   <text x="1350.5" y="468" class="dept-label" style="fill:#E65100;font-size:13px">Лаб. робото-</text>
   <text x="1350.5" y="480" class="dept-label" style="fill:#E65100;font-size:13px">техники</text>
   <rect x="1342.5" y="347" width="16" height="5" class="door"/>
-  <rect x="1411" y="350" width="108" height="220" class="room lab-color" data-room="522" data-type="lab" rx="2"/>
+  <rect x="1471" y="350" width="108" height="220" class="room lab-color" data-room="522" data-type="lab" rx="2"/>
   <text x="1525.0" y="450" class="room-num">522</text>
   <text x="1525.0" y="472" class="dept-label" style="fill:#E65100;font-size:13px">Аудитория</text>
   <rect x="1517.0" y="347" width="16" height="5" class="door"/>

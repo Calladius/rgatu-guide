@@ -211,7 +211,7 @@
   <text x="1448" y="450" class="room-num">328</text>
   <text x="1448" y="472" class="dept-label" style="fill:#1565C0;font-size:13px">Аудитория</text>
   <rect x="1440" y="347" width="16" height="5" class="door"/>
-  <rect x="1495" y="350" width="115" height="220" class="room atif-color" data-room="330" data-type="atif" rx="2"/>
+  <rect x="1555" y="350" width="115" height="220" class="room atif-color" data-room="330" data-type="atif" rx="2"/>
   <text x="1612.5" y="450" class="room-num">330</text>
   <text x="1612.5" y="468" class="dept-label" style="fill:#1565C0;font-size:13px">Лаб. каф.</text>
   <text x="1612.5" y="480" class="dept-label" style="fill:#1565C0;font-size:13px">материаловед.</text>
