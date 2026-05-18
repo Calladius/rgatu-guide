@@ -1256,8 +1256,8 @@ function initMapZoom() {
   container.addEventListener('touchmove', onTouchMove, { passive: false });
   container.addEventListener('touchend', onTouchEnd);
 
-  // начальный размер текста
-  updateTextScale(1);
+  // начальный размер текста под экран
+  initTextScale();
 }
 
 function setViewBox(x, y, w, h) {
@@ -1287,7 +1287,6 @@ function zoomAtPoint(factor, clientX, clientY) {
     const o = MapZoom.origVB;
     setViewBox(o.x, o.y, o.w, o.h);
     MapZoom.scale = 1;
-    updateTextScale(1);
     return;
   }
 
@@ -1308,7 +1307,6 @@ function zoomAtPoint(factor, clientX, clientY) {
 
   setViewBox(newX, newY, newW, newH);
   MapZoom.scale = newScale;
-  updateTextScale(newScale);
 }
 
 function onZoomWheel(e) {
@@ -1405,42 +1403,42 @@ function zoomReset() {
   const o = MapZoom.origVB;
   setViewBox(o.x, o.y, o.w, o.h);
   MapZoom.scale = 1;
-  updateTextScale(1);
 }
 
-// динамический размер текста при зуме
-// при приближении уменьшаем font-size чтобы текст не раздувался
-function updateTextScale(scale) {
+// адаптируем шрифты под размер экрана
+// на мобильном SVG маленький — шрифты нужно увеличить
+// при зуме текст масштабируется естественно (вместе с картой)
+function initTextScale() {
   const svg = MapZoom.svg;
   if (!svg) return;
-  // базовые размеры из CSS
-  const baseSizes = {
-    'room-num': 24,
-    'dept-label': 13,
-    'label': 15
-  };
-  // при зуме > 1 уменьшаем шрифт обратно
-  const factor = 1 / Math.max(scale, 1);
+  const container = MapZoom.container;
+  if (!container) return;
+
+  // во сколько раз SVG уменьшен на экране
+  const displayWidth = container.getBoundingClientRect().width;
+  const svgWidth = MapZoom.origVB.w; // 2155
+  const displayScale = displayWidth / svgWidth; // ~0.17 на мобильном, ~0.56 на ПК
+
+  // на мобильном displayScale ~0.17, шрифт 24px → 4px на экране
+  // нужно увеличить в 1/displayScale раз чтобы было ~24px на экране
+  // но не слишком — на ПК displayScale ~0.56, 24/0.56=43 — многовато
+  // компромисс: увеличиваем пропорционально но с лимитом
+  const boost = Math.min(1 / displayScale, 3); // максимум x3
+
+  const baseSizes = { 'room-num': 24, 'dept-label': 13, 'label': 15 };
   Object.entries(baseSizes).forEach(([cls, base]) => {
-    const newSize = Math.round(base * factor * 10) / 10;
-    const minSize = cls === 'room-num' ? 8 : cls === 'dept-label' ? 5 : 6;
-    const finalSize = Math.max(newSize, minSize);
+    const boosted = Math.round(base * boost);
     svg.querySelectorAll(`.${cls}`).forEach(t => {
-      // не трогаем инлайн font-size (особые помещения с крупным текстом)
+      // инлайн font-size (особые помещения) — увеличиваем пропорционально
       const inlineFs = t.style.fontSize;
-      if (inlineFs && cls !== 'room-num') {
+      if (inlineFs) {
         const origInline = parseFloat(inlineFs);
-        if (origInline > base) {
-          // крупный текст (ЦРО, Туалет, Гардероб и тд) — масштабируем от его размера
-          t.style.fontSize = Math.max(Math.round(origInline * factor * 10) / 10, minSize) + 'px';
+        if (origInline !== base) {
+          t.style.fontSize = Math.round(origInline * boost) + 'px';
           return;
         }
       }
-      if (cls === 'room-num') {
-        t.style.fontSize = finalSize + 'px';
-      } else {
-        t.style.fontSize = finalSize + 'px';
-      }
+      t.style.fontSize = boosted + 'px';
     });
   });
 }
