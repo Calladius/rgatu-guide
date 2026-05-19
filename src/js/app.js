@@ -20,6 +20,13 @@ const App = {
 
 // инит
 document.addEventListener('DOMContentLoaded', async () => {
+  // обновляем высоту хедера если safe-area добавила padding
+  const header = document.querySelector('.header');
+  if (header) {
+    const realH = header.getBoundingClientRect().height;
+    document.documentElement.style.setProperty('--header-h', realH + 'px');
+  }
+
   // сначала меню и поиск — они должны работать даже если рендер сломается
   setupSidebar();
   setupSearch();
