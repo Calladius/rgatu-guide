@@ -1,6 +1,6 @@
 // sw для путеводителя ргату
 
-const CACHE_NAME = 'rgatu-guide-v20';
+const CACHE_NAME = 'rgatu-guide-v21';
 
 // таймаут сети — если инет "есть" но заблокирован, не висим
 const NETWORK_TIMEOUT = 3000;
@@ -109,21 +109,25 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // ститика — cache first, обновляем в фоне
+  // ститика — cache first только из текущего кэша, обновляем в фоне
   if (isStaticAsset(url.pathname)) {
     event.respondWith(
-      caches.match(request).then((cached) => {
-        // фоновое обновление, не блокирует отдачу
-        const fetchPromise = fetchWithTimeout(request, NETWORK_TIMEOUT)
-          .then((response) => {
-            if (response.ok) {
-              const clone = response.clone();
-              caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
-            }
-            return response;
-          })
-          .catch(() => cached);
-        return cached || fetchPromise;
+      caches.open(CACHE_NAME).then((cache) => {
+        return cache.match(request).then((cached) => {
+          // фоновое обновление
+          fetchWithTimeout(request, NETWORK_TIMEOUT)
+            .then((response) => {
+              if (response.ok) {
+                const clone = response.clone();
+                cache.put(request, clone);
+              }
+            })
+            .catch(() => {});
+          // есть в текущем кэше — отдаём, нет — из сети
+          if (cached) return cached;
+          return fetchWithTimeout(request, NETWORK_TIMEOUT)
+            .catch(() => new Response('offline', { status: 503 }));
+        });
       })
     );
     return;
