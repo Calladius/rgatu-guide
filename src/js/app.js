@@ -20,6 +20,11 @@ const App = {
 
 // инит
 document.addEventListener('DOMContentLoaded', async () => {
+  // bing браузер на мобильных — поднимаем контент хедера
+  if (/Bing/i.test(navigator.userAgent)) {
+    document.documentElement.classList.add('bing-browser');
+  }
+
   // сначала меню и поиск — они должны работать даже если рендер сломается
   setupSidebar();
   setupSearch();

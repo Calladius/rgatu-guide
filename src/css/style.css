@@ -52,6 +52,10 @@ ul { list-style: none; }
   display: flex; align-items: center; height: 100%;
   max-width: 1200px; margin: 0 auto; padding: 0 16px; gap: 12px;
 }
+/* bing браузер — контент хедера съезжает вниз, поднимаем */
+.bing-browser .header__inner {
+  margin-top: -8px;
+}
 .header__menu-btn {
   display: flex; flex-direction: column; gap: 4px; padding: 8px;
 }
