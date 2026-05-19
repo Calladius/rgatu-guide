@@ -1,6 +1,6 @@
 // sw для путеводителя ргату
 
-const CACHE_NAME = 'rgatu-guide-v19';
+const CACHE_NAME = 'rgatu-guide-v20';
 
 // таймаут сети — если инет "есть" но заблокирован, не висим
 const NETWORK_TIMEOUT = 3000;

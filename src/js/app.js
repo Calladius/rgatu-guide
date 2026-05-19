@@ -1255,14 +1255,6 @@ function initMapZoom() {
   container.addEventListener('touchstart', onTouchStart, { passive: false });
   container.addEventListener('touchmove', onTouchMove, { passive: false });
   container.addEventListener('touchend', onTouchEnd);
-
-  // начальный размер текста под экран
-  initTextScale();
-
-  // пересчёт при повороте/ресайзе
-  window.addEventListener('resize', () => {
-    if (MapZoom.svg) initTextScale();
-  });
 }
 
 function setViewBox(x, y, w, h) {
@@ -1410,39 +1402,7 @@ function zoomReset() {
   MapZoom.scale = 1;
 }
 
-// адаптируем шрифты под размер экрана
-// SVG viewBox 2155px вписывается в контейнер — на мобильном ~360px
-// без корректировки 24px в SVG → ~4px на экране (нечитаемо)
-// увеличиваем шрифт так чтобы на экране было ~24px для номеров
-function initTextScale() {
-  const svg = MapZoom.svg;
-  if (!svg) return;
-  const container = MapZoom.container;
-  if (!container) return;
 
-  const displayWidth = container.getBoundingClientRect().width;
-  const svgWidth = MapZoom.origVB.w; // 2155
-  const displayScale = displayWidth / svgWidth;
-
-  // компромисс: увеличиваем пропорционально но с лимитом
-  const boost = Math.min(1 / displayScale, 3); // максимум x3
-
-  const baseSizes = { 'room-num': 24, 'dept-label': 13, 'label': 15 };
-  Object.entries(baseSizes).forEach(([cls, base]) => {
-    const boosted = Math.round(base * boost);
-    svg.querySelectorAll(`.${cls}`).forEach(t => {
-      const inlineFs = t.style.fontSize;
-      if (inlineFs) {
-        const origInline = parseFloat(inlineFs);
-        if (origInline !== base) {
-          t.style.fontSize = Math.round(origInline * boost) + 'px';
-          return;
-        }
-      }
-      t.style.fontSize = boosted + 'px';
-    });
-  });
-}
 
 // service worker
 if ('serviceWorker' in navigator) {
